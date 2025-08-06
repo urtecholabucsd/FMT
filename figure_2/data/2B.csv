@@ -1,0 +1,415 @@
+,sample_id,metabolite,sample,flux,name
+0,11-0,for[e],recipient,15.385417457062623,Formate
+1,11-0,ac[e],recipient,35.543701337344004,acetate
+2,11-0,ppa[e],recipient,0.06795311744179829,propionate
+3,11-0,but[e],recipient,4.121568205543349,butyrate
+4,11-0,M03134[e],recipient,0.00029891566062541225,Valeric Acid
+5,11-0,so3[e],recipient,0.13747095234566464,Sulfite
+6,11-0,tsul[e],recipient,0.1440554933436241,thiosulfate(2-)
+7,11-0,ch4s[e],recipient,0.0018785655514106168,Methanethiol
+8,11-0,h2[e],recipient,1.3340337460756435,Hydrogen
+9,12-0,for[e],recipient,12.08039640691409,Formate
+10,12-0,ac[e],recipient,34.32539884661416,acetate
+11,12-0,ppa[e],recipient,0.0035254610156609063,propionate
+12,12-0,but[e],recipient,4.963167213582309,butyrate
+13,12-0,M03134[e],recipient,1.8770389439626463e-05,Valeric Acid
+14,12-0,so3[e],recipient,0.0005302268803511912,Sulfite
+15,12-0,tsul[e],recipient,0.13201479967115284,thiosulfate(2-)
+16,12-0,ch4s[e],recipient,8.489459158450483e-05,Methanethiol
+17,12-0,h2[e],recipient,0.5687634866142223,Hydrogen
+18,16-0,for[e],recipient,18.87751060171352,Formate
+19,16-0,ac[e],recipient,30.18187076014792,acetate
+20,16-0,ppa[e],recipient,0.05246852217876959,propionate
+21,16-0,but[e],recipient,5.056888881497883,butyrate
+22,16-0,M03134[e],recipient,0.00027373762846698865,Valeric Acid
+23,16-0,so3[e],recipient,0.14209242262620597,Sulfite
+24,16-0,tsul[e],recipient,0.17158680502492327,thiosulfate(2-)
+25,16-0,ch4s[e],recipient,0.0014845659470045104,Methanethiol
+26,16-0,h2[e],recipient,1.0380889373383109,Hydrogen
+27,18-0,for[e],recipient,26.43443347801844,Formate
+28,18-0,ac[e],recipient,47.25608969456735,acetate
+29,18-0,ppa[e],recipient,2.346186268144079,propionate
+30,18-0,but[e],recipient,13.566790625481083,butyrate
+31,18-0,M03134[e],recipient,0.0,Valeric Acid
+32,18-0,so3[e],recipient,0.03906666477802289,Sulfite
+33,18-0,tsul[e],recipient,0.006666451764572279,thiosulfate(2-)
+34,18-0,ch4s[e],recipient,1.0112647202177051e-08,Methanethiol
+35,18-0,h2[e],recipient,0.8181743624287167,Hydrogen
+36,19-0,for[e],recipient,21.34123509956277,Formate
+37,19-0,ac[e],recipient,33.386374423683634,acetate
+38,19-0,ppa[e],recipient,0.04411269082731623,propionate
+39,19-0,but[e],recipient,2.7646136977594162,butyrate
+40,19-0,M03134[e],recipient,4.282567426471685e-05,Valeric Acid
+41,19-0,so3[e],recipient,0.058286236016218206,Sulfite
+42,19-0,tsul[e],recipient,0.20548495765770475,thiosulfate(2-)
+43,19-0,ch4s[e],recipient,9.546298420374285e-05,Methanethiol
+44,19-0,h2[e],recipient,15.816112652060474,Hydrogen
+45,22-0,for[e],recipient,16.06118904678701,Formate
+46,22-0,ac[e],recipient,32.14188716449346,acetate
+47,22-0,ppa[e],recipient,1.3673615047727035e-05,propionate
+48,22-0,but[e],recipient,2.8570852744926603,butyrate
+49,22-0,M03134[e],recipient,0.0,Valeric Acid
+50,22-0,so3[e],recipient,9.256927063029244e-07,Sulfite
+51,22-0,tsul[e],recipient,0.04769636617412182,thiosulfate(2-)
+52,22-0,ch4s[e],recipient,7.201941744374873e-07,Methanethiol
+53,22-0,h2[e],recipient,0.1981276581948265,Hydrogen
+54,23-0,for[e],recipient,8.859978669666509,Formate
+55,23-0,ac[e],recipient,28.208076287860674,acetate
+56,23-0,ppa[e],recipient,0.02843796291170859,propionate
+57,23-0,but[e],recipient,1.7625683823585334,butyrate
+58,23-0,M03134[e],recipient,0.0,Valeric Acid
+59,23-0,so3[e],recipient,0.12586714446639835,Sulfite
+60,23-0,tsul[e],recipient,0.17669784734256191,thiosulfate(2-)
+61,23-0,ch4s[e],recipient,0.0,Methanethiol
+62,23-0,h2[e],recipient,3.820041635904572,Hydrogen
+63,24-0,for[e],recipient,24.03210775699156,Formate
+64,24-0,ac[e],recipient,41.90115698667503,acetate
+65,24-0,ppa[e],recipient,0.008484677983683105,propionate
+66,24-0,but[e],recipient,5.133513038979868,butyrate
+67,24-0,M03134[e],recipient,0.0,Valeric Acid
+68,24-0,so3[e],recipient,0.13771262634330125,Sulfite
+69,24-0,tsul[e],recipient,0.14143183017941466,thiosulfate(2-)
+70,24-0,ch4s[e],recipient,0.00019100541690311178,Methanethiol
+71,24-0,h2[e],recipient,1.440282024528516,Hydrogen
+72,25-0,for[e],recipient,13.806962364933193,Formate
+73,25-0,ac[e],recipient,35.521316006227664,acetate
+74,25-0,ppa[e],recipient,0.40847197727004525,propionate
+75,25-0,but[e],recipient,4.389126315216397,butyrate
+76,25-0,M03134[e],recipient,0.0,Valeric Acid
+77,25-0,so3[e],recipient,0.0010301552779606016,Sulfite
+78,25-0,tsul[e],recipient,0.060426185133989486,thiosulfate(2-)
+79,25-0,ch4s[e],recipient,0.00026501997293597237,Methanethiol
+80,25-0,h2[e],recipient,0.5387810405510586,Hydrogen
+81,3-0,for[e],recipient,15.204222359528126,Formate
+82,3-0,ac[e],recipient,42.33537391652558,acetate
+83,3-0,ppa[e],recipient,0.02513919620791262,propionate
+84,3-0,but[e],recipient,4.454673754763442,butyrate
+85,3-0,M03134[e],recipient,0.0,Valeric Acid
+86,3-0,so3[e],recipient,0.004951108982035432,Sulfite
+87,3-0,tsul[e],recipient,0.02793042400402724,thiosulfate(2-)
+88,3-0,ch4s[e],recipient,0.0006183160714352071,Methanethiol
+89,3-0,h2[e],recipient,0.5860927692541166,Hydrogen
+90,30-0,for[e],recipient,13.751095803597726,Formate
+91,30-0,ac[e],recipient,38.41560993638114,acetate
+92,30-0,ppa[e],recipient,0.20518398539902005,propionate
+93,30-0,but[e],recipient,3.0890213885016156,butyrate
+94,30-0,M03134[e],recipient,0.00010282647889405254,Valeric Acid
+95,30-0,so3[e],recipient,0.20827652836922889,Sulfite
+96,30-0,tsul[e],recipient,0.43846134082494403,thiosulfate(2-)
+97,30-0,ch4s[e],recipient,0.00011346558671534039,Methanethiol
+98,30-0,h2[e],recipient,1.8061126027891972,Hydrogen
+99,31-0,for[e],recipient,14.376080760443424,Formate
+100,31-0,ac[e],recipient,37.03400306104983,acetate
+101,31-0,ppa[e],recipient,0.16056469971354576,propionate
+102,31-0,but[e],recipient,2.436832715064633,butyrate
+103,31-0,M03134[e],recipient,9.575104014183313e-06,Valeric Acid
+104,31-0,so3[e],recipient,0.08740660977366989,Sulfite
+105,31-0,tsul[e],recipient,0.33497331453888124,thiosulfate(2-)
+106,31-0,ch4s[e],recipient,3.0000475823126882e-05,Methanethiol
+107,31-0,h2[e],recipient,6.409436277624389,Hydrogen
+108,32-0,for[e],recipient,10.159516609808975,Formate
+109,32-0,ac[e],recipient,33.79505106757544,acetate
+110,32-0,ppa[e],recipient,1.4812521420312983,propionate
+111,32-0,but[e],recipient,2.5806905508484217,butyrate
+112,32-0,M03134[e],recipient,0.0,Valeric Acid
+113,32-0,so3[e],recipient,0.031228427351920877,Sulfite
+114,32-0,tsul[e],recipient,0.11087698576183784,thiosulfate(2-)
+115,32-0,ch4s[e],recipient,0.02251472164083786,Methanethiol
+116,32-0,h2[e],recipient,0.6261868686485812,Hydrogen
+117,33-0,for[e],recipient,9.174767816249338,Formate
+118,33-0,ac[e],recipient,36.018826800926576,acetate
+119,33-0,ppa[e],recipient,0.037466486350758166,propionate
+120,33-0,but[e],recipient,2.1102794379776095,butyrate
+121,33-0,M03134[e],recipient,8.081212380154379e-05,Valeric Acid
+122,33-0,so3[e],recipient,0.020110811253221263,Sulfite
+123,33-0,tsul[e],recipient,0.08252578462081736,thiosulfate(2-)
+124,33-0,ch4s[e],recipient,0.0007382558359362643,Methanethiol
+125,33-0,h2[e],recipient,0.504291545766355,Hydrogen
+126,36-0,for[e],recipient,10.647670915168806,Formate
+127,36-0,ac[e],recipient,39.17194393932099,acetate
+128,36-0,ppa[e],recipient,1.9023618573645988,propionate
+129,36-0,but[e],recipient,3.7156568668040912,butyrate
+130,36-0,M03134[e],recipient,0.001180511239142363,Valeric Acid
+131,36-0,so3[e],recipient,0.17522224830627153,Sulfite
+132,36-0,tsul[e],recipient,0.45821118372517894,thiosulfate(2-)
+133,36-0,ch4s[e],recipient,0.016158470814733036,Methanethiol
+134,36-0,h2[e],recipient,0.6629294261528802,Hydrogen
+135,37-0,for[e],recipient,15.479369498773261,Formate
+136,37-0,ac[e],recipient,29.508880889529678,acetate
+137,37-0,ppa[e],recipient,0.21889382991685255,propionate
+138,37-0,but[e],recipient,2.286874962981121,butyrate
+139,37-0,M03134[e],recipient,2.6874931846178475e-05,Valeric Acid
+140,37-0,so3[e],recipient,0.001994996381327811,Sulfite
+141,37-0,tsul[e],recipient,0.06272673400867024,thiosulfate(2-)
+142,37-0,ch4s[e],recipient,0.00013228867137792539,Methanethiol
+143,37-0,h2[e],recipient,8.617729739116802,Hydrogen
+144,54-0,for[e],recipient,12.422974026446495,Formate
+145,54-0,ac[e],recipient,34.73324570209852,acetate
+146,54-0,ppa[e],recipient,0.032177789952223215,propionate
+147,54-0,but[e],recipient,2.12537827367512,butyrate
+148,54-0,M03134[e],recipient,6.687375842620778e-05,Valeric Acid
+149,54-0,so3[e],recipient,0.012865977231746067,Sulfite
+150,54-0,tsul[e],recipient,0.06978081860940813,thiosulfate(2-)
+151,54-0,ch4s[e],recipient,0.0004534004213698087,Methanethiol
+152,54-0,h2[e],recipient,0.5015248052134683,Hydrogen
+153,56-0,for[e],recipient,14.61917461445789,Formate
+154,56-0,ac[e],recipient,30.826878343675194,acetate
+155,56-0,ppa[e],recipient,0.01275312354163422,propionate
+156,56-0,but[e],recipient,6.032214999308585,butyrate
+157,56-0,M03134[e],recipient,7.800663986554431e-05,Valeric Acid
+158,56-0,so3[e],recipient,0.20118303596797849,Sulfite
+159,56-0,tsul[e],recipient,0.4735711242254144,thiosulfate(2-)
+160,56-0,ch4s[e],recipient,0.0002547458252467097,Methanethiol
+161,56-0,h2[e],recipient,0.6128470420138193,Hydrogen
+162,59-0,for[e],recipient,16.94095586775065,Formate
+163,59-0,ac[e],recipient,35.815163674857374,acetate
+164,59-0,ppa[e],recipient,1.0488139907500877,propionate
+165,59-0,but[e],recipient,4.0286571279245065,butyrate
+166,59-0,M03134[e],recipient,0.0017377581170406255,Valeric Acid
+167,59-0,so3[e],recipient,0.060247200004568256,Sulfite
+168,59-0,tsul[e],recipient,0.10179856486367399,thiosulfate(2-)
+169,59-0,ch4s[e],recipient,0.008075046233299722,Methanethiol
+170,59-0,h2[e],recipient,0.9379808833063505,Hydrogen
+171,64-0,for[e],recipient,10.13045383414487,Formate
+172,64-0,ac[e],recipient,37.39918059516248,acetate
+173,64-0,ppa[e],recipient,0.1222501239194521,propionate
+174,64-0,but[e],recipient,2.7739708218607517,butyrate
+175,64-0,M03134[e],recipient,0.0,Valeric Acid
+176,64-0,so3[e],recipient,0.0025047782641549133,Sulfite
+177,64-0,tsul[e],recipient,0.09763741456507272,thiosulfate(2-)
+178,64-0,ch4s[e],recipient,0.0015875201625939683,Methanethiol
+179,64-0,h2[e],recipient,0.6425390390129678,Hydrogen
+180,66-0,for[e],recipient,12.47542525762168,Formate
+181,66-0,ac[e],recipient,38.05682257551978,acetate
+182,66-0,ppa[e],recipient,0.0,propionate
+183,66-0,but[e],recipient,2.481746438274138,butyrate
+184,66-0,M03134[e],recipient,0.0,Valeric Acid
+185,66-0,so3[e],recipient,0.03862085508719497,Sulfite
+186,66-0,tsul[e],recipient,0.0858834724292315,thiosulfate(2-)
+187,66-0,ch4s[e],recipient,0.0,Methanethiol
+188,66-0,h2[e],recipient,0.6418665373982131,Hydrogen
+189,70-0,for[e],recipient,26.482455926134325,Formate
+190,70-0,ac[e],recipient,34.77033257019754,acetate
+191,70-0,ppa[e],recipient,0.44326719448457463,propionate
+192,70-0,but[e],recipient,6.485208703191605,butyrate
+193,70-0,M03134[e],recipient,0.0,Valeric Acid
+194,70-0,so3[e],recipient,0.11282270422574536,Sulfite
+195,70-0,tsul[e],recipient,0.14156152040540967,thiosulfate(2-)
+196,70-0,ch4s[e],recipient,0.00016739122683249603,Methanethiol
+197,70-0,h2[e],recipient,0.6529416995999434,Hydrogen
+198,71-0,for[e],recipient,13.405982082870755,Formate
+199,71-0,ac[e],recipient,47.97035070377514,acetate
+200,71-0,ppa[e],recipient,0.3019795509599257,propionate
+201,71-0,but[e],recipient,4.927364368846766,butyrate
+202,71-0,M03134[e],recipient,3.345658912732184e-05,Valeric Acid
+203,71-0,so3[e],recipient,0.10008065304352892,Sulfite
+204,71-0,tsul[e],recipient,0.04129723479776742,thiosulfate(2-)
+205,71-0,ch4s[e],recipient,0.0005778039930236261,Methanethiol
+206,71-0,h2[e],recipient,1.1601224589964199,Hydrogen
+207,75-0,for[e],recipient,14.72811433232263,Formate
+208,75-0,ac[e],recipient,29.654093638449286,acetate
+209,75-0,ppa[e],recipient,0.12494624551490706,propionate
+210,75-0,but[e],recipient,3.148377105052266,butyrate
+211,75-0,M03134[e],recipient,0.0,Valeric Acid
+212,75-0,so3[e],recipient,0.12766663805801975,Sulfite
+213,75-0,tsul[e],recipient,0.1436216104098605,thiosulfate(2-)
+214,75-0,ch4s[e],recipient,9.812813622558511e-05,Methanethiol
+215,75-0,h2[e],recipient,18.16834403286043,Hydrogen
+216,77-0,for[e],recipient,19.979121574695007,Formate
+217,77-0,ac[e],recipient,33.924285441110236,acetate
+218,77-0,ppa[e],recipient,1.0868987368073375,propionate
+219,77-0,but[e],recipient,12.163180813485805,butyrate
+220,77-0,M03134[e],recipient,0.0,Valeric Acid
+221,77-0,so3[e],recipient,0.014542642085109091,Sulfite
+222,77-0,tsul[e],recipient,0.05083083370406378,thiosulfate(2-)
+223,77-0,ch4s[e],recipient,0.0006428441445288785,Methanethiol
+224,77-0,h2[e],recipient,1.0924006254886174,Hydrogen
+225,78-0,for[e],recipient,13.611318948968192,Formate
+226,78-0,ac[e],recipient,37.00649167017614,acetate
+227,78-0,ppa[e],recipient,1.5966874087739418,propionate
+228,78-0,but[e],recipient,11.466238354150136,butyrate
+229,78-0,M03134[e],recipient,0.0,Valeric Acid
+230,78-0,so3[e],recipient,0.2041398078098102,Sulfite
+231,78-0,tsul[e],recipient,0.4323378470930161,thiosulfate(2-)
+232,78-0,ch4s[e],recipient,7.935567209572472e-05,Methanethiol
+233,78-0,h2[e],recipient,2.0657251186458883,Hydrogen
+234,81-0,for[e],recipient,10.675992266947192,Formate
+235,81-0,ac[e],recipient,38.132735900272706,acetate
+236,81-0,ppa[e],recipient,0.5276785515942902,propionate
+237,81-0,but[e],recipient,3.0071084963132737,butyrate
+238,81-0,M03134[e],recipient,0.0003379766382642026,Valeric Acid
+239,81-0,so3[e],recipient,0.0665977553781503,Sulfite
+240,81-0,tsul[e],recipient,0.12672507980349557,thiosulfate(2-)
+241,81-0,ch4s[e],recipient,0.001962596741962614,Methanethiol
+242,81-0,h2[e],recipient,1.6430542893843298,Hydrogen
+243,88-0,for[e],recipient,8.783379382052498,Formate
+244,88-0,ac[e],recipient,42.920259193475836,acetate
+245,88-0,ppa[e],recipient,0.0010726083515505262,propionate
+246,88-0,but[e],recipient,3.7247938728675773,butyrate
+247,88-0,M03134[e],recipient,4.813297044650984e-06,Valeric Acid
+248,88-0,so3[e],recipient,0.00011312190307075579,Sulfite
+249,88-0,tsul[e],recipient,0.05283249023453799,thiosulfate(2-)
+250,88-0,ch4s[e],recipient,1.3576868423859527e-05,Methanethiol
+251,88-0,h2[e],recipient,0.47168164775012883,Hydrogen
+252,89-0,for[e],recipient,13.2493606524713,Formate
+253,89-0,ac[e],recipient,47.4421127423283,acetate
+254,89-0,ppa[e],recipient,0.00045722947476114367,propionate
+255,89-0,but[e],recipient,2.7435102923480224,butyrate
+256,89-0,M03134[e],recipient,3.575784631842615e-06,Valeric Acid
+257,89-0,so3[e],recipient,0.05571141955968435,Sulfite
+258,89-0,tsul[e],recipient,0.19404108442511941,thiosulfate(2-)
+259,89-0,ch4s[e],recipient,1.0448459185146021e-05,Methanethiol
+260,89-0,h2[e],recipient,0.4875410833200038,Hydrogen
+261,90-0,for[e],recipient,9.884883821237853,Formate
+262,90-0,ac[e],recipient,48.02717878087314,acetate
+263,90-0,ppa[e],recipient,0.39336069639347565,propionate
+264,90-0,but[e],recipient,1.831940597757192,butyrate
+265,90-0,M03134[e],recipient,3.2021469420298724e-06,Valeric Acid
+266,90-0,so3[e],recipient,0.0003663535242793238,Sulfite
+267,90-0,tsul[e],recipient,0.16657832477455248,thiosulfate(2-)
+268,90-0,ch4s[e],recipient,1.0553350430788764e-05,Methanethiol
+269,90-0,h2[e],recipient,1.0384951818450445,Hydrogen
+270,D-10,for[e],donor,7.592925541980232,Formate
+271,D-10,ac[e],donor,34.31778027963409,acetate
+272,D-10,ppa[e],donor,0.0007440297370124399,propionate
+273,D-10,but[e],donor,0.8711102152061709,butyrate
+274,D-10,M03134[e],donor,0.0,Valeric Acid
+275,D-10,so3[e],donor,1.470991283385637e-05,Sulfite
+276,D-10,tsul[e],donor,0.02007115966794359,thiosulfate(2-)
+277,D-10,ch4s[e],donor,6.061340279582184e-06,Methanethiol
+278,D-10,h2[e],donor,0.3697671005778717,Hydrogen
+279,D-12,for[e],donor,15.506601080656623,Formate
+280,D-12,ac[e],donor,40.79949196520871,acetate
+281,D-12,ppa[e],donor,0.0,propionate
+282,D-12,but[e],donor,2.825555971740499,butyrate
+283,D-12,M03134[e],donor,0.0,Valeric Acid
+284,D-12,so3[e],donor,0.0,Sulfite
+285,D-12,tsul[e],donor,0.05822478286051344,thiosulfate(2-)
+286,D-12,ch4s[e],donor,0.0,Methanethiol
+287,D-12,h2[e],donor,0.5470710826519956,Hydrogen
+288,D-13U,for[e],donor,9.507711639715504,Formate
+289,D-13U,ac[e],donor,35.03873612202564,acetate
+290,D-13U,ppa[e],donor,0.24987753452757766,propionate
+291,D-13U,but[e],donor,1.7375235674409113,butyrate
+292,D-13U,M03134[e],donor,0.0,Valeric Acid
+293,D-13U,so3[e],donor,0.009560754601169062,Sulfite
+294,D-13U,tsul[e],donor,0.07040171743638021,thiosulfate(2-)
+295,D-13U,ch4s[e],donor,0.0016674220953062874,Methanethiol
+296,D-13U,h2[e],donor,0.42211193663486707,Hydrogen
+297,D-14,for[e],donor,6.617662274330647,Formate
+298,D-14,ac[e],donor,31.432497123539438,acetate
+299,D-14,ppa[e],donor,1.1775924565842157e-06,propionate
+300,D-14,but[e],donor,1.1707549856272892,butyrate
+301,D-14,M03134[e],donor,8.275092226399442e-09,Valeric Acid
+302,D-14,so3[e],donor,3.0654162760900935e-07,Sulfite
+303,D-14,tsul[e],donor,0.031679087567784224,thiosulfate(2-)
+304,D-14,ch4s[e],donor,3.4843212793724834e-08,Methanethiol
+305,D-14,h2[e],donor,0.24410087465522207,Hydrogen
+306,D-14U,for[e],donor,9.066884237032937,Formate
+307,D-14U,ac[e],donor,36.85638997056199,acetate
+308,D-14U,ppa[e],donor,0.0,propionate
+309,D-14U,but[e],donor,1.7420092616556035,butyrate
+310,D-14U,M03134[e],donor,0.0,Valeric Acid
+311,D-14U,so3[e],donor,0.0,Sulfite
+312,D-14U,tsul[e],donor,0.01806813830803965,thiosulfate(2-)
+313,D-14U,ch4s[e],donor,0.0,Methanethiol
+314,D-14U,h2[e],donor,0.39816124095444844,Hydrogen
+315,D-15Fryst,for[e],donor,12.138345574678892,Formate
+316,D-15Fryst,ac[e],donor,34.445296677412216,acetate
+317,D-15Fryst,ppa[e],donor,0.001888239409067966,propionate
+318,D-15Fryst,but[e],donor,1.304515794614225,butyrate
+319,D-15Fryst,M03134[e],donor,0.0,Valeric Acid
+320,D-15Fryst,so3[e],donor,0.0001940291472057035,Sulfite
+321,D-15Fryst,tsul[e],donor,0.030060608387821125,thiosulfate(2-)
+322,D-15Fryst,ch4s[e],donor,4.8817158495636175e-05,Methanethiol
+323,D-15Fryst,h2[e],donor,0.4471344999415148,Hydrogen
+324,D-15U,for[e],donor,15.166778478290569,Formate
+325,D-15U,ac[e],donor,24.99311284051507,acetate
+326,D-15U,ppa[e],donor,0.5459830441838466,propionate
+327,D-15U,but[e],donor,1.8521086063818293,butyrate
+328,D-15U,M03134[e],donor,0.0,Valeric Acid
+329,D-15U,so3[e],donor,0.01618687920085056,Sulfite
+330,D-15U,tsul[e],donor,0.04160263779210158,thiosulfate(2-)
+331,D-15U,ch4s[e],donor,0.012655315704985185,Methanethiol
+332,D-15U,h2[e],donor,0.508260318506171,Hydrogen
+333,D-2,for[e],donor,6.833607972358348,Formate
+334,D-2,ac[e],donor,31.529133891846612,acetate
+335,D-2,ppa[e],donor,0.0,propionate
+336,D-2,but[e],donor,1.3709665534841398,butyrate
+337,D-2,M03134[e],donor,0.0,Valeric Acid
+338,D-2,so3[e],donor,6.010234301380101e-10,Sulfite
+339,D-2,tsul[e],donor,0.017997677179229756,thiosulfate(2-)
+340,D-2,ch4s[e],donor,0.0,Methanethiol
+341,D-2,h2[e],donor,0.3038807023782143,Hydrogen
+342,D-3,for[e],donor,6.210920207750622,Formate
+343,D-3,ac[e],donor,32.93051608778816,acetate
+344,D-3,ppa[e],donor,0.037963792255049075,propionate
+345,D-3,but[e],donor,1.978345338998329,butyrate
+346,D-3,M03134[e],donor,0.0,Valeric Acid
+347,D-3,so3[e],donor,1.9246059552591467e-05,Sulfite
+348,D-3,tsul[e],donor,0.027032035004413802,thiosulfate(2-)
+349,D-3,ch4s[e],donor,2.226359332153728e-06,Methanethiol
+350,D-3,h2[e],donor,0.2901076179426382,Hydrogen
+351,D-4,for[e],donor,4.141368956232354,Formate
+352,D-4,ac[e],donor,28.22016777805152,acetate
+353,D-4,ppa[e],donor,4.709778218261379e-10,propionate
+354,D-4,but[e],donor,1.0429685522929995,butyrate
+355,D-4,M03134[e],donor,0.0,Valeric Acid
+356,D-4,so3[e],donor,4.744039077012268e-10,Sulfite
+357,D-4,tsul[e],donor,0.011817957095828058,thiosulfate(2-)
+358,D-4,ch4s[e],donor,0.0,Methanethiol
+359,D-4,h2[e],donor,0.18499620796271807,Hydrogen
+360,D-5Fryst,for[e],donor,5.646527398232634,Formate
+361,D-5Fryst,ac[e],donor,31.0646129716843,acetate
+362,D-5Fryst,ppa[e],donor,0.0036474513313374955,propionate
+363,D-5Fryst,but[e],donor,0.9960144653240515,butyrate
+364,D-5Fryst,M03134[e],donor,0.0,Valeric Acid
+365,D-5Fryst,so3[e],donor,1.5739430777602615e-05,Sulfite
+366,D-5Fryst,tsul[e],donor,0.006333312309037051,thiosulfate(2-)
+367,D-5Fryst,ch4s[e],donor,1.4196720078721035e-05,Methanethiol
+368,D-5Fryst,h2[e],donor,0.26808189484615447,Hydrogen
+369,D-6Fresk,for[e],donor,6.249826413574288,Formate
+370,D-6Fresk,ac[e],donor,35.97191130658126,acetate
+371,D-6Fresk,ppa[e],donor,0.16616397097811939,propionate
+372,D-6Fresk,but[e],donor,1.1444600549313235,butyrate
+373,D-6Fresk,M03134[e],donor,0.0,Valeric Acid
+374,D-6Fresk,so3[e],donor,6.913916398071172e-09,Sulfite
+375,D-6Fresk,tsul[e],donor,1.4316696343347207e-07,thiosulfate(2-)
+376,D-6Fresk,ch4s[e],donor,8.213327434648566e-07,Methanethiol
+377,D-6Fresk,h2[e],donor,0.35558366245718614,Hydrogen
+378,D-6Fryst,for[e],donor,5.482340120120216,Formate
+379,D-6Fryst,ac[e],donor,34.033508124796086,acetate
+380,D-6Fryst,ppa[e],donor,0.0,propionate
+381,D-6Fryst,but[e],donor,1.7100396306970096,butyrate
+382,D-6Fryst,M03134[e],donor,0.0,Valeric Acid
+383,D-6Fryst,so3[e],donor,0.0,Sulfite
+384,D-6Fryst,tsul[e],donor,0.008157245170277713,thiosulfate(2-)
+385,D-6Fryst,ch4s[e],donor,0.0,Methanethiol
+386,D-6Fryst,h2[e],donor,0.2394095097907755,Hydrogen
+387,D-7Fryst,for[e],donor,5.740185428467956,Formate
+388,D-7Fryst,ac[e],donor,30.71366956201751,acetate
+389,D-7Fryst,ppa[e],donor,0.010941713600266443,propionate
+390,D-7Fryst,but[e],donor,0.7739768081802555,butyrate
+391,D-7Fryst,M03134[e],donor,0.0,Valeric Acid
+392,D-7Fryst,so3[e],donor,1.0179946117811331e-08,Sulfite
+393,D-7Fryst,tsul[e],donor,0.0,thiosulfate(2-)
+394,D-7Fryst,ch4s[e],donor,0.0,Methanethiol
+395,D-7Fryst,h2[e],donor,0.21145171504329238,Hydrogen
+396,D-9Feresk,for[e],donor,4.337744854467214,Formate
+397,D-9Feresk,ac[e],donor,19.056380975596404,acetate
+398,D-9Feresk,ppa[e],donor,0.02691129876572932,propionate
+399,D-9Feresk,but[e],donor,0.37300890569025164,butyrate
+400,D-9Feresk,M03134[e],donor,0.0,Valeric Acid
+401,D-9Feresk,so3[e],donor,0.0,Sulfite
+402,D-9Feresk,tsul[e],donor,0.0,thiosulfate(2-)
+403,D-9Feresk,ch4s[e],donor,3.8980335665859925e-08,Methanethiol
+404,D-9Feresk,h2[e],donor,0.14419557424527904,Hydrogen
+405,D-9Fryst,for[e],donor,4.6069858794029,Formate
+406,D-9Fryst,ac[e],donor,29.420495370663048,acetate
+407,D-9Fryst,ppa[e],donor,0.09718983140340118,propionate
+408,D-9Fryst,but[e],donor,0.956424033103754,butyrate
+409,D-9Fryst,M03134[e],donor,0.0,Valeric Acid
+410,D-9Fryst,so3[e],donor,6.9224784984409765e-09,Sulfite
+411,D-9Fryst,tsul[e],donor,0.0,thiosulfate(2-)
+412,D-9Fryst,ch4s[e],donor,1.2003550979589537e-05,Methanethiol
+413,D-9Fryst,h2[e],donor,0.14984485903492803,Hydrogen

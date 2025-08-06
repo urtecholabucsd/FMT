@@ -1,0 +1,807 @@
+taxon_id,kingdom,phylum,class,order,family,genus,species,strain
+465515,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Micrococcaceae,Micrococcus,Micrococcus luteus,Micrococcus luteus NCTC 2665
+469602,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium nucleatum,Fusobacterium vincentii 3_1_27
+1002364,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Hafnia,Hafnia alvei,Hafnia alvei ATCC 51873
+469599,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium periodonticum,Fusobacterium periodonticum 2_1_31
+502347,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Escherichia,Escherichia albertii,Escherichia albertii TW07627
+525367,Bacteria,Firmicutes,Bacilli,Bacillales,Listeriaceae,Listeria,Listeria grayi,Listeria grayi DSM 20601
+568703,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus rhamnosus,Lacticaseibacillus rhamnosus GG
+565040,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium longum,Bifidobacterium longum subsp. infantis 157F
+546262,Bacteria,Proteobacteria,Betaproteobacteria,Neisseriales,Neisseriaceae,Neisseria,Neisseria cinerea,Neisseria cinerea ATCC 14685
+1121126,Bacteria,Firmicutes,Bacilli,Bacillales,Listeriaceae,Brochotrix,Brochothrix thermosphacta,Brochothrix thermosphacta DSM 20171 = FSL F6-1036
+545696,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Holdemania,Holdemania filiformis,Holdemania filiformis DSM 12042
+1122949,Bacteria,Firmicutes,Tissierellia,Tissierellales,Peptoniphilaceae,Peptoniphilus,Peptoniphilus lacrimalis,Peptoniphilus lacrimalis DSM 7455
+702444,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides ovatus,Bacteroides xylanisolvens SD CC 2a
+1423799,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus salivarius,Ligilactobacillus salivarius DSM 20555 = ATCC 11741
+1140001,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus durans,Enterococcus durans ATCC 6056
+767031,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella denticola,Prevotella denticola F0289
+1127131,Bacteria,Firmicutes,Bacilli,Lactobacillales,Leuconostocaceae,Leuconostoc,Weissella confusa,Weissella confusa LBAE C39-2
+537972,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Helicobacteraceae,Helicobacter,Helicobacter pullorum,Helicobacter pullorum MIT 98-5489
+537007,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Blautia,Blautia hansenii,Blautia hansenii DSM 20583
+749518,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus faecalis,Enterococcus faecalis TX2134
+936154,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus parauberis,Streptococcus parauberis KCTC 11537
+1203611,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes,Alistipes onderdonkii,Alistipes onderdonkii WAL 8169 = DSM 19147
+657309,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides xylanisolvens,Bacteroides xylanisolvens XB1A
+206672,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium longum,Bifidobacterium longum NCC2705
+426355,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Methylobacteriaceae,Methylobacterium,Methylobacterium radiotolerans,Methylobacterium radiotolerans JCM 2831
+553174,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella melaninogenica,Prevotella melaninogenica ATCC 25845
+1397694,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillales Incertae Sedis XII,Exiguobacterium,Exiguobacterium aurantiacum,Exiguobacterium aurantiacum DSM 6208
+1178544,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus altitudinis,Bacillus altitudinis 41KF2b
+469617,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium ulcerans,Fusobacterium ulcerans ATCC 49185
+1384484,Bacteria,Actinobacteria,Coriobacteriia,Eggerthellales,Eggerthellaceae,Adlercreutzia,Adlercreutzia equolifaciens,Adlercreutzia equolifaciens DSM 19450
+1121100,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides pyogenes,Phocaeicola plebeius DSM 17135
+450749,Bacteria,Firmicutes,Clostridia,Clostridiales,Veillonellaceae,Veillonella,Veillonella sp.,Veillonella sp. 6_1_27
+1120988,Bacteria,Proteobacteria,Gammaproteobacteria,Aeromonadales,Vibrionaceae,Anaerobiospirillum,Anaerobiospirillum succiniciproducens,Anaerobiospirillum succiniciproducens DSM 6400
+548479,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Mobiluncus,Mobiluncus curtisii,Mobiluncus curtisii ATCC 43063
+1122603,Bacteria,Proteobacteria,Gammaproteobacteria,Xanthomonadales,Sinobacteraceae,Nevskia,Nevskia ramosa,Nevskia ramosa DSM 11499
+566552,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium catenulatum,Bifidobacterium catenulatum DSM 16992 = JCM 1194 = LMG 11043
+1236550,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Micrococcaceae,Kocuria,Kocuria palustris,Kocuria palustris PEL
+1208104,Bacteria,Proteobacteria,Gammaproteobacteria,Aeromonadales,Aeromonadaceae,Aeromonas,Aeromonas media,Aeromonas media WS
+717962,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Coprococcus,Coprococcus catus,Coprococcus catus GD/7
+1089456,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Pseudomonadaceae,Pseudomonas,Pseudomonas aeruginosa,Pseudomonas aeruginosa NCGM2.S1
+565653,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus gallinarum,Enterococcus gallinarum EG2
+585520,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus helveticus,Lactobacillus helveticus DSM 20075 = CGMCC 1.1877
+537012,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides cellulosilyticus,Bacteroides cellulosilyticus DSM 14838
+413999,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium botulinum,Clostridium botulinum A str. ATCC 3502
+1211815,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Geodermatophilaceae,Blastococcus,Blastococcus massiliensis,Candidatus Blastococcus massiliensis AP3
+762984,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides clarus,Bacteroides clarus YIT 12056
+1121019,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Arthrobacter,Arthrobacter castelli,Arthrobacter castelli DSM 16402
+272623,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Lactococcus,Lactococcus lactis,Lactococcus lactis subsp. lactis Il1403
+1185325,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus coryniformis,Loigolactobacillus coryniformis subsp. coryniformis CECT 5711
+754252,Bacteria,Actinobacteria,Actinobacteria,Propionibacteriales,Propionibacteriaceae,Propionibacterium,Propionibacterium freudenreichii,Propionibacterium freudenreichii subsp. shermanii CIRM-BIA1
+568816,Bacteria,Firmicutes,Negativicutes,Selenomonadales,Acidaminococcaceae,Acidaminococcus,Acidaminococcus intestini,Acidaminococcus intestini RyC-MR95
+525268,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Corynebacteriaceae,Corynebacterium,Corynebacterium striatum,Corynebacterium striatum ATCC 6940
+290338,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Citrobacter,Citrobacter koseri,Citrobacter koseri ATCC BAA-895
+398511,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus pseudofirmus,Alkalihalophilus pseudofirmus OF4
+205921,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus agalactiae,Streptococcus agalactiae A909
+324831,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus gasseri,Lactobacillus gasseri ATCC 33323 = JCM 1131
+1089547,Bacteria,Bacteroidetes,Cytophagia,Cytophagales,Cytophagaceae,Rudanella,Rudanella lutea,Rudanella lutea DSM 19387
+457401,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Escherichia,Escherichia sp.,Escherichia sp. 4_1_40B
+457398,Bacteria,Proteobacteria,Deltaproteobacteria,Desulfovibrionales,Desulfovibrionaceae,Desulfovibrio,Desulfovibrio sp.,Desulfovibrio sp. 3_1_syn3
+742817,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Odoribacter,Odoribacter laneus,Odoribacter laneus YIT 12061
+561180,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium gallicum,Bifidobacterium gallicum DSM 20093 = LMG 11596
+999413,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Erysipelatoclostridium,Clostridium innocuum,[Clostridium] innocuum 2959
+1064537,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Dermabacteraceae,Brachybacterium,Brachybacterium paraconglomeratum,Brachybacterium paraconglomeratum LC44
+411469,Bacteria,Firmicutes,Clostridia,Clostridiales,Eubacteriaceae,Eubacterium,Eubacterium hallii,Anaerobutyricum hallii DSM 3353
+562982,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillales Incertae Sedis XI,Gemella,Gemella morbillorum,Gemella morbillorum M424
+518635,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium angulatum,Bifidobacterium angulatum DSM 20098 = JCM 7096
+1156918,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Alcaligenaceae,Alcaligenes,Alcaligenes faecalis,Alcaligenes faecalis subsp. faecalis NCIB 8687
+500633,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,unclassified Peptostreptococcaceae,Clostridium hiranonis,Peptacetobacter hiranonis DSM 13275
+1125724,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Micrococcaceae,Rothia,Rothia aeria,Rothia aeria F0474
+1122985,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella loescheii,Hoylesella loescheii DSM 19665 = JCM 12249 = ATCC 15930
+1170318,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Propionibacteriaceae,Propionibacterium,Propionibacterium avidum,Cutibacterium avidum 44067
+1307436,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus firmus,Cytobacillus firmus DS1
+688245,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Comamonadaceae,Comamonas,Comamonas testosteroni,Comamonas thiooxydans
+411475,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Flavonifractor,Flavonifractor plautii,Flavonifractor plautii ATCC 29863
+1437595,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium pseudolongum,Bifidobacterium pseudolongum subsp. pseudolongum DSM 20099
+393305,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Yersinia,Yersinia enterocolitica,Yersinia enterocolitica subsp. enterocolitica 8081
+634498,Archaea,Euryarchaeota,Methanobacteria,Methanobacteriales,Methanobacteriaceae,Methanobrevibacter,Methanobrevibacter ruminantium,Methanobrevibacter ruminantium M1
+388919,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus sanguinis,Streptococcus sanguinis SK36
+742766,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Dysgonomonas,Dysgonomonas gadei,Dysgonomonas gadei ATCC BAA-286
+1218102,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Alcaligenaceae,Alcaligenes,Alcaligenes faecalis,Alcaligenes faecalis subsp. faecalis NBRC 13111
+585054,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Escherichia,Escherichia fergusonii,Escherichia fergusonii ATCC 35469
+742741,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnoclostridium,Clostridium symbiosum,[Clostridium] symbiosum WAL-14673
+1408440,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillales Incertae Sedis XI,Gemella,Gemella sanguinis,Gemella sanguinis ATCC 700632
+364106,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Escherichia,Escherichia coli,Escherichia coli UTI89
+321956,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus delbrueckii,Lactobacillus delbrueckii subsp. bulgaricus ATCC BAA-365
+910954,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Dietziaceae,Dietzia,Dietzia cinnamea,Dietzia cinnamea P4
+546270,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillales Incertae Sedis XI,Gemella,Gemella haemolysans,Gemella haemolysans ATCC 10379
+523794,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Leptotrichiaceae,Leptotrichia,Leptotrichia buccalis,Leptotrichia buccalis C-1013-b
+762968,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Paraprevotella,Paraprevotella clara,Paraprevotella clara YIT 11840
+445971,Bacteria,Firmicutes,Clostridia,Clostridiales,Eubacteriaceae,Anaerofustis,Anaerofustis stercorihominis,Anaerofustis stercorihominis DSM 17244
+1121342,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium tyrobutyricum,Clostridium tyrobutyricum DSM 2637 = ATCC 25755 = JCM 11008
+930942,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus animalis,Ligilactobacillus animalis KCTC 3501 = DSM 20602
+1140002,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus avium,Enterococcus avium ATCC 14025
+888727,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiales Incertae Sedis XIII,Eubacterium,Eubacterium sulci,Eubacterium sulci ATCC 35585
+428127,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,unclassified Erysipelotrichaceae,Eubacterium dolichum,Amedibacillus dolichus DSM 3991
+1123313,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Streptococcus,Streptococcus pleomorphus,Faecalicoccus pleomorphus DSM 20574
+500637,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Providencia,Providencia rustigianii,Providencia rustigianii DSM 4541
+556270,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Coprobacillus,Coprobacillus sp.,Coprobacillus sp. D7
+585506,Bacteria,Firmicutes,Bacilli,Lactobacillales,Leuconostocaceae,Weissella,Weissella paramesenteroides,Weissella paramesenteroides ATCC 33313
+626522,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Alloprevotella,Alloprevotella tannerae,Alloprevotella tannerae ATCC 51259
+657324,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Butyrivibrio,Butyrivibrio fibrisolvens,Butyrivibrio fibrisolvens 16/4
+1194526,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus warneri,Staphylococcus warneri SG1
+470146,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Coprococcus,Coprococcus comes,Coprococcus comes ATCC 27758
+536229,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus pumilus,Bacillus pumilus ATCC 7061
+638301,Bacteria,Firmicutes,Bacilli,Lactobacillales,Carnobacteriaceae,Granulicatella,Granulicatella adiacens,Granulicatella adiacens ATCC 49175
+626369,Bacteria,Firmicutes,Bacilli,Lactobacillales,Carnobacteriaceae,Granulicatella,Granulicatella elegans,Granulicatella elegans ATCC 700633
+205913,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium longum,Bifidobacterium longum DJO10A
+525361,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus rhamnosus,Lacticaseibacillus rhamnosus LMS2-1
+640513,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Enterobacter,Enterobacter asburiae,Enterobacter soli
+622312,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Roseburia,Roseburia inulinivorans,Roseburia inulinivorans DSM 16841
+585394,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Roseburia,Roseburia hominis,Roseburia hominis A2-183
+1410647,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium ruminantium,Bifidobacterium ruminantium DSM 6489
+527025,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus thuringiensis,Bacillus thuringiensis serovar thuringiensis str. T01001
+596327,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Porphyromonas,Porphyromonas uenonis,Porphyromonas uenonis 60-3
+476272,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Blautia,Blautia hydrogenotrophica,Blautia hydrogenotrophica DSM 10507
+1121129,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Butyricimonas,Butyricimonas synergistica,Butyricimonas synergistica DSM 23225
+441770,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium botulinum,Clostridium botulinum A str. ATCC 19397
+1122997,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Propionibacteriaceae,Propionibacterium,Propionibacterium jensenii,Acidipropionibacterium jensenii DSM 20535
+742821,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Sutterellaceae,Sutterella,Sutterella wadsworthensis,Sutterella wadsworthensis 3_1_45B
+1203606,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Butyricicoccus,Butyricicoccus pullicaecorum,Butyricicoccus pullicaecorum 1.2
+478801,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Dermacoccaceae,Kytococcus,Kytococcus sedentarius,Kytococcus sedentarius DSM 20547
+592031,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiales Incertae Sedis XIII,Eubacterium,Eubacterium saphenum,Eubacterium saphenum ATCC 49989
+1028803,Bacteria,Proteobacteria,Gammaproteobacteria,Pasteurellales,Pasteurellaceae,Haemophilus,Haemophilus haemolyticus,Haemophilus haemolyticus M19501
+333381,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Oceanobacillus,Oceanobacillus picturae,Oceanobacillus picturae
+1121344,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminiclostridium,Clostridium viride,[Clostridium] viride DSM 6836
+272621,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus acidophilus,Lactobacillus acidophilus NCFM
+411460,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Blautia,Ruminococcus torques,[Ruminococcus] torques ATCC 27756
+888050,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Actinomyces,Actinomyces cardiffensis,Schaalia cardiffensis F0333
+279808,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus haemolyticus,Staphylococcus haemolyticus JCSC1435
+1437599,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium coryneforme,Bifidobacterium coryneforme DSM 20216
+1437612,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium stercoris,Bifidobacterium adolescentis JCM 15918
+547042,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides coprophilus,Phocaeicola coprophilus DSM 18228 = JCM 13818
+663952,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus dysgalactiae,Streptococcus dysgalactiae subsp. dysgalactiae ATCC 27957
+266835,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Phyllobacteriaceae,Mesorhizobium,Mesorhizobium loti,Mesorhizobium japonicum MAFF 303099
+1280705,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella bryantii,Segatella baroniae C21a
+504472,Bacteria,Bacteroidetes,Cytophagia,Cytophagales,Cytophagaceae,Spirosoma,Spirosoma linguale,Spirosoma linguale DSM 74
+469605,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium gonidiaformans,Fusobacterium gonidiaformans 3-1-5R
+411489,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium sp.,Clostridium sp. L2-50
+908338,Bacteria,Firmicutes,Tissierellia,Tissierellales,Peptoniphilaceae,Peptoniphilus,Peptoniphilus harei,Peptoniphilus harei ACS-146-V-Sch2b
+441620,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Methylobacteriaceae,Methylobacterium,Methylobacterium populi,Methylorubrum populi BJ001
+1276282,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus pasteuri,Staphylococcus pasteuri SP1
+720554,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminiclostridium,Clostridium clariflavum,Acetivibrio clariflavus DSM 19732
+591001,Bacteria,Firmicutes,Negativicutes,Acidaminococcales,Acidaminococcaceae,Acidaminococcus,Acidaminococcus fermentans,Acidaminococcus fermentans DSM 20731
+347256,Bacteria,Tenericutes,Mollicutes,Mycoplasmatales,Mycoplasmataceae,Mycoplasma,Mycoplasma hominis,Metamycoplasma hominis ATCC 23114
+411459,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Blautia,Blautia obeum,Blautia obeum ATCC 29174
+457396,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium sp,Clostridium sp. 7_2_43FAA
+467705,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus gordonii,Streptococcus gordonii str. Challis substr. CH1
+997350,Bacteria,Firmicutes,Tissierellia,Tissierellales,Peptoniphilaceae,Peptoniphilus,Peptoniphilus indolicus,Peptoniphilus indolicus ATCC 29427
+1121445,Bacteria,Proteobacteria,Deltaproteobacteria,Desulfovibrionales,Desulfovibrionaceae,Desulfovibrio,Desulfovibrio desulfuricans,Desulfovibrio desulfuricans DSM 642
+525325,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus fermentum,Limosilactobacillus fermentum ATCC 14931
+234621,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Nocardiaceae,Rhodococcus,Rhodococcus erythropolis,Rhodococcus erythropolis PR4
+471870,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides intestinalis,Bacteroides intestinalis DSM 17393
+398513,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium bifidum,Bifidobacterium bifidum NCIMB 41171
+1158610,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus phoeniculicola,Enterococcus phoeniculicola ATCC BAA-412
+742729,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium animalis,Bifidobacterium animalis subsp. lactis Bi-07
+207244,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Anaerostipes,Anaerostipes sp.,Anaerostipes caccae
+642492,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Cellulosilyticum,Cellulosilyticum lentocellum,Cellulosilyticum lentocellum DSM 5427
+525258,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Clostridioides,Clostridium difficile,Clostridioides difficile NAP07
+629741,Bacteria,Proteobacteria,Betaproteobacteria,Neisseriales,Neisseriaceae,Kingella,Kingella oralis,Kingella oralis ATCC 51147
+657314,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Blautia,Ruminococcus obeum,Blautia obeum A2-162
+444177,Bacteria,Firmicutes,Bacilli,Bacillales,Planococcaceae,Lysinibacillus,Lysinibacillus sphaericus,Lysinibacillus sphaericus C3-41
+411472,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnoclostridium,Clostridium symbiosum,[Clostridium] symbiosum ATCC 14940
+242619,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Porphyromonas,Porphyromonas gingivalis,Porphyromonas gingivalis W83
+1037409,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Brucellaceae,Bradyrhizobium,Bradyrhizobium japonicum,Bradyrhizobium japonicum USDA 6
+1440052,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Escherichia,Escherichia albertii,Escherichia albertii KF1
+457412,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcus,Ruminococcus sp.,Ruminococcus sp. 5_1_39BFAA
+742743,Bacteria,Firmicutes,Negativicutes,Veillonellales,Veillonellaceae,Dialister,Dialister succinatiphilus,Dialister succinatiphilus YIT 11850
+1009846,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Burkholderiaceae,Burkholderia,Burkholderia cepacia,Burkholderia cepacia GG4
+457394,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. 4_3_47FAA
+873513,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella buccae,Segatella buccae ATCC 33574
+563194,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Pediococcus,Pediococcus acidilactici,Pediococcus acidilactici 7_4
+1328337,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Hafnia,Hafnia alvei,Klebsiella pneumoniae BIDMC 31
+273526,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Serratia,Serratia marcescens,Serratia marcescens subsp. marcescens Db11
+445973,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Intestinibacter,Clostridium bartlettii,Intestinibacter bartlettii DSM 16795
+1150461,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium scardovii,Bifidobacterium scardovii JCM 12489 = DSM 13734
+873533,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella oralis,Hoylesella oralis ATCC 33269
+349741,Bacteria,Verrucomicrobia,Verrucomicrobiae,Verrucomicrobiales,Akkermansiaceae,Akkermansia,Akkermansia muciniphila,Akkermansia muciniphila ATCC BAA-835
+645462,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Clostridioides,Clostridium difficile,Clostridioides difficile CD196
+85962,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Helicobacteraceae,Helicobacter,Helicobacter pylori,Helicobacter pylori 26695
+469621,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium periodonticum,Fusobacterium periodonticum 1_1_41FAA
+469590,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. 2_2_4
+657316,Bacteria,Firmicutes,Negativicutes,Selenomonadales,Veillonellaceae,Megamonas,Megamonas hypermegale,Megamonas hypermegale ART12/1
+762966,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Suterellaceae,Parasutterella,Parasutterella excrementihominis,Parasutterella excrementihominis YIT 11859
+1115803,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Actinomyces,Actinomyces naeslundii,Actinomyces naeslundii str. Howell 279
+1121303,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminiclostridium,Clostridium cellobioparum,Ruminiclostridium cellobioparum DSM 1351 = ATCC 15832
+500640,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Citrobacter,Citrobacter youngae,Citrobacter youngae ATCC 29220
+405534,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus cereus,Bacillus cereus AH187
+585543,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. D20
+393130,Bacteria,Firmicutes,Bacilli,Bacillales,Listeriaceae,Listeria,Listeria monocytogenes,Listeria monocytogenes J0161
+1262650,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus xylosus,Staphylococcus xylosus NJ
+904314,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus pettenkoferi,Staphylococcus pettenkoferi VCU012
+1410645,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium boum,Bifidobacterium boum DSM 20432
+698737,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus lugdunensis,Staphylococcus lugdunensis HKU09-01
+1203610,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Parabacteroides,Parabacteroides gordonii,Parabacteroides gordonii MS-1 = DSM 23371
+279010,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus licheniformis,Bacillus licheniformis DSM 13 = ATCC 14580
+903510,Bacteria,Proteobacteria,Gammaproteobacteria,Vibrionales,Vibrionaceae,Vibrio,Vibrio furnissii,Vibrio furnissii NCTC 11218
+457421,Bacteria,Firmicutes,Clostridia,Clostridiales,unclassified Clostridiales,unclassified Clostridiales,Clostridiales sp.,Clostridiales bacterium 1_7_47FAA
+349968,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Yersinia,Yersinia bercovieri,Yersinia bercovieri ATCC 43970
+1257041,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus mutans,Streptococcus mutans ATCC 25175
+300267,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Shigella,Shigella dysenteriae,Shigella dysenteriae Sd197
+879090,Bacteria,Firmicutes,Bacilli,Bacillales,Listeriaceae,Listeria,Listeria monocytogenes,Listeria monocytogenes SLCC7179
+515620,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Eubacterium,Eubacterium eligens,Lachnospira eligens ATCC 27750
+1219013,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Nocardiaceae,Rhodococcus,Rhodococcus equi,Prescottella equi NBRC 101255 = C 7
+1125712,Bacteria,Actinobacteria,Coriobacteriia,Coriobacteriales,Coriobacteriaceae,Olsenella,Olsenella profusa,Olsenella profusa F0195
+657319,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminiclostridium,Eubacterium siraeum,[Eubacterium] siraeum 70/3
+641146,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Scardovia,Scardovia inopinata,Scardovia inopinata F0304
+398578,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Comamonadaceae,Delftia,Delftia acidovorans,Delftia acidovorans SPH-1
+1316931,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium butyricum,Clostridium butyricum DSM 10702
+866776,Bacteria,Firmicutes,Negativicutes,Veillonellales,Veillonellaceae,Veillonella,Veillonella atypica,Veillonella atypica ACS-049-V-Sch6
+1005995,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Tatumella,Tatumella ptyseos,Tatumella ptyseos ATCC 33301
+537013,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminiclostridium,Clostridium methylpentosum,[Clostridium] methylpentosum DSM 5476
+649757,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Anaerostipes,Anaerostipes hadrus,Anaerostipes hadrus ATCC 29173 = JCM 17467
+1189311,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus capitis,Staphylococcus capitis QN1
+398525,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Bradyrhizobiaceae,Bradyrhizobium,Bradyrhizobium elkanii,Bradyrhizobium elkanii USDA 76
+1458276,Bacteria,Proteobacteria,Gammaproteobacteria,Aeromonadales,Aeromonadaceae,Aeromonas,Aeromonas jandaei,Aeromonas jandaei Riv2
+1197906,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Brucellaceae,Alfipia,Afipia birgiae,Afipia birgiae 34632
+649746,Bacteria,Synergistetes,Synergistia,Synergistales,Synergistaceae,Anaerobaculum,Anaerobaculum hydrogeniformans,Acetomicrobium hydrogeniformans ATCC BAA-1850
+246198,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella intermedia,Prevotella intermedia 17
+585524,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus amylolyticus,Lactobacillus amylolyticus DSM 11664
+546263,Bacteria,Proteobacteria,Betaproteobacteria,Neisseriales,Neisseriaceae,Neisseria,Neisseria elongata,Neisseria elongata subsp. glycolytica ATCC 29315
+362948,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus salivarius,Ligilactobacillus salivarius UCC118
+1295400,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter jejuni,Campylobacter jejuni subsp. jejuni ICDCCJ07004
+1110694,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Pantoea,Pantoea agglomerans,Pantoea agglomerans IG1
+1077285,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides faecis,Bacteroides faecis MAJ27
+709991,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Odoribacter,Odoribacter splanchnicus,Odoribacter splanchnicus DSM 20712
+556263,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium necrophorum,Fusobacterium necrophorum D12
+1123253,Bacteria,Proteobacteria,Gammaproteobacteria,Xanthomonadales,Xanthomonadaceae,Silanimonas,Silanimonas lenta,Silanimonas lenta DSM 16282
+742726,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Barnesiella,Barnesiella intestinihominis,Barnesiella intestinihominis YIT 11860
+411468,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnoclostridium,Clostridium scindens,[Clostridium] scindens ATCC 35704
+469603,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium nucleatum,Fusobacterium animalis 3_1_33
+483218,Bacteria,Firmicutes,Clostridia,Clostridiales,unclassified Clostridiales,unclassified Clostridiales,Bacteroides pectinophilus,[Bacteroides] pectinophilus ATCC 43243
+1122950,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Peptostreptococcus,Peptostreptococcus anaerobius,Peptostreptococcus anaerobius VPI 4330 = DSM 2949
+1410665,Bacteria,Firmicutes,Negativicutes,Selenomonadales,Selenomonadaceae,Mitsuokella,Mitsuokella jalaludinii,Mitsuokella jalaludinii DSM 13811
+290339,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Cronobacter,Cronobacter sakazakii,Cronobacter sakazakii ATCC BAA-894
+537973,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus paracasei,Lacticaseibacillus paracasei subsp. paracasei 8700:2
+525362,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus ruminis,Ligilactobacillus ruminis ATCC 25644
+1121101,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides salyersiae,Bacteroides salyersiae WAL 10018 = DSM 18765 = JCM 12988
+1280692,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium cadaveris,Clostridium cadaveris AGR2141
+1123524,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Pseudomonadaceae,Pseudomonas,Pseudomonas monteilii,Pseudomonas monteilii QM
+469607,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium sp.,Fusobacterium animalis 4_8
+1274524,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus sonorensis,Bacillus sonorensis L12
+556267,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Helicobacteraceae,Helicobacter,Helicobacter winghamensis,Helicobacter winghamensis ATCC BAA-430
+632245,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium butyricum,Clostridium butyricum E4 str. BoNT E BL5262
+1033734,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus timonensis,Bacillus timonensis
+665951,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,unclassified Lachnospiraceae,Lachnospiraceae bacterium,Lachnospiraceae bacterium 8_1_57FAA
+521003,Bacteria,Actinobacteria,Coriobacteriia,Coriobacteriales,Coriobacteriaceae,Collinsella,Collinsella intestinalis,Collinsella intestinalis DSM 13280
+1118059,Bacteria,Firmicutes,Tissierellia,unclassified Tissierellia,unclassified Tissierellia,Kallipyga,Kallipyga massiliensis,Kallipyga massiliensis ph2
+411486,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium sp.,Clostridium sp. M62/1
+525370,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Nocardiaceae,Rhodococcus,Rhodococcus equi,Prescottella equi ATCC 33707
+1005996,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Raoultella,Raoultella planticola,Raoultella planticola ATCC 33531
+473819,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium dentium,Bifidobacterium dentium ATCC 27678
+592022,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus megaterium,Priestia megaterium DSM 319
+596315,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Peptostreptococcus,Peptostreptococcus stomatis,Peptostreptococcus stomatis DSM 17678
+500632,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Tyzzerella,Clostridium nexile,[Clostridium] nexile DSM 1787
+213810,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcus,Ruminococcus champanellensis,Ruminococcus champanellensis 18P13 = JCM 17042
+457405,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium nucleatum,Fusobacterium animalis 7_1
+1158606,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus asini,Enterococcus asini ATCC 700915
+195103,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium perfringens,Clostridium perfringens ATCC 13124
+367737,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Arcobacter,Arcobacter butzleri,Aliarcobacter butzleri RM4018
+1121102,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Bacteroides ureolyticus,Campylobacter ureolyticus DSM 20703
+264731,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella ruminicola,Xylanibacter ruminicola 23
+546274,Bacteria,Proteobacteria,Betaproteobacteria,Neisseriales,Neisseriaceae,Eikenella,Eikenella corrodens,Eikenella corrodens ATCC 23834
+411471,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Subdoligranulum,Subdoligranulum variabile,Subdoligranulum variabile DSM 15176
+1045856,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Enterobacter,Enterobacter cloacae,Enterobacter ludwigii
+1006000,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Kluyvera,Kluyvera ascorbata,Kluyvera ascorbata ATCC 33433
+1139219,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus dispar,Enterococcus dispar ATCC 51266
+226186,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides thetaiotaomicron,Bacteroides thetaiotaomicron VPI-5482
+1076934,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus lutetiensis,Streptococcus lutetiensis 033
+1122237,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Microbacteriaceae,Microbacterium,Microbacterium gubbeenense,Microbacterium gubbeenense DSM 15944
+758678,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium botulinum,Clostridium botulinum F str. 230613
+411484,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium sp.,Clostridium sp. SS2/1
+553973,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnoclostridium,Clostridium hylemonae,[Clostridium] hylemonae DSM 15053
+416269,Bacteria,Proteobacteria,Gammaproteobacteria,Pasteurellales,Pasteurellaceae,Actinobacillus,Actinobacillus pleuropneumoniae,Actinobacillus pleuropneumoniae serovar 5b str. L20
+657308,Bacteria,Actinobacteria,Coriobacteriia,Eggerthellales,Eggerthellaceae,Gordonibacter,Gordonibacter pamelaeae,Gordonibacter pamelaeae 7-10-1-b
+218495,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus uberis,Streptococcus uberis 0140J
+552396,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,unclassified Erysipelotrichaceae,Erysipelotrichaceae bacterium,Erysipelotrichaceae bacterium 5_2_54FAA
+457387,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. 1_1_30
+575595,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus crispatus,Lactobacillus crispatus 125-2-CHN
+1211844,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Stoquefichus,Stoquefichus massiliensis,Candidatus Stoquefichus massiliensis AP9
+562983,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillales Incertae Sedis XI,Gemella,Gemella sanguinis,Gemella sanguinis M325
+983952,Bacteria,Proteobacteria,Betaproteobacteria,Rhodocyclales,Rhodocyclaceae,Methyloversatilis,Methyloversatilis universalis,Methyloversatilis universalis Fam500
+543734,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus casei,Lacticaseibacillus paracasei
+1121864,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus cecorum,Enterococcus cecorum DSM 20682 = ATCC 43198
+999412,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Hungatella,Clostridium hathewayi,Hungatella hathewayi 12489931
+445975,Bacteria,Actinobacteria,Coriobacteriia,Coriobacteriales,Coriobacteriaceae,Collinsella,Collinsella stercoris,Collinsella stercoris DSM 13279
+295405,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides fragilis,Bacteroides fragilis YCH46
+370551,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus pyogenes,Streptococcus pyogenes MGAS9429
+1408437,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Eubacterium,Eubacterium desmolans,Agathobaculum desmolans ATCC 43058
+537011,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella copri,Segatella copri DSM 18205
+349966,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Yersinia,Yersinia frederiksenii,Yersinia frederiksenii ATCC 33641
+262727,Bacteria,Proteobacteria,Gammaproteobacteria,Pasteurellales,Pasteurellaceae,Haemophilus,Haemophilus influenzae,Haemophilus influenzae R2846
+525365,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus ultunensis,Lactobacillus ultunensis DSM 16047
+1217674,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Moraxellaceae,Acinetobacter,Acinetobacter radioresistens,Acinetobacter radioresistens NIPH 2130
+411464,Bacteria,Proteobacteria,Deltaproteobacteria,Desulfovibrionales,Desulfovibrionaceae,Desulfovibrio,Desulfovibrio piger,Desulfovibrio piger ATCC 29098
+246201,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus mitis,Streptococcus mitis NCTC 12261
+931276,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium saccharoperbutylacetonicum,Clostridium saccharoperbutylacetonicum N1-4(HMT)
+566551,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Cedecea,Cedecea davisae,Cedecea davisae DSM 4568
+491074,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus faecalis,Enterococcus faecalis TX0104
+1160719,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Propionibacteriaceae,Propionibacterium,Propionibacterium granulosum,Cutibacterium granulosum DSM 20700
+547043,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium pseudocatenulatum,Bifidobacterium pseudocatenulatum DSM 20438 = JCM 1200 = LMG 10505
+866499,Bacteria,Synergistetes,Synergistia,Synergistales,Synergistaceae,Cloacibacillus,Cloacibacillus evryensis,Cloacibacillus evryensis DSM 19522
+483216,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides eggerthii,Bacteroides eggerthii DSM 20697
+391904,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium longum,Bifidobacterium longum subsp. infantis
+1158612,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus caccae,Enterococcus caccae ATCC BAA-1240
+537971,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Helicobacteraceae,Helicobacter,Helicobacter cinaedi,Helicobacter cinaedi CCUG 18818 = ATCC BAA-847
+411466,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Actinomyces,Actinomyces odontolyticus,Schaalia dentiphila ATCC 17982
+435591,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Parabacteroides,Parabacteroides distasonis,Parabacteroides distasonis ATCC 8503
+515619,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,unclassified Lachnospiraceae,Eubacterium rectale,Agathobacter rectalis ATCC 33656
+393126,Bacteria,Firmicutes,Bacilli,Bacillales,Listeriaceae,Listeria,Listeria monocytogenes,Listeria monocytogenes FSL R2-561
+525259,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Clostridioides,Clostridium difficile,Clostridioides difficile NAP08
+903814,Bacteria,Firmicutes,Clostridia,Clostridiales,Eubacteriaceae,Eubacterium,Eubacterium limosum,Eubacterium callanderi
+499177,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Acetoanaerobium,Clostridium sticklandii,Acetoanaerobium sticklandii
+665953,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides eggerthii,Bacteroides eggerthii 1_2_48FAA
+1350,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus sp.,Enterococcus faecalis
+888746,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus peroris,Streptococcus peroris ATCC 700780
+469615,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium gonidiaformans,Fusobacterium gonidiaformans ATCC 25563
+641112,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcus,Ruminococcus flavefaciens,Ruminococcus flavefaciens FD-1
+1006003,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Citrobacter,Citrobacter freundii,Citrobacter freundii ATCC 8090 = MTCC 1658 = NBRC 12681
+883062,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium bifidum,Bifidobacterium bifidum S17
+525379,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus equinus,Streptococcus equinus ATCC 9812
+360104,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter concisus,Campylobacter concisus 13826
+908290,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Methylobacteriaceae,Methylobacterium,Methylobacterium mesophilicum,Methylobacterium mesophilicum SR1.6/6
+1077975,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Gordoniaceae,Gordonia,Gordonia rubripertincta,Gordonia rubripertincta NBRC 101908
+1292022,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Microbacteriaceae,Curtobacterium,Curtobacterium flaccumfaciens,Curtobacterium flaccumfaciens UCD-AKU
+469585,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. 1_1_14
+329,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Burkholderiaceae,Ralstonia,Ralstonia sp.,Ralstonia pickettii
+515608,Bacteria,Tenericutes,Mollicutes,Mycoplasmatales,Mycoplasmataceae,Ureaplasma,Ureaplasma parvum,Ureaplasma parvum serovar 1 str. ATCC 27813
+904306,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus vestibularis,Streptococcus vestibularis F0396
+645463,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Clostridioides,Clostridium difficile,Clostridioides difficile R20291
+999415,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Eggerthia,Eggerthia catenaformis,Eggerthia catenaformis OT 569 = DSM 20559
+1235811,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella disiens,Prevotella disiens JCM 6334 = ATCC 29426
+445972,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Anaerotruncus,Anaerotruncus colihominis,Anaerotruncus colihominis DSM 17241
+272562,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium acetobutylicum,Clostridium acetobutylicum ATCC 824
+573236,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium animalis,Bifidobacterium animalis subsp. lactis V9
+405566,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus helveticus,Lactobacillus helveticus DPC 4571
+752555,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella bryantii,Segatella baroniae B14
+1121090,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus fordii,Siminovitchia fordii DSM 16014 = CIP 108821
+586220,Bacteria,Firmicutes,Bacilli,Lactobacillales,Leuconostocaceae,Leuconostoc,Leuconostoc mesenteroides,Leuconostoc mesenteroides subsp. cremoris ATCC 19254
+1899017,Bacteria,Cyanobacteria,Melainabacteria,unclassified Melainabacteria,unclassified Melainabacteria,unclassified Melainabacteria,Melainabacterium MEL.A1,Candidatus Melainabacteria bacterium MEL.A1
+457390,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. 3_1_23
+742742,Bacteria,Actinobacteria,Coriobacteriia,Coriobacteriales,Coriobacteriaceae,Collinsella,Collinsella tanakaei,Collinsella tanakaei YIT 12063
+518637,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Holdemanella,Eubacterium biforme,Holdemanella biformis DSM 3989
+548476,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Corynebacteriaceae,Corynebacterium,Corynebacterium aurimucosum,Corynebacterium aurimucosum ATCC 700975
+1124991,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Morganella,Morganella morganii,Morganella morganii subsp. morganii KT
+1382315,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Geobacillus vulcani,Geobacillus vulcani PSS1
+626939,Bacteria,Firmicutes,Negativicutes,Selenomonadales,Acidaminococcaceae,Phascolarctobacterium,Phascolarctobacterium succinatutens,Phascolarctobacterium succinatutens YIT 12067
+1122988,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella nanceiensis,Hoylesella nanceiensis DSM 19126 = JCM 15639
+1064535,Bacteria,Firmicutes,Negativicutes,Selenomonadales,Veillonellaceae,Megasphaera,Megasphaera elsdenii,Megasphaera elsdenii DSM 20460
+863767,Bacteria,Firmicutes,Bacilli,Bacillales,Listeriaceae,Listeria,Listeria monocytogenes,Listeria monocytogenes serotype 7 str. SLCC2482
+1042156,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium sp.,Clostridium sp. SY8519
+1005999,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Leminorella,Leminorella grimontii,Leminorella grimontii ATCC 33999 = DSM 5078
+224308,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus subtilis,Bacillus subtilis subsp. subtilis str. 168
+342451,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus saprophyticus,Staphylococcus saprophyticus subsp. saprophyticus ATCC 15305 = NCTC 7292
+644283,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Micromonosporaceae,Micromonospora,Micromonospora aurantiaca,Micromonospora aurantiaca ATCC 27029
+871541,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Actinomyces,Actinomyces oris,Actinomyces oris K20
+445336,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium botulinum,Clostridium botulinum Bf
+1232666,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus sciuri,Mammaliicoccus sciuri
+479437,Bacteria,Actinobacteria,Coriobacteriia,Eggerthellales,Eggerthellaceae,Eggerthella,Eggerthella lenta,Eggerthella lenta DSM 2243
+1035195,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Corynebacteriaceae,Corynebacterium,Corynebacterium durum,Corynebacterium durum F0235
+1121115,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Blautia,Blautia wexlerae,Blautia wexlerae DSM 19850
+1121315,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Terrisporobacter,Clostridium glycolicum,Terrisporobacter glycolicus ATCC 14880 = DSM 1288
+1280694,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Pseudobutyrivibrio,Pseudobutyrivibrio ruminis,Pseudobutyrivibrio ruminis AD2017
+471881,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Proteus,Proteus penneri,Proteus penneri ATCC 35198
+818,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides thetaiotaomicron
+435830,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Actinomyces,Actinomyces graevenitzii,Actinomyces graevenitzii C83
+763034,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides fluxus,Bacteroides fluxus YIT 12057
+471874,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Providencia,Providencia stuartii,Providencia stuartii ATCC 25827
+411477,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Parabacteroides,Parabacteroides merdae,Parabacteroides merdae ATCC 43184
+768486,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus hirae,Enterococcus hirae ATCC 9790
+561,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Escherichia,Escherichia sp.,Escherichia coli
+1229781,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Brevibacteriaceae,Brevibacterium,Brevibacterium casei,Brevibacterium casei S18
+500635,Bacteria,Firmicutes,Negativicutes,Selenomonadales,Veillonellaceae,Mitsuokella,Mitsuokella multacida,Mitsuokella multacida DSM 20544
+428125,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminiclostridium,Clostridium leptum,[Clostridium] leptum DSM 753
+561177,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptoniphilaceae,Anaerococcus,Anaerococcus hydrogenalis,Anaerococcus hydrogenalis DSM 7454
+1150460,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium kashiwanohense,Bifidobacterium catenulatum subsp. kashiwanohense JCM 15439 = DSM 21854
+1229756,Bacteria,Firmicutes,Bacilli,Lactobacillales,Leuconostocaceae,Leuconostoc,Leuconostoc gelidum,Leuconostoc gelidum JB7
+411473,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcus,Ruminococcus callidus,Ruminococcus callidus ATCC 27760
+890402,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium longum,Bifidobacterium longum subsp. longum BBMN68
+1159488,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus equorum,Staphylococcus equorum subsp. equorum Mu2
+889201,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus cristatus,Streptococcus cristatus ATCC 51100
+935839,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Promicromonosporaceae,Cellulosimicrobium,Cellulosimicrobium cellulans,Cellulosimicrobium cellulans J36
+469596,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Coprobacillus,Coprobacillus sp.,Coprobacillus cateniformis
+205922,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Pseudomonadaceae,Pseudomonas,Pseudomonas fluorescens,Pseudomonas fluorescens Pf0-1
+354242,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter jejuni,Campylobacter jejuni subsp. jejuni 81-176
+552398,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,unclassified Ruminococcaceae,Ruminococcaceae bacterium,Ruminococcaceae bacterium D16
+1367477,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus infantis,Bacillus infantis NRRL B-14911
+525338,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus plantarum,Lactiplantibacillus plantarum subsp. plantarum ATCC 14917 = JCM 1149 = CGMCC 1.2437
+360107,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter hominis,Campylobacter hominis ATCC BAA-381
+272559,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides fragilis,Bacteroides fragilis NCTC 9343
+1000565,Bacteria,Proteobacteria,Betaproteobacteria,Rhodocyclales,Rhodocyclaceae,Methyloversatilis,Methyloversatilis universalis,Methyloversatilis universalis FAM5
+553204,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Corynebacteriaceae,Corynebacterium,Corynebacterium amycolatum,Corynebacterium amycolatum SK46
+596320,Bacteria,Proteobacteria,Betaproteobacteria,Neisseriales,Neisseriaceae,Neisseria,Neisseria flavescens,Neisseria flavescens SK114
+759350,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium longum,Bifidobacterium longum subsp. longum JDM301
+866771,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella disiens,Prevotella disiens FB035-09AN
+657322,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Faecalibacterium,Faecalibacterium prausnitzii,Faecalibacterium prausnitzii SL3/3
+502800,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Yersinia,Yersinia pseudotuberculosis,Yersinia pseudotuberculosis YPIII
+1315976,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Plesiomonas,Plesiomonas shigelloides,Plesiomonas shigelloides 302-73
+878320,Bacteria,Proteobacteria,Gammaproteobacteria,Aeromonadales,Aeromonadaceae,Aeromonas,Aeromonas caviae,Aeromonas caviae Ae398
+997884,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides nordii,Bacteroides nordii CL02T12C05
+500639,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Enterobacter,Enterobacter cancerogenus,Enterobacter cancerogenus ATCC 35316
+411902,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnoclostridium,Clostridium bolteae,Enterocloster bolteae ATCC BAA-613
+1122993,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella veroralis,Prevotella veroralis DSM 19559 = JCM 6290
+484018,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides plebeius,Phocaeicola plebeius
+1089454,Bacteria,Actinobacteria,Actinobacteria,Corynebacteriales,Gordoniaceae,Gordonia,Gordonia terrae,Gordonia terrae NBRC 100016
+1159899,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Salmonella,Salmonella enterica,Salmonella enterica subsp. enterica serovar Typhimurium str. LT2
+1122984,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella intermedia,Prevotella intermedia ATCC 25611 = DSM 20706
+931277,Archaea,Euryarchaeota,Halobacteria,Halobacteriales,Halobacteriaceae,Halococcus,Halococcus morrhuae,Halococcus morrhuae DSM 1307
+1031746,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter hyointestinalis,Campylobacter hyointestinalis subsp. hyointestinalis LMG 9260
+469589,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. 2_1_33B
+546268,Bacteria,Proteobacteria,Betaproteobacteria,Neisseriales,Neisseriaceae,Neisseria,Neisseria subflava,Neisseria subflava NJ9703
+556268,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Oxalobacteraceae,Oxalobacter,Oxalobacter formigenes,Oxalobacter paraformigenes
+1280689,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium paraputrificum,Clostridium paraputrificum AGR2156
+1121124,Bacteria,Proteobacteria,Alphaproteobacteria,Caulobacterales,Caulobacteraceae,Brevundimonas,Brevundimonas bacteroides,Brevundimonas bacteroides DSM 4726
+290402,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium beijerinckii,Clostridium beijerinckii NCIMB 8052
+553206,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Corynebacteriaceae,Corynebacterium,Corynebacterium tuberculostearicum,Corynebacterium tuberculostearicum SK141
+491077,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus reuteri,Limosilactobacillus reuteri SD2112
+411463,Bacteria,Firmicutes,Clostridia,Clostridiales,Eubacteriaceae,Eubacterium,Eubacterium ventriosum,Eubacterium ventriosum ATCC 27560
+512566,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus pneumoniae,Streptococcus pneumoniae G54
+1160721,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcus,Ruminococcus bicirculans,Ruminococcus bicirculans (ex Wegman et al. 2014)
+553175,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Porphyromonas,Porphyromonas endodontalis,Porphyromonas endodontalis ATCC 35406
+649764,Bacteria,Actinobacteria,Coriobacteriia,Coriobacteriales,Coriobacteriaceae,Slackia,Slackia exigua,Slackia exigua ATCC 700122
+457424,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides fragilis,Bacteroides fragilis 3_1_12
+483217,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides dorei,Phocaeicola dorei DSM 17855
+665943,Bacteria,Actinobacteria,Coriobacteriia,Eggerthellales,Eggerthellaceae,Eggerthella,Eggerthella sp.,Eggerthella sp. 1_3_56FAA
+634176,Bacteria,Proteobacteria,Gammaproteobacteria,Pasteurellales,Pasteurellaceae,Aggregatibacter,Aggregatibacter aphrophilus,Aggregatibacter aphrophilus NJ8700
+411467,Bacteria,Firmicutes,Clostridia,Clostridiales,unclassified Clostridiales,Pseudoflavonifractor,Pseudoflavonifractor capillosus,Pseudoflavonifractor capillosus ATCC 29799
+393127,Bacteria,Firmicutes,Bacilli,Bacillales,Listeriaceae,Listeria,Listeria monocytogenes,Listeria monocytogenes Finland 1998
+526997,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus mycoides,Bacillus mycoides DSM 2048
+1246,Bacteria,Firmicutes,Bacilli,Lactobacillales,Leuconostocaceae,Leuconostoc,Leuconostoc lactis,Leuconostoc lactis
+1444307,Bacteria,Firmicutes,Bacilli,Bacillales,Paenibacillaceae,Brevibacillus,Brevibacillus agri,Brevibacillus agri 5-2
+536231,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Roseburia,Roseburia intestinalis,Roseburia intestinalis L1-82
+518636,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnoclostridium,Clostridium asparagiforme,[Clostridium] asparagiforme DSM 15981
+548477,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Corynebacteriaceae,Corynebacterium,Corynebacterium glucuronolyticum,Corynebacterium glucuronolyticum ATCC 51867
+702459,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium bifidum,Bifidobacterium bifidum PRL2010
+457416,Bacteria,Firmicutes,Clostridia,Clostridiales,Veillonellaceae,Veillonella,Veillonella sp.,Veillonella sp. 3_1_44
+1156431,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus sp.,Streptococcus ilei
+743719,Bacteria,Firmicutes,Bacilli,Bacillales,Paenibacillaceae,Paenibacillus,Paenibacillus lactis,Paenibacillus lactis 154
+981539,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus gallolyticus,Streptococcus gallolyticus subsp. gallolyticus ATCC 43143
+580050,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium animalis,Bifidobacterium animalis subsp. lactis Bl-04
+1197728,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella conceptionensis,Prevotella conceptionensis 9403948
+1336752,Bacteria,Proteobacteria,Gammaproteobacteria,Gammavibrionales,Vibrionaceae,Vibrio,Vibrio fluvialis,Vibrio fluvialis PG41
+997353,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella pallens,Prevotella pallens ATCC 700821
+562973,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Actinomyces,Actinomyces viscosus,Actinomyces viscosus C505
+1198291,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus amyloliquefaciens,Bacillus amyloliquefaciens DC-12
+1196029,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus endophyticus,Priestia filamentosa
+278197,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Pediococcus,Pediococcus pentosaceus,Pediococcus pentosaceus ATCC 25745
+411474,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Coprococcus,Coprococcus eutactus,Coprococcus eutactus ATCC 27759
+1547,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Erysipelatoclostridium,Clostridium ramosum,Thomasclavelia ramosa DSM 1402
+679189,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella timonensis,Hoylesella timonensis CRIS 5C-B1
+334390,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus fermentum,Limosilactobacillus fermentum IFO 3956
+457400,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Escherichia,Escherichia sp.,Escherichia sp. 1_1_43
+944562,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus oris,Limosilactobacillus oris F0423
+525328,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus iners,Lactobacillus iners DSM 13335
+334413,Bacteria,Firmicutes,Tissierellia,Tissierellales,Peptoniphilaceae,Finegoldia,Finegoldia magna,Finegoldia magna ATCC 29328
+1300222,Bacteria,Firmicutes,Bacilli,Bacillales,Paenibacillaceae,Brevibacillus,Brevibacillus borstelensis,Brevibacillus borstelensis AK1
+742740,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnoclostridium,Clostridium symbiosum,[Clostridium] symbiosum WAL-14163
+525309,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus antri,Limosilactobacillus antri DSM 16041
+563192,Bacteria,Proteobacteria,Deltaproteobacteria,Desulfovibrionales,Desulfovibrionaceae,Bilophila,Bilophila wadsworthia,Bilophila wadsworthia 3_1_6
+1171373,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Propionibacteriaceae,Propionibacterium,Propionibacterium acidipropionici,Acidipropionibacterium acidipropionici ATCC 4875
+451515,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus aureus,Staphylococcus aureus subsp. aureus USA300_FPR3757
+457392,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. 3_2_5
+645464,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter jejuni,Campylobacter jejuni subsp. jejuni M1
+553482,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus equi,Streptococcus equi subsp. equi 4047
+521095,Bacteria,Actinobacteria,Coriobacteriia,Coriobacteriales,Coriobacteriaceae,Atopobium,Atopobium parvulum,Lancefieldella parvula DSM 20469
+525369,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Proteus,Proteus mirabilis,Proteus mirabilis ATCC 29906
+445970,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes,Alistipes putredinis,Alistipes putredinis DSM 17216
+321955,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Brevibacteriaceae,Brevibacterium,Brevibacterium linens,Brevibacterium aurantiacum
+553220,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter gracilis,Campylobacter gracilis RM3268
+411490,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Anaerostipes,Anaerostipes caccae,Anaerostipes caccae L1-92
+457388,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Parabacteroides sp. 2_1_7
+1292036,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Paeniclostridium,Clostridium sordellii,Paraclostridium sordellii ATCC 9714
+479436,Bacteria,Firmicutes,Negativicutes,Selenomonadales,Veillonellaceae,Veillonella,Veillonella parvula,Veillonella parvula DSM 2008
+469593,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. 3_1_40A
+675806,Bacteria,Proteobacteria,Gammaproteobacteria,Vibrionales,Vibrionaceae,Vibrio,Vibrio mimicus,Vibrio mimicus MB451
+411476,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides ovatus,Bacteroides ovatus
+1282887,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnospira,Lachnospira multipara,Lachnospira multipara ATCC 19207
+644284,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Arcanobacterium,Arcanobacterium haemolyticum,Arcanobacterium haemolyticum DSM 20595
+1217986,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Moraxellaceae,Acinetobacter,Acinetobacter haemolyticus,Acinetobacter haemolyticus NIPH 261
+469378,Bacteria,Actinobacteria,Coriobacteriia,Coriobacteriales,Coriobacteriaceae,Ctyptobacterium,Cryptobacterium curtum,Cryptobacterium curtum DSM 15641
+1304881,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnoclostridium,Clostridium indolis,Lacrimispora indolis DSM 755
+1122917,Bacteria,Firmicutes,Bacilli,Bacillales,Paenibacillaceae,Paenibacillus,Paenibacillus daejeonensis,Paenibacillus daejeonensis DSM 15491
+1121333,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Erysipelatoclostridium,Clostridium saccharogumia,Thomasclavelia saccharogumia DSM 17460
+1033992,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Pseudomonadaceae,Pseudomonas,Pseudomonas oleovorans,Ectopseudomonas oleovorans MOIL14HWK12
+641143,Bacteria,Bacteroidetes,Flavobacteriia,Flavobacteriales,Flavobacteriaceae,Capnocytophaga,Capnocytophaga granulosa,Capnocytophaga granulosa ATCC 51502
+1095730,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus constellatus,Streptococcus constellatus subsp. constellatus SK53
+386585,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Escherichia,Escherichia coli,Escherichia coli O157:H7 str. Sakai
+441771,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium botulinum,Clostridium botulinum A str. Hall
+1248438,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Pseudomonadaceae,Pseudomonas,Pseudomonas alcaliphila,Ectopseudomonas chengduensis
+1202533,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus nealsonii,Niallia nealsonii AAU1
+556264,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium nucleatum,Fusobacterium animalis D11
+1051502,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus vallismortis,Bacillus vallismortis DV1-F-3
+1346614,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Serratia,Serratia liquefaciens,Serratia liquefaciens ATCC 27592
+655811,Bacteria,Firmicutes,Tissierellia,Tissierellales,Peptoniphilaceae,Anaerococcus,Anaerococcus vaginalis,Anaerococcus vaginalis ATCC 51170
+469604,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium nucleatum,Fusobacterium vincentii 3_1_36A2
+649747,Bacteria,Firmicutes,Bacilli,Bacillales,Paenibacillaceae,Aneurinibacillus,Aneurinibacillus aneurinilyticus,Aneurinibacillus aneurinilyticus ATCC 12856
+1130798,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus mucosae,Limosilactobacillus mucosae LM1
+742820,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus anginosus,Streptococcus anginosus 1_2_62CV
+888833,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus australis,Streptococcus australis ATCC 700641
+565047,Bacteria,Firmicutes,Bacilli,Bacillales,Listeriaceae,Listeria,Listeria monocytogenes,Listeria monocytogenes L99
+1292043,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus flexus,Priestia megaterium
+1133568,Bacteria,Spirochaetes,Spirochaetia,Spirochaetales,Spirochaetaceae,Brachyspira,Brachyspira pilosicoli,Brachyspira pilosicoli B2904
+1448141,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Arcanobacterium,Trueperella pyogenes,Trueperella pyogenes MS249
+502558,Bacteria,Actinobacteria,Coriobacteriia,Eggerthellales,Eggerthellaceae,Eggerthella,Eggerthella sp.,Eggerthella sp. YY7918
+862514,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Pediococcus,Pediococcus acidilactici,Pediococcus acidilactici DSM 20284
+679935,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes,Alistipes finegoldii,Alistipes finegoldii DSM 17242
+1215110,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Pseudomonadaceae,Pseudomonas,Pseudomonas monteilii,Pseudomonas monteilii NBRC 103158 = DSM 14164
+1215915,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Lactococcus,Lactococcus raffinolactis,Lactococcus raffinolactis 4877
+470145,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides coprocola,Phocaeicola coprocola DSM 17136
+1095770,Bacteria,Firmicutes,Tissierellia,Tissierellales,Peptoniphilaceae,Peptoniphilus,Peptoniphilus timonensis,Peptoniphilus timonensis JC401
+1035839,Bacteria,Proteobacteria,Gammaproteobacteria,Pasteurellales,Pasteurellaceae,Haemophilus,Haemophilus sputorum,Haemophilus sputorum CCUG 13788
+1319815,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Cetobacterium,Cetobacterium somerae,Cetobacterium somerae ATCC BAA-474
+1122981,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella corporis,Prevotella corporis DSM 18810 = JCM 8529
+911104,Bacteria,Firmicutes,Bacilli,Lactobacillales,Leuconostocaceae,Leuconostoc,Weissella cibaria,Weissella cibaria KACC 11862
+203267,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Micrococcaceae,Tropheryma,Tropheryma whipplei,Tropheryma whipplei str. Twist
+469606,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium nucleatum,Fusobacterium vincentii 4_1_13
+1346330,Bacteria,Proteobacteria,Gammaproteobacteria,Sphingomonadales,Sphingomonadaceae,Sphingomonas,Sphingomonas paucimobilis,Sphingobacterium paucimobilis HER1398
+1054460,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus pseudopneumoniae,Streptococcus pseudopneumoniae IS7493
+1392501,Bacteria,Firmicutes,Negativicutes,Selenomonadales,Selenomonadaceae,Veillonella,Selenomonas ruminantium,Selenomonas ruminantium AC2024
+536233,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium botulinum,Clostridium botulinum E1 str. 'BoNT E Beluga'
+1203540,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium breve,Bifidobacterium breve HPH0326
+649754,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Corynebacteriaceae,Corynebacterium,Corynebacterium ammoniagenes,Corynebacterium ammoniagenes DSM 20306
+879088,Bacteria,Firmicutes,Bacilli,Bacillales,Listeriaceae,Listeria,Listeria monocytogenes,Listeria monocytogenes SLCC2378
+887898,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Burkholderiaceae,Lautropia,Lautropia mirabilis,Lautropia mirabilis ATCC 51599
+546266,Bacteria,Proteobacteria,Betaproteobacteria,Neisseriales,Neisseriaceae,Neisseria,Neisseria mucosa,Neisseria mucosa ATCC 25996
+1121130,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Butyricimonas,Butyricimonas virosa,Butyricimonas virosa DSM 23226
+28112,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Tannerella,Tannerella forsythia,Tannerella forsythia
+471854,Bacteria,Bacteroidetes,Cytophagia,Cytophagales,Cytophagaceae,Dyadobacter,Dyadobacter fermentans,Dyadobacter fermentans DSM 18053
+767029,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Propionibacteriaceae,Propionibacterium,Propionibacterium propionicum,Arachnia propionica F0230a
+1296619,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus capitis,Staphylococcus capitis CR0101
+1123242,Bacteria,Planctomycetes,Planctomycetales,Planctomycetales,Planctomycetaceae,Schlesneria,Schlesneria paludicola,Schlesneria paludicola DSM 18645
+743710,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus atrophaeus,Bacillus atrophaeus ATCC 49822-1
+306263,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter lari,Campylobacter lari RM2100
+658089,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,unclassified Lachnospiraceae,Lachnospiraceae bacterium,Lachnospiraceae bacterium 5_1_63FAA
+1214102,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Mycobacteriaceae,Mycobacterium,Mycobacterium fortuitum,Mycobacterium fortuitum subsp. fortuitum DSM 46621
+257314,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus johnsonii,Lactobacillus johnsonii NCC 533
+592010,Bacteria,Firmicutes,Bacilli,Lactobacillales,Aerococcaceae,Abiotrophia,Abiotrophia defectiva,Abiotrophia defectiva ATCC 49176
+1423757,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus hilgardii,Lentilactobacillus hilgardii DSM 20176 = ATCC 8290
+762982,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Paraprevotella,Paraprevotella xylaniphila,Paraprevotella xylaniphila YIT 11841
+888048,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus parasanguinis,Streptococcus parasanguinis ATCC 903
+742727,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides oleiciplenus,Bacteroides oleiciplenus YIT 12058
+272620,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Klebsiella,Klebsiella pneumoniae,Klebsiella pneumoniae subsp. pneumoniae MGH 78578
+1246477,Bacteria,Firmicutes,Bacilli,Bacillales,Paenibacillaceae,Brevibacillus,Brevibacillus agri,Brevibacillus agri BAB-2500
+996285,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Pseudomonadaceae,Pseudomonas,Pseudomonas stutzeri,Stutzerimonas stutzeri DSM 4166
+469610,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,unclassified Burkholderiales,unclassified Burkholderiales,Burkholderiales bacterium,Burkholderiales bacterium 1_1_47
+556258,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. D1
+1212545,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus arlettae,Staphylococcus arlettae CVD059
+1410657,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Kandleria,Kandleria vitulina,Kandleria vitulina DSM 20405
+480119,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Moraxellaceae,Acinetobacter,Acinetobacter baumannii,Acinetobacter baumannii AB0057
+411461,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Dorea,Dorea formicigenerans,Dorea formicigenerans ATCC 27755
+1408472,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella brevis,Xylanibacter brevis ATCC 19188
+1261127,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Citrobacter,Citrobacter amalonaticus,Citrobacter amalonaticus Y19
+1123318,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus thoraltensis,Streptococcus thoraltensis DSM 12221
+1203465,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides timonensis,Bacteroides timonensis
+511145,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Escherichia,Escherichia coli,Escherichia coli str. K-12 substr. MG1655
+889204,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus infantis,Streptococcus infantis ATCC 700779
+299033,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus reuteri,Limosilactobacillus reuteri subsp. reuteri JCM 1112
+1121482,Bacteria,Bacteroidetes,Cytophagia,Cytophagales,Cytophagaceae,Dyadobacter,Dyadobacter beijingensis,Dyadobacter beijingensis DSM 21582
+1429046,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Nocardiaceae,Rhodococcus,Rhodococcus rhodochrous,Rhodococcus rhodochrous ATCC 21198
+1122978,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella albensis,Segatella albensis DSM 11370 = JCM 12258
+411483,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Faecalibacterium,Faecalibacterium prausnitzii,Faecalibacterium duncaniae
+1160707,Bacteria,Firmicutes,Bacilli,Bacillales,Planococcaceae,Ureibacillus,Ureibacillus thermosphaericus,Ureibacillus thermosphaericus str. Thermo-BF
+1122982,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella denticola,Prevotella denticola DSM 20614 = JCM 13449
+411487,Bacteria,Firmicutes,Clostridia,Clostridiales,Eubacteriaceae,Eubacterium,Eubacterium hallii,Anaerobutyricum hallii
+999410,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnoclostridium,Clostridium clostridioforme,[Clostridium] clostridioforme CM201
+997348,Bacteria,Proteobacteria,Betaproteobacteria,Neisseriales,Neisseriaceae,Neisseria,Neisseria macacae,Neisseria macacae ATCC 33926
+1401079,Bacteria,Firmicutes,Clostridia,Clostriadiales,Family XIII Incertae Sedis,Mogibacterium,Mogibacterium timidum,Mogibacterium timidum ATCC 33093
+457395,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. 9_1_42FAA
+575587,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Moraxellaceae,Acinetobacter,Acinetobacter junii,Acinetobacter junii SH205
+471871,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium sporogenes,Clostridium sporogenes ATCC 15579
+1286820,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnoclostridium,Clostridium methoxybenzovorans,Lacrimispora indolis SR3
+1235795,Bacteria,Firmicutes,Bacilli,Bacillales,Paenibacillaceae,Paenibacillus,Paenibacillus barengoltzii,Paenibacillus barengoltzii G22
+1446473,Bacteria,Proteobacteria,Alphaproteobacteria,Rhodobacterales,Rhodobacteraceae,Paracoccus,Paracoccus yeei,Paracoccus yeei ATCC BAA-599
+469591,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Parabacteroides sp. 20_3
+697329,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcus,Ruminococcus albus,Ruminococcus albus 7 = DSM 20455
+1051501,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus mojavensis,Bacillus mojavensis RO-H-1 = KCTC 3706
+718251,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Edwardsiella,Edwardsiella tarda,Edwardsiella tarda FL6-60
+1123075,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Ruminococcus,Ruminococcus gauvreauii,Ruminococcus gauvreauii DSM 19829
+265669,Bacteria,Firmicutes,Bacilli,Bacillales,Listeriaceae,Listeria,Listeria monocytogenes,Listeria monocytogenes serotype 4b str. F2365
+1035184,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus constellatus,Streptococcus constellatus subsp. pharyngis SK1060 = CCUG 46377
+644042,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus plantarum,Lactiplantibacillus plantarum JDM1
+283165,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Bartonellaceae,Bartonella,Bartonella quintana,Bartonella quintana str. Toulouse
+525279,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus faecium,Enterococcus faecium TX1330
+1410676,Bacteria,Proteobacteria,Gammaproteobacteria,Aeromonadales,Vibrionaceae,Succinivibrio,Succinivibrio dextrinosolvens,Succinivibrio dextrinosolvens H5
+420247,Archaea,Euryarchaeota,Methanobacteria,Methanobacteriales,Methanobacteriaceae,Methanobrevibacter,Methanobrevibacter smithii,Methanobrevibacter smithii ATCC 35061
+1244083,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter showae,Campylobacter showae CSUNSWCD
+451640,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Catenibacterium,Catenibacterium mitsuokai,Catenibacterium mitsuokai DSM 15897
+742733,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnoclostridium,Clostridium citroniae,[Clostridium] citroniae WAL-17108
+1415164,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus cohnii,Staphylococcus cohnii hu-01
+1441930,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Serratia,Serratia fonticola,Chania multitudinisentens RB-25
+546273,Bacteria,Firmicutes,Negativicutes,Veillonellales,Veillonellaceae,Veillonella,Veillonella dispar,Veillonella dispar ATCC 17748
+411462,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Dorea,Dorea longicatena,Dorea longicatena DSM 13814
+1235815,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella enoeca,Hoylesella enoeca JCM 12259
+387344,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus brevis,Levilactobacillus brevis ATCC 367
+1437603,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium mongoliense,Bifidobacterium mongoliense DSM 21395
+1353979,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus xylosus,Staphylococcus xylosus DMB3-Bh1
+1121334,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminiclostridium,Clostridium sporosphaeroides,Faecalispora sporosphaeroides DSM 1294
+626095,Bacteria,Tenericutes,Mollicutes,Mycoplasmatales,Mycoplasmataceae,Ureaplasma,Ureaplasma urealyticum,Ureaplasma urealyticum serovar 8 str. ATCC 27618
+449673,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides stercoris,Bacteroides stercoris ATCC 43183
+904,Bacteria,Firmicutes,Negativicutes,Selenomonadales,Acidaminococcaceae,Acidaminococcus,Acidaminococcus sp.,Acidaminococcus intestini
+176280,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus epidermidis,Staphylococcus epidermidis ATCC 12228
+1163399,Bacteria,Proteobacteria,Gammaproteobacteria,Xanthomonadales,Xanthomonadaceae,Stenotrophomonas,Stenotrophomonas maltophilia,Stenotrophomonas maltophilia D457
+511680,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Butyrivibrio,Butyrivibrio crossotus,Eshraghiella crossota DSM 2876
+351627,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus saccharolyticus,Caldicellulosiruptor saccharolyticus DSM 8903
+657323,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcus,Ruminococcus sp.,Ruminococcus sp. SR1/5
+883166,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus simulans,Staphylococcus simulans ACS-120-V-Sch1
+1256908,Bacteria,Firmicutes,Clostridia,Clostridiales,Eubacteriaceae,Eubacterium,Eubacterium ramulus,Eubacterium ramulus ATCC 29099
+937593,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Geobacillus,Geobacillus stearothermophilus,Geobacillus stearothermophilus ATCC 7953
+1050720,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Rhizobiaceae,Agrobacterium,Agrobacterium tumefaciens,Agrobacterium tumefaciens F2
+945711,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Corynebacteriaceae,Corynebacterium,Corynebacterium ulcerans,Corynebacterium ulcerans 809
+1167632,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus vitulinus,Mammaliicoccus vitulinus F1028
+553184,Bacteria,Actinobacteria,Coriobacteriia,Coriobacteriales,Coriobacteriaceae,Atopobium,Atopobium rimae,Lancefieldella rimae ATCC 49626
+1035191,Bacteria,Proteobacteria,Alphaproteobacteria,Caulobacterales,Caulobacteraceae,Brevundimonas,Brevundimonas diminuta,Brevundimonas diminuta 470-4
+1121111,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium thermacidophilum,Bifidobacterium thermacidophilum subsp. thermacidophilum DSM 15837
+1122976,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Porphyromonas,Porphyromonas uenonis,Porphyromonas uenonis DSM 23387 = JCM 13868
+679192,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Bulleidia,Bulleidia extructa,Bulleidia extructa W1219
+409438,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Escherichia,Escherichia coli,Escherichia coli SE11
+525919,Bacteria,Firmicutes,Tissierellia,Tissierellales,Peptoniphilaceae,Anaerococcus,Anaerococcus prevotii,Anaerococcus prevotii DSM 20548
+378753,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Micrococcaceae,Kocuria,Kocuria rhizophila,Kocuria rhizophila DC2201
+742725,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes,Alistipes indistinctus,Alistipes indistinctus YIT 12060
+655812,Bacteria,Firmicutes,Bacilli,Lactobacillales,Aerococcaceae,Aerococcus,Aerococcus viridans,Aerococcus viridans ATCC 11563 = CCUG 4311
+1136177,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus pentosus,Lactiplantibacillus pentosus KCA1
+411903,Bacteria,Actinobacteria,Coriobacteriia,Coriobacteriales,Coriobacteriaceae,Collinsella,Collinsella aerofaciens,Collinsella aerofaciens ATCC 25986
+1123263,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Solobacterium,Solobacterium moorei,Solobacterium moorei DSM 22971
+469618,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium varium,Fusobacterium varium ATCC 27725
+1115512,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Escherichia,Escherichia hermannii,Atlantibacter hermannii NBRC 105704
+575594,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus coleohominis,Limosilactobacillus coleohominis 101-4-CHN
+457393,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. 4_1_36
+563193,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Parabacteroides,Parabacteroides sp.,Parabacteroides sp. D13
+1123488,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Varibaculum,Varibaculum cambriense,Varibaculum cambriense DSM 15806
+613026,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Helicobacteraceae,Helicobacter,Helicobacter bilis,Helicobacter bilis ATCC 43879
+1316928,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Gordoniaceae,Gordonia,Gordonia terrae,Gordonia terrae C-6
+347253,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus salivarius,Streptococcus salivarius JIM8777
+692420,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus amyloliquefaciens,Bacillus amyloliquefaciens DSM 7 = ATCC 23350
+469588,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. 2_1_22
+742818,Bacteria,Actinobacteria,Coriobacteriia,Coriobacteriales,Coriobacteriaceae,Slackia,Slackia piriformis,Slackia piriformis YIT 12062
+546269,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Filifactor,Filifactor alocis,Filifactor alocis ATCC 35896
+645127,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Corynebacteriaceae,Corynebacterium,Corynebacterium kroppenstedtii,Corynebacterium kroppenstedtii DSM 44385
+556269,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Oxalobacteraceae,Oxalobacter,Oxalobacter formigenes,Oxalobacter formigenes OXCC13
+718252,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Faecalibacterium,Faecalibacterium prausnitzii,Faecalibacterium prausnitzii L2-6
+1231627,Bacteria,Firmicutes,Bacilli,Bacillales,Planococcaceae,Lysinibacillus,Lysinibacillus fusiformis,Lysinibacillus fusiformis ZB2
+469609,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus sp.,Streptococcus sp. 2_1_36FAA
+862962,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides fragilis,Bacteroides fragilis 638R
+469592,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. 3_1_19
+411485,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Faecalibacterium,Faecalibacterium prausnitzii,Faecalibacterium prausnitzii M21/2
+585544,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. D22
+883077,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Actinomyces,Actinomyces turicensis,Schaalia turicensis ACS-279-V-Col4
+1074451,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus curvatus,Latilactobacillus curvatus CRL 705
+471872,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus infantarius,Streptococcus infantarius subsp. infantarius ATCC BAA-102
+500638,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Edwardsiella,Edwardsiella tarda,Edwardsiella tarda ATCC 23685
+428128,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminiclostridium,Eubacterium siraeum,[Eubacterium] siraeum DSM 15702
+367928,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium adolescentis,Bifidobacterium adolescentis ATCC 15703
+300269,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Shigella,Shigella sonnei,Shigella sonnei Ss046
+1235789,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Parabacteroides,Parabacteroides goldsteinii,Parabacteroides goldsteinii dnLKV18
+657317,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,unclassified Lachnospiraceae,Eubacterium rectale,Agathobacter rectalis M104/1
+997352,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella nigrescens,Prevotella nigrescens ATCC 33563
+190304,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium nucleatum,Fusobacterium nucleatum subsp. nucleatum ATCC 25586
+762967,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Suterellaceae,Sutterella,Sutterella parvirubra,Sutterella parvirubra YIT 11816
+585501,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Oribacterium,Oribacterium sinus,Oribacterium sinus F0268
+591365,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus intermedius,Streptococcus intermedius JTH08
+1005994,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Trabulsiella,Trabulsiella guamensis,Trabulsiella guamensis ATCC 49490
+592028,Bacteria,Firmicutes,Negativicutes,Veillonellales,Veillonellaceae,Dialister,Dialister invisus,Dialister invisus DSM 15470
+762376,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Alcaligenaceae,Achromobacter,Achromobacter xylosoxidans,Achromobacter xylosoxidans A8
+1121367,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Corynebacteriaceae,Corynebacterium,Corynebacterium propinquum,Corynebacterium propinquum DSM 44285
+998088,Bacteria,Proteobacteria,Gammaproteobacteria,Aeromonadales,Aeromonadaceae,Aeromonas,Aeromonas veronii,Aeromonas veronii B565
+411470,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Blautia,Ruminococcus gnavus,Mediterraneibacter gnavus ATCC 29149
+868129,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella bivia,Prevotella bivia DSM 20514
+226185,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus faecalis,Enterococcus faecalis V583
+272558,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus halodurans,Halalkalibacterium halodurans C-125
+1122975,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Porphyromonas,Porphyromonas somerae,Porphyromonas somerae DSM 23386
+1321814,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiales Incertae Sedis XIII,Eubacterium,Eubacterium brachy,Eubacterium brachy ATCC 33089
+657313,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Blautia,Ruminococcus torques,[Ruminococcus] torques L2-14
+1400136,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Citrobacter,Citrobacter freundii,Citrobacter freundii UCI 31
+435837,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus hominis,Staphylococcus hominis subsp. hominis C80
+321967,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus casei,Lacticaseibacillus paracasei ATCC 334
+1423814,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus vaginalis,Limosilactobacillus vaginalis DSM 5837 = ATCC 49540
+380703,Bacteria,Proteobacteria,Gammaproteobacteria,Aeromonadales,Aeromonadaceae,Aeromonas,Aeromonas hydrophila,Aeromonas hydrophila subsp. hydrophila ATCC 7966
+762948,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Micrococcaceae,Rothia,Rothia dentocariosa,Rothia dentocariosa ATCC 17931
+326426,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium breve,Bifidobacterium breve UCC2003
+887929,Bacteria,Firmicutes,Clostridia,Clostridiales,Eubacteriaceae,Pseudoramibacter,Pseudoramibacter alactolyticus,Pseudoramibacter alactolyticus ATCC 23263
+244366,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Klebsiella,Klebsiella sp.,Klebsiella variicola
+411479,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides uniformis,Bacteroides uniformis ATCC 8492
+1042403,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium animalis,Bifidobacterium animalis subsp. lactis CNCM I-2494
+537006,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Parabacteroides,Parabacteroides johnsonii,Parabacteroides johnsonii DSM 18315
+1322347,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium longum,Bifidobacterium longum E18
+748224,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Faecalibacterium,Faecalibacterium cf.,Faecalibacterium cf. prausnitzii KLE1255
+314315,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus sakei,Latilactobacillus sakei subsp. sakei 23K
+360105,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter curvus,Campylobacter curvus 525.92
+1175296,Archaea,Euryarchaeota,Thermoplasmata,Methanomassiliicoccales,Methanomassiliicoccaceae,Methanomassiliicoccus,Methanomassiliicoccus luminyensis,Methanomassiliicoccus luminyensis B10
+1033739,Bacteria,Firmicutes,Bacilli,Bacillales,Planococcaceae,Kurthia,Kurthia massiliensis,Kurthia massiliensis
+352165,Bacteria,Synergistetes,Synergistia,Synergistales,Synergistaceae,Pyramidobacter,Pyramidobacter piscolens,Pyramidobacter piscolens W5455
+1156433,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus sp.,Streptococcus ilei
+1120942,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Actinomyces,Actinomyces georgiae,Schaalia georgiae DSM 6843
+439375,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Brucellaceae,Ochrobactrum,Ochrobactrum anthropi,Brucella anthropi ATCC 49188
+1121114,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Blautia,Blautia producta,Blautia producta ATCC 27340 = DSM 2950
+717960,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Faecalitalea,Eubacterium cylindroides,Faecalitalea cylindroides T2-87
+442563,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium animalis,Bifidobacterium animalis subsp. lactis AD011
+641118,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Brucellaceae,Ochrobactrum,Ochrobactrum intermedium,Brucella intermedia LMG 3301
+1255680,Bacteria,Proteobacteria,Gammaproteobacteria,Xanthomonadales,Xanthomonadaceae,Stenotrophomonas,Stenotrophomonas rhizophila,Stenotrophomonas rhizophila
+762983,Bacteria,Proteobacteria,Gammaproteobacteria,Aeromonadales,Succinivibrionaceae,Succinatimonas,Succinatimonas hippei,Succinatimonas hippei YIT 12066
+566550,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Hungatella,Clostridium hathewayi,Hungatella hathewayi DSM 13479
+1121097,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides graminisolvens,Bacteroides graminisolvens DSM 19988 = JCM 15093
+591020,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Shigella,Shigella flexneri,Shigella flexneri 2002017
+545697,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium celatum,Clostridium celatum DSM 1785
+358681,Bacteria,Firmicutes,Bacilli,Bacillales,Paenibacillaceae,Brevibacillus,Brevibacillus brevis,Brevibacillus brevis NBRC 100599
+525306,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus acidophilus,Lactobacillus acidophilus ATCC 4796
+525278,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus faecalis,Enterococcus faecalis TX1322
+680646,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Micrococcaceae,Rothia,Rothia mucilaginosa,Rothia mucilaginosa DY-18
+553177,Bacteria,Bacteroidetes,Flavobacteriia,Flavobacteriales,Flavobacteriaceae,Capnocytophaga,Capnocytophaga sputigena,Capnocytophaga sputigena ATCC 33612
+1315312,Bacteria,Proteobacteria,Gammaproteobacteria,Vibrionales,Vibrionaceae,Vibrio,Vibrio fluvialis,Vibrio fluvialis 560
+1448136,Bacteria,Proteobacteria,Alphaproteobacteria,Rhodospirillales,Acetobacteraceae,Roseomonas,Roseomonas mucosa,Roseomonas mucosa ATCC BAA-692
+552531,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium animalis,Bifidobacterium animalis lactis BB-12
+1260282,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Enterobacter,Enterobacter hormaechei,Enterobacter hormaechei YT3
+565042,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium longum,Bifidobacterium longum subsp. longum JCM 1217
+864566,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter coli,Campylobacter coli JV20
+1223528,Bacteria,Actinobacteria,Actinobacteria,Micrococcales,Microbacteriaceae,Microbacterium,Microbacterium oleivorans,Microbacterium oleivorans NBRC 103075
+411901,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides caccae,Bacteroides caccae
+702443,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides ovatus,Bacteroides ovatus SD CMC 3f
+469616,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium mortiferum,Fusobacterium mortiferum ATCC 9817
+220668,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus plantarum,Lactiplantibacillus plantarum WCFS1
+927666,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus oralis,Streptococcus oralis Uo5
+702447,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides xylanisolvens,Bacteroides xylanisolvens SD CC 1b
+553218,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter rectus,Campylobacter rectus RM3267
+435590,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides vulgatus,Phocaeicola vulgatus ATCC 8482
+537970,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Helicobacteraceae,Helicobacter,Helicobacter canadensis,Helicobacter canadensis MIT 98-5491
+633147,Bacteria,Actinobacteria,Coriobacteriia,Coriobacteriales,Coriobacteriaceae,Olsenella,Olsenella uli,Olsenella uli DSM 7084
+657321,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcus,Ruminococcus bromii,Ruminococcus bromii L2-63
+879243,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Porphyromonadaceae,Porphyromonas,Porphyromonas asaccharolytica,Porphyromonas asaccharolytica DSM 20707
+411465,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptoniphilaceae,Parvimonas,Parvimonas micra,Parvimonas micra ATCC 33270
+883156,Bacteria,Firmicutes,Negativicutes,Veillonellales,Veillonellaceae,Veillonella,Veillonella ratti,Veillonella seminalis ACS-216-V-Col6b
+888832,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella salivae,Segatella salivae DSM 15606
+695560,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus amylovorus,Lactobacillus amylovorus GRL 1112
+420889,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Lactococcus,Lactococcus garvieae,Lactococcus garvieae ATCC 49156
+1336236,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcus,Ruminococcus flavefaciens,Ruminococcus flavefaciens ATCC 19208
+1122992,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella timonensis,Hoylesella timonensis 4401737 = DSM 22865 = JCM 15640
+483215,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides finegoldii,Bacteroides finegoldii DSM 17565
+1233170,Bacteria,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Paraclostridium,Clostridium bifermentans,Paraclostridium bifermentans ATCC 19299
+997872,Bacteria,Actinobacteria,Coriobacteriia,Coriobacteriales,Coriobacteriaceae,Atopobium,Atopobium minutum,Atopobium minutum 10063974
+1437882,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Pseudomonadaceae,Pseudomonas,Pseudomonas nitroreducens,Pseudomonas nitroreducens HBP1
+390333,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus delbrueckii,Lactobacillus delbrueckii subsp. bulgaricus ATCC 11842 = JCM 1002
+484020,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium bifidum,Bifidobacterium bifidum BGN4
+1254439,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium thermophilum,Bifidobacterium thermophilum RBL67
+264199,Bacteria,Firmicutes,Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,Streptococcus thermophilus,Streptococcus thermophilus LMG 18311
+525246,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Actinomycetaceae,Actinomyces,Actinomyces urogenitalis,Actinomyces urogenitalis DSM 15434
+267747,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Propionibacteriaceae,Propionibacterium,Propionibacterium acnes,Cutibacterium acnes KPA171202
+1002368,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Yokenella,Yokenella regensburgei,Yokenella regensburgei ATCC 43003
+405531,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus cereus,Bacillus cereus G9842
+556259,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. D2
+1206781,Bacteria,Firmicutes,Bacilli,Bacillales,Paenibacillaceae,Paenibacillus,Paenibacillus alvei,Paenibacillus alvei DSM 29
+1216976,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Alcaligenaceae,Achromobacter,Achromobacter xylosoxidans,Achromobacter xylosoxidans NBRC 15126 = ATCC 27061
+1259823,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Enterobacter,Enterobacter hormaechei,Enterobacter hormaechei YT2
+1122991,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella shahii,Hoylesella shahii DSM 15611 = JCM 12083
+553481,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Mycobacteriaceae,Mycobacterium,Mycobacterium avium,Mycobacterium avium subsp. avium ATCC 25291
+555970,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium animalis,Bifidobacterium animalis subsp. lactis
+1331262,Bacteria,Proteobacteria,Betaproteobacteria,Burkholderiales,Bradyrhizobiaceae,Bordetella,Bordetella hinzii,Bordetella hinzii OH87 BAL007II
+478749,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Marvinbryantia,Marvinbryantia formatexigens,Marvinbryantia formatexigens
+886872,Bacteria,Firmicutes,Bacilli,Lactobacillales,Leuconostocaceae,Leuconostoc,Leuconostoc argentinum,Leuconostoc lactis KCTC 3773
+471875,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcus,Ruminococcus lactaris,[Ruminococcus] lactaris ATCC 29176
+1028307,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Enterobacter,Enterobacter aerogenes,Klebsiella aerogenes KCTC 2190
+457391,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides sp.,Bacteroides sp. 3_1_33FAA
+742816,Bacteria,Firmicutes,Negativicutes,Selenomonadales,Selenomonadaceae,Megamonas,Megamonas funiformis,Megamonas funiformis YIT 11815
+66692,Bacteria,Firmicutes,Bacilli,Bacillales,Bacillaceae,Bacillus,Bacillus clausii,Shouchella clausii KSM-K16
+548480,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium longum,Bifidobacterium longum subsp. longum ATCC 55813
+862965,Bacteria,Proteobacteria,Gammaproteobacteria,Pasteurellales,Pasteurellaceae,Haemophilus,Haemophilus parainfluenzae,Haemophilus parainfluenzae T3T1
+469595,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Citrobacter,Citrobacter sp.,Citrobacter portucalensis
+1144300,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus gastricus,Limosilactobacillus gastricus PS3
+440497,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus jensenii,Lactobacillus jensenii 1153
+557598,Bacteria,Proteobacteria,Betaproteobacteria,Neisseriales,Chromobacteriaceae,Laribacter,Laribacter hongkongensis,Laribacter hongkongensis HLHK9
+521097,Bacteria,Bacteroidetes,Flavobacteriia,Flavobacteriales,Flavobacteriaceae,Capnocytophaga,Capnocytophaga ochracea,Capnocytophaga ochracea DSM 7271
+658659,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,unclassified Erysipelotrichaceae,Erysipelotrichaceae bacterium,Erysipelotrichaceae bacterium 3_1_53
+537937,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium longum,Bifidobacterium longum subsp. infantis CCUG 52486
+527004,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Yersinia,Yersinia rohdei,Yersinia rohdei ATCC 43380
+428126,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Erysipelatoclostridium,Clostridium spiroforme,Thomasclavelia spiroformis DSM 1552
+1176165,Bacteria,Actinobacteria,Actinobacteria,Actinomycetales,Brevibacteriaceae,Brevibacterium,Brevibacterium massiliense,Brevibacterium ravenspurgense 5401308 = CCUG 53855
+1336753,Bacteria,Proteobacteria,Gammaproteobacteria,Gammavibrionales,Vibrionaceae,Vibrio,Vibrio fluvialis,Vibrio fluvialis I21563
+1202534,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae,Clostridium,Clostridium sartagoforme,Clostridium sartagoforme AAU1
+706433,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Solobacterium,Solobacterium moorei,Solobacterium moorei F0204
+1002367,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Prevotellaceae,Prevotella,Prevotella stercorea,Leyella stercorea DSM 18206
+717959,Bacteria,Bacteroidetes,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes,Alistipes shahii,Alistipes shahii WAL 8301
+1006551,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Klebsiella,Klebsiella oxytoca,Klebsiella michiganensis KCTC 1686
+909954,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus johnsonii,Lactobacillus johnsonii DPC 6026
+1278306,Bacteria,Fusobacteria,Fusobacteriia,Fusobacteriales,Fusobacteriaceae,Fusobacterium,Fusobacterium russii,Fusobacterium russii ATCC 25533
+888826,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter upsaliensis,Campylobacter upsaliensis JV21
+675812,Bacteria,Proteobacteria,Gammaproteobacteria,Vibrionales,Vibrionaceae,Grimontia,Grimontia hollisae,Grimontia hollisae CIP 101886
+1046625,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Moraxellaceae,Acinetobacter,Acinetobacter lwoffii,Acinetobacter lwoffii WJ10621
+749219,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Moraxellaceae,Moraxella,Moraxella catarrhalis,Moraxella catarrhalis RH4
+879089,Bacteria,Firmicutes,Bacilli,Bacillales,Listeriaceae,Listeria,Listeria monocytogenes,Listeria monocytogenes SLCC2540
+435838,Bacteria,Firmicutes,Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,Staphylococcus caprae,Staphylococcus capitis C87
+360106,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter fetus,Campylobacter fetus subsp. fetus 82-40
+525310,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus brevis,Lentilactobacillus hilgardii ATCC 27305
+525337,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus paracasei,Lacticaseibacillus paracasei subsp. paracasei ATCC 25302 = DSM 5622 = JCM 8130
+474186,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus faecalis,Enterococcus faecalis OG1RF
+469613,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,unclassified Enterobacteriaceae,Enterobacteriaceae bacterium,Enterobacteriaceae bacterium 9_2_54FAA
+192222,Bacteria,Proteobacteria,Epsilonproteobacteria,Campylobacterales,Campylobacteraceae,Campylobacter,Campylobacter jejuni,Campylobacter jejuni subsp. jejuni NCTC 11168 = ATCC 700819
+521000,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Providencia,Providencia rettgeri,Providencia rettgeri DSM 1131
+575586,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Moraxellaceae,Acinetobacter,Acinetobacter johnsonii,Acinetobacter johnsonii SH046
+223926,Bacteria,Proteobacteria,Gammaproteobacteria,Vibrionales,Vibrionaceae,Vibrio,Vibrio parahaemolyticus,Vibrio parahaemolyticus RIMD 2210633
+888066,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,Enterococcus casseliflavus,Enterococcus casseliflavus ATCC 12755
+339860,Archaea,Euryarchaeota,Methanobacteria,Methanobacteriales,Methanobacteriaceae,Methanosphaera,Methanosphaera stadtmanae,Methanosphaera stadtmanae DSM 3091
+525318,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus buchneri,Lentilactobacillus buchneri ATCC 11577
+871585,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Moraxellaceae,Acinetobacter,Acinetobacter calcoaceticus,Acinetobacter pittii PHEA-2
+527012,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Yersinia,Yersinia kristensenii,Yersinia kristensenii ATCC 33638
+520999,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacteriales,Enterobacteriaceae,Providencia,Providencia alcalifaciens,Providencia alcalifaciens DSM 30120
+1237085,Archaea,Thaumarchaeota,Nitrososphaeria,Nitrososphaerales,Nitrososphaeraceae,Nitrososphaera,Candidatus Nitrososphaera,Candidatus Nitrososphaera gargensis Ga9.2
+1217689,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Moraxellaceae,Acinetobacter,Acinetobacter pittii,Acinetobacter lactucae
+1112856,Bacteria,Tenericutes,Mollicutes,Mycoplasmatales,Mycoplasmataceae,Mycoplasma,Mycoplasma pneumoniae,Mycoplasmoides pneumoniae 309
+273057,Archaea,Crenarchaeota,Thermoprotei,Sulfolobales,Sulfolobaceae,Sulfolobus,Sulfolobus solfataricus,Saccharolobus solfataricus P2
