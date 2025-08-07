@@ -1,0 +1,361 @@
+id,abundance,sample_id,kingdom,phylum,class,order,family,genus,species
+AZC3J_13,6712.7233134113385,C,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,Clostridium,
+AZC3J_18,38895.09213980606,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides thetaiotaomicron
+AZC3J_28,7394.595593006168,C,Bacteria,Verrucomicrobiota,Verrucomicrobiae,Verrucomicrobiales,Akkermansiaceae,Akkermansia,Akkermansia muciniphila
+AZC3J_3,6130.21968742079,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-56,
+AZC3J_34,19947.542176657713,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCA_002490665.1
+AZC3J_46,7214.373641473334,C,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,Clostridium,
+AZC3J_51,10951.968095941733,C,Bacteria,Firmicutes_A,Clostridia,4C28d-15,CAG-727,UBA11940,
+AZC3J_55,10941.094389943244,C,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus johnsonii
+AZC3J_64,6184.2120003225,C,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,Ruminococcaceae,UBA1394,
+AZC3J_73,8094.316437975714,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC3J_74,17833.14908943022,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp1
+AZC3J_76,47954.5223220873,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA7173,GCA_001689485.1
+AZC3J_79,8901.531209731931,C,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-582,
+AZC3J_80,31662.4316597668,C,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,DTU089,Eubacterium_R,
+AZC3J_81,6149.476774438846,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCF_000403335.2
+AZC3J_87,71284.51703224909,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes,GCA_002428825.1
+AZC3J_91,6648.933840061774,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,28-4,
+AZC3J_99,8637.829390317016,C,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,CAG-273,
+AZC5T_104,6330.942718160121,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-303,
+AZC5T_107,52891.49357782485,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA7173,GCA_001689485.1
+AZC5T_109,8892.90901952529,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Prevotella,Prevotella sp21
+AZC5T_119,6552.468409837052,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-56,
+AZC5T_120,7947.779595839705,C,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus intestinalis
+AZC5T_122,8066.070370950544,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,
+AZC5T_14,13346.754443159112,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-65,
+AZC5T_19,29344.44513105399,C,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,Ruminococcaceae,UBA1394,
+AZC5T_22,7241.82418488619,C,Bacteria,Verrucomicrobiota,Verrucomicrobiae,Verrucomicrobiales,Akkermansiaceae,Akkermansia,Akkermansia muciniphila
+AZC5T_26,6649.034392348052,C,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,Clostridium,
+AZC5T_30,7668.7311997518555,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCF_000403215.1
+AZC5T_37,9911.925519845689,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides_B,GCA_002493165.1
+AZC5T_38,13490.928945254556,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes,
+AZC5T_44,25800.83380069691,C,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,CAG-492,
+AZC5T_57,9295.031795933664,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC5T_64,22494.714916707922,C,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,UBA7001,
+AZC5T_66,32587.92808008979,C,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus_B,Lactobacillus_B murinus
+AZC5T_68,20780.9907195003,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Eubacterium_J,
+AZC5T_69,14575.98817460154,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,TF01-11,
+AZC5T_78,8464.213550320877,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,UBA3282,
+AZC5T_8,12252.669033184042,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC5T_80,18209.06998103264,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Tannerellaceae,Parabacteroides,Parabacteroides goldsteinii
+AZC5T_85,11672.429041959764,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCA_002358575.1
+AZC5T_87,9637.16970324888,C,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-582,
+AZC5T_93,39527.38125589161,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides xylanisolvens
+AZC5T_94,53098.56524447395,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides uniformis
+AZC5T_97,152317.87750430504,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,Homeothermus,GCA_002492595.1
+AZC5T_98,10032.090219223255,C,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus johnsonii
+AZC7E_109,16402.472032989637,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,
+AZC7E_114,13101.629820904625,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes,
+AZC7E_12,13181.416065236897,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,GCA_002491635.1
+AZC7E_15,69312.99835608083,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC7E_16,10981.422943741583,C,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus johnsonii
+AZC7E_25,13471.49660782124,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp1
+AZC7E_29,9878.05456681582,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes_A,
+AZC7E_39,289725.89644796273,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,Homeothermus,GCA_002492595.1
+AZC7E_45,36133.33526797596,C,Bacteria,Desulfobacterota,Desulfovibrionia,Desulfovibrionales,Desulfovibrionaceae,Desulfovibrio,
+AZC7E_51,9992.158891996105,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Eubacterium_F,
+AZC7E_54,28926.074677477034,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,GCA_001689585.1
+AZC7E_57,9834.618224354968,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-95,GCF_000403495.2
+AZC7E_59,6019.408085441625,C,Bacteria,Actinobacteriota,Coriobacteriia,Coriobacteriales,Eggerthellaceae,Enterorhabdus,Enterorhabdus caecimuris
+AZC7E_60,9502.30685619919,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp4
+AZC7E_61,45803.602547554256,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA7173,GCA_001689485.1
+AZC7E_64,23896.729759805403,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA7173,
+AZC7E_69,12683.796150640599,C,Bacteria,Proteobacteria,Gammaproteobacteria,Betaproteobacteriales,Burkholderiaceae,Parasutterella,
+AZC7E_70,6935.947477273226,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,GCA_002361275.1
+AZC7E_73,200587.03676864068,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides acidifaciens
+AZC7E_77,10299.8108760613,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,28-4,
+AZC7E_78,6559.68116013482,C,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,Clostridium,
+AZC7E_82,8751.7476636439,C,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus intestinalis
+AZC7E_89,115964.54858353884,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,CAG-1031 sp1
+AZC7E_96,38017.01191034288,C,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus_B,Lactobacillus_B murinus
+AZC9C_103,8007.284217182283,C,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-465,Clostridium,
+AZC9C_106,13508.636302773268,C,Bacteria,Firmicutes_A,Clostridia,4C28d-15,UBA3700,Christensenella,
+AZC9C_112,14877.958250335081,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC9C_113,15283.673879630336,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-56,
+AZC9C_116,13059.306476066125,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,UBA3282,
+AZC9C_18,24820.189102952107,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Tannerellaceae,Parabacteroides,Parabacteroides goldsteinii
+AZC9C_29,6976.958020857321,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Parasporobacterium,
+AZC9C_32,15465.090659723282,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides stercorirosoris
+AZC9C_40,6293.055442143115,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC9C_53,15048.431696958614,C,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,CAG-793,
+AZC9C_54,31253.9985975616,C,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,Ruminococcaceae,UBA1394,
+AZC9C_6,312857.85663488734,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,Homeothermus,GCA_002492595.1
+AZC9C_61,9236.640726021713,C,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus intestinalis
+AZC9C_68,6873.751251729193,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,Homeothermus,GCA_002358615.1
+AZC9C_7,11861.643324677503,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp1
+AZC9C_71,54861.604665167426,C,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus_B,Lactobacillus_B murinus
+AZC9C_75,113150.98088847309,C,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides congonensis
+AZC9C_86,7053.863302254837,C,Bacteria,Bacteroidota,Bacteroidia,Flavobacteriales,UBA1820,UBA1820,
+AZC9C_93,6854.99505752899,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC9C_94,32680.546493031172,C,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,Clostridium,
+AZC9C_95,30062.3299572162,C,Bacteria,Firmicutes_B,Peptococcia,Peptococcales,Peptococcaceae,UBA7185,
+AZC9C_96,8703.186518441888,C,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-776,
+AZC9C_98,6156.817669593529,C,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Dorea,
+AZC3J_21,7021.1209571808995,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC3J_32,17050.97002763325,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp6
+AZC3J_34,13410.644283619984,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCA_002490665.1
+AZC3J_43,8692.266492904362,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Eubacterium_F,
+AZC3J_51,70915.21498116132,E,Bacteria,Firmicutes_A,Clostridia,4C28d-15,CAG-727,UBA11940,
+AZC3J_55,9833.483363044352,E,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus johnsonii
+AZC3J_58,11133.696073953783,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Lachnospira,
+AZC3J_74,65242.01778013919,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp1
+AZC3J_76,6911.703707760235,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA7173,GCA_001689485.1
+AZC3J_79,17954.086250393644,E,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-582,
+AZC3J_81,8428.146386403792,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCF_000403335.2
+AZC3J_88,12612.02276840049,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,
+AZC3J_90,18973.349894033443,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,unclassified Lachnospiraceae,
+AZC3J_91,6934.1171112617985,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,28-4,
+AZC5T_104,25928.074367842102,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-303,
+AZC5T_106,17323.725826187732,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC5T_107,14146.605353225139,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA7173,GCA_001689485.1
+AZC5T_108,8714.870133049417,E,Bacteria,Firmicutes,Bacilli,RF39,UBA660,UBA9416,
+AZC5T_109,55834.42903664823,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Prevotella,Prevotella sp21
+AZC5T_120,70831.59546595106,E,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus intestinalis
+AZC5T_21,6085.652489412655,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC5T_32,8251.600071937824,E,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-460,
+AZC5T_34,6524.405248410978,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,GCA_002490635.1
+AZC5T_39,8931.035139524989,E,Bacteria,Firmicutes_A,Clostridia,Clostridiales,Savagellaceae,Savagella,Savagella sp1
+AZC5T_41,7551.826980383925,E,Bacteria,Firmicutes,Bacilli,RF39,UBA660,UBA9416,
+AZC5T_51,9779.596851567527,E,Bacteria,Firmicutes,Bacilli,RF39,UBA660,UBA5026,
+AZC5T_52,7634.509487983246,E,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,DTU089,Eubacterium_R,
+AZC5T_66,15152.697654661662,E,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus_B,Lactobacillus_B murinus
+AZC5T_68,8505.658166942105,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Eubacterium_J,
+AZC5T_69,7145.884034223112,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,TF01-11,
+AZC5T_78,7580.166895918591,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,UBA3282,
+AZC5T_8,18949.100103764566,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC5T_84,70890.52566403327,E,Bacteria,Firmicutes_A,Clostridia,4C28d-15,CAG-727,UBA11940,
+AZC5T_85,23767.941732546766,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCA_002358575.1
+AZC5T_9,9297.802978999918,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,28-4,GCF_000403275.1
+AZC5T_93,23204.901144210322,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides xylanisolvens
+AZC5T_94,7504.246469638701,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides uniformis
+AZC5T_97,10559.335949913693,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,Homeothermus,GCA_002492595.1
+AZC7E_101,21405.538567990454,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,Muribaculum,Muribaculum intestinale
+AZC7E_104,44946.609402884555,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA3263,UBA3263 sp2
+AZC7E_105,32989.5718476615,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-303,
+AZC7E_106,26637.094302318852,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Marinifilaceae,Odoribacter,
+AZC7E_109,25813.877819791567,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,
+AZC7E_111,29565.921724962136,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,GCA_002492665.1
+AZC7E_113,367875.5059010621,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Prevotella,Prevotella sp21
+AZC7E_115,10117.288347978641,E,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,Ruminococcaceae,Ruminococcus,
+AZC7E_116,8946.24071152017,E,Bacteria,Proteobacteria,Alphaproteobacteria,RF32,CAG-239,CAG-495,
+AZC7E_12,100860.32240959497,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,GCA_002491635.1
+AZC7E_13,10901.21479622277,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,unclassified Lachnospiraceae,
+AZC7E_15,409143.48205228115,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC7E_17,16494.915790154693,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,GCA_002490635.1
+AZC7E_2,102143.57226271299,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,UBA932,RC9,
+AZC7E_23,41867.48909992614,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,Homeothermus,GCA_002358615.1
+AZC7E_24,18300.332944340822,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC7E_25,86281.5884859585,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp1
+AZC7E_26,16527.95789032586,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,Muribaculum,Muribaculum sp1
+AZC7E_3,118526.20936539494,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,GCA_002494015.1
+AZC7E_32,34523.65497293603,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA3263,GCA_001689615.1
+AZC7E_34,6765.676051562072,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC7E_36,26730.977717412192,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC7E_37,59050.536412195775,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,
+AZC7E_38,138911.0134248857,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,GCA_001689425.1
+AZC7E_39,25898.05579147858,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,Homeothermus,GCA_002492595.1
+AZC7E_4,17856.52863919508,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC7E_42,118913.73887245155,E,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,UBA7001,
+AZC7E_48,27312.505483096997,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes,
+AZC7E_5,10504.42449177722,E,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,DTU089,Eubacterium_R,
+AZC7E_54,174864.5403600923,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,GCA_001689585.1
+AZC7E_55,10350.17323805568,E,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-582,
+AZC7E_58,26029.4829455907,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,GCA_001689575.1
+AZC7E_60,22838.895991805657,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp4
+AZC7E_61,17068.002387278255,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA7173,GCA_001689485.1
+AZC7E_62,19740.22065079161,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,28-4,
+AZC7E_68,58275.00334376032,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,GCA_001689535.1
+AZC7E_70,135006.0615257382,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,GCA_002361275.1
+AZC7E_71,9854.391413192196,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC7E_72,7384.626740360048,E,Bacteria,Cyanobacteriota,Vampirovibrionia,Gastranaerophilales,Gastranaerophilaceae,Gastranaerophilus,Gastranaerophilus phascolarctosicola
+AZC7E_73,110383.07570010965,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides acidifaciens
+AZC7E_76,8471.605602886824,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-56,
+AZC7E_77,9205.92722482559,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,28-4,
+AZC7E_79,31279.987627370487,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC7E_80,29841.258787398696,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-303,
+AZC7E_81,19080.551488812438,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp6
+AZC7E_84,13309.398212819708,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC7E_87,25441.89708431326,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes,Alistipes sp3
+AZC7E_88,9462.560483503374,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC7E_89,76064.74308435073,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,CAG-1031 sp1
+AZC7E_90,14128.13888889608,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA7173,
+AZC7E_91,16248.278707624902,E,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,UBA7001,
+AZC7E_93,16112.502772980277,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,UBA932,RC9,
+AZC7E_94,9668.502976076947,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA7173,
+AZC7E_95,14237.944566922632,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,S24-7,
+AZC7E_96,24836.190384643523,E,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus_B,Lactobacillus_B murinus
+AZC7E_97,26179.893895596248,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCA_002358575.1
+AZC9C_102,13660.674993083228,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC9C_106,70959.7364246862,E,Bacteria,Firmicutes_A,Clostridia,4C28d-15,UBA3700,Christensenella,
+AZC9C_113,8777.366766781155,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-56,
+AZC9C_116,10402.889615579112,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,UBA3282,
+AZC9C_14,9880.82173664939,E,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-822,
+AZC9C_25,8982.186237339001,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA7173,GCA_002491305.1
+AZC9C_27,10536.7473737353,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,28-4,GCF_000403275.1
+AZC9C_29,13143.617990785437,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Parasporobacterium,
+AZC9C_34,9748.385914498893,E,Bacteria,Actinobacteriota,Actinobacteria,Actinomycetales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium pseudolongum_A
+AZC9C_40,9967.22744881693,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC9C_57,8958.62110043765,E,Bacteria,Firmicutes_A,Clostridia,Clostridiales,Savagellaceae,Savagella,Savagella sp1
+AZC9C_6,46185.63903036982,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,Homeothermus,GCA_002492595.1
+AZC9C_68,83415.03917792632,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,Homeothermus,GCA_002358615.1
+AZC9C_7,121189.69679358836,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp1
+AZC9C_71,23805.460598764777,E,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus_B,Lactobacillus_B murinus
+AZC9C_88,45370.01798314312,E,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC9C_93,9821.165152713975,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC9C_94,8610.14675414054,E,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,Clostridium,
+AZC9C_98,6316.1986254558915,E,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Dorea,
+AZC3J_1,16093.995068167005,J,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,DTU089,Acutalibacter,Acutalibacter muris
+AZC3J_13,7260.998106102979,J,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,Clostridium,
+AZC3J_18,840507.7222486355,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides thetaiotaomicron
+AZC3J_20,16623.018007788538,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Eubacterium_F,
+AZC3J_21,15667.29661071338,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC3J_25,22178.22350387844,J,Bacteria,Firmicutes,Bacilli,Acholeplasmatales,CAG-307,UBA7004,
+AZC3J_26,6794.364745302002,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Hungatella_A,
+AZC3J_28,29823.384882247035,J,Bacteria,Verrucomicrobiota,Verrucomicrobiae,Verrucomicrobiales,Akkermansiaceae,Akkermansia,Akkermansia muciniphila
+AZC3J_31,8030.558473715673,J,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,Oscillospiraceae,Oscillibacter,
+AZC3J_32,9923.637559310848,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp6
+AZC3J_34,99849.10687470464,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCA_002490665.1
+AZC3J_45,12444.621835675012,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-65,
+AZC3J_46,22769.99281938421,J,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,Clostridium,
+AZC3J_49,27516.243121986954,J,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,Ruminococcaceae,UBA946,
+AZC3J_55,78809.99358896061,J,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus johnsonii
+AZC3J_56,17849.05194620888,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,unclassified Lachnospiraceae,
+AZC3J_57,13129.507675145353,J,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-776,
+AZC3J_59,19152.097577910816,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-65,
+AZC3J_6,47524.493753326715,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,unclassified Lachnospiraceae,
+AZC3J_60,18704.926860337553,J,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,DTU089,Eubacterium_R,
+AZC3J_61,8193.597704564538,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,UBA9502,
+AZC3J_64,31876.092423880244,J,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,Ruminococcaceae,UBA1394,
+AZC3J_71,7938.420384810532,J,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-776,
+AZC3J_73,6109.3739039144,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC3J_74,342351.39048589166,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp1
+AZC3J_77,7387.949265633047,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Ruminococcus_B,
+AZC3J_79,59362.00337714424,J,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-582,
+AZC3J_81,7205.255746464451,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCF_000403335.2
+AZC3J_82,93623.46775610808,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Dorea,
+AZC3J_87,205209.2961739305,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes,GCA_002428825.1
+AZC3J_88,19103.19875553591,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,
+AZC3J_9,6447.843558911415,J,Bacteria,Firmicutes_A,Clostridia,CAG-41,UBA1381,CAG-41,
+AZC3J_91,8128.0973218999725,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,28-4,
+AZC3J_95,8760.257532011306,J,Bacteria,Firmicutes_A,Clostridia,4C28d-15,UBA3700,Christensenella,
+AZC3J_99,20305.464781243118,J,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,CAG-273,
+AZC5T_106,185686.27994163128,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC5T_115,45199.44176490994,J,Bacteria,Cyanobacteriota,Vampirovibrionia,Gastranaerophilales,Gastranaerophilaceae,Gastranaerophilus,
+AZC5T_21,14218.853986582968,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC5T_22,28351.445116646773,J,Bacteria,Verrucomicrobiota,Verrucomicrobiae,Verrucomicrobiales,Akkermansiaceae,Akkermansia,Akkermansia muciniphila
+AZC5T_26,20502.09036233691,J,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,Clostridium,
+AZC5T_64,86999.15252703628,J,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,UBA7001,
+AZC5T_67,16883.422459775105,J,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,DTU089,Eubacterium_R,
+AZC5T_69,73028.86273438625,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,TF01-11,
+AZC5T_85,8328.305641899138,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCA_002358575.1
+AZC5T_87,28760.428766158126,J,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-582,
+AZC5T_98,16481.897379239228,J,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus johnsonii
+AZC7E_107,17601.82007563077,J,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,DTU089,Eubacterium_R,
+AZC7E_116,39175.28679460631,J,Bacteria,Proteobacteria,Alphaproteobacteria,RF32,CAG-239,CAG-495,
+AZC7E_16,14705.44306724246,J,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus,Lactobacillus johnsonii
+AZC7E_25,73917.55403663972,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp1
+AZC7E_29,10344.465102134938,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes_A,
+AZC7E_34,11663.495980316717,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC7E_4,152460.4095829555,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC7E_45,25663.142001734108,J,Bacteria,Desulfobacterota,Desulfovibrionia,Desulfovibrionales,Desulfovibrionaceae,Desulfovibrio,
+AZC7E_47,50270.94802225308,J,Bacteria,Patescibacteria,Saccharimonadia,Saccharimonadales,Saccharimonadaceae,Candidatus Southlakia,
+AZC7E_54,31518.958401801578,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,GCA_001689585.1
+AZC7E_60,6122.948436272056,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp4
+AZC7E_69,44979.73457324275,J,Bacteria,Proteobacteria,Gammaproteobacteria,Betaproteobacteriales,Burkholderiaceae,Parasutterella,
+AZC7E_70,11273.379581928728,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,GCA_002361275.1
+AZC7E_72,54867.01455450553,J,Bacteria,Cyanobacteriota,Vampirovibrionia,Gastranaerophilales,Gastranaerophilaceae,Gastranaerophilus,Gastranaerophilus phascolarctosicola
+AZC7E_74,14757.48491355327,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Ruminococcus_B,
+AZC7E_78,21297.673118070423,J,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,Clostridium,
+AZC9C_108,21930.62508305099,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCA_002490665.1
+AZC9C_110,21540.760986905065,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,TF01-11,
+AZC9C_115,12116.370810525983,J,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-776,
+AZC9C_25,9814.278157233126,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA7173,GCA_002491305.1
+AZC9C_3,18172.31304755314,J,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,Clostridium,
+AZC9C_30,7758.611138708789,J,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-582,
+AZC9C_34,14332.906343885155,J,Bacteria,Actinobacteriota,Actinobacteria,Actinomycetales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium pseudolongum_A
+AZC9C_6,12836.673047557995,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,Homeothermus,GCA_002492595.1
+AZC9C_60,7408.170489832399,J,Bacteria,Proteobacteria,Alphaproteobacteria,RF32,CAG-239,CAG-495,GCA_001917125.1
+AZC9C_68,18039.720024289112,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,Homeothermus,GCA_002358615.1
+AZC9C_69,41314.071005411024,J,Bacteria,Firmicutes,Bacilli,Haloplasmatales,Turicibacteraceae,Turicibacter,GCA_002311155.1
+AZC9C_7,85696.49358777246,J,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp1
+AZC9C_80,8735.832385637046,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC9C_81,8807.52269168189,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Ruminococcus_B,
+AZC9C_91,11019.958497769512,J,Bacteria,Deferribacterota,Deferribacteres,Deferribacterales,Mucispirillaceae,Mucispirillum,Mucispirillum schaedleri
+AZC9C_96,13766.71061486013,J,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-776,
+AZC9C_97,18043.944376072694,J,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,DTU089,Eubacterium_R,
+AZC9C_98,6855.814834729326,J,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Dorea,
+AZC3J_1,6857.4182989941855,T,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,DTU089,Acutalibacter,Acutalibacter muris
+AZC3J_10,9106.358985812825,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Roseburia,
+AZC3J_13,11056.152449290425,T,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,Clostridium,
+AZC3J_18,48107.05319306694,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides thetaiotaomicron
+AZC3J_2,7821.097384958086,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,UBA9502,
+AZC3J_26,10182.78363605285,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Hungatella_A,
+AZC3J_34,29255.777346718467,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCA_002490665.1
+AZC3J_45,6173.4922341057945,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-65,
+AZC3J_6,44727.70128755068,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,unclassified Lachnospiraceae,
+AZC3J_62,94471.9330278354,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,
+AZC3J_63,7307.204702088454,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-95,
+AZC3J_70,8872.854585871824,T,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,Oscillospiraceae,CAG-110,
+AZC3J_71,6103.032762539054,T,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-776,
+AZC3J_81,55853.85410629553,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCF_000403335.2
+AZC3J_92,6313.4204507420545,T,Bacteria,Firmicutes,Bacilli,Erysipelotrichales,Erysipelatoclostridiaceae,Erysipelatoclostridium,Erysipelatoclostridium cocleatum
+AZC3J_95,7591.7760190688305,T,Bacteria,Firmicutes_A,Clostridia,4C28d-15,UBA3700,Christensenella,
+AZC3J_99,26645.222842673855,T,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,CAG-273,
+AZC5T_1,42791.94705493976,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,
+AZC5T_104,9622.112804418952,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-303,
+AZC5T_111,10641.14427838643,T,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus_H,
+AZC5T_115,21233.21293236447,T,Bacteria,Cyanobacteriota,Vampirovibrionia,Gastranaerophilales,Gastranaerophilaceae,Gastranaerophilus,
+AZC5T_119,11676.181114170984,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-56,
+AZC5T_12,55478.94456502892,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp4
+AZC5T_17,13474.250276145272,T,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,Clostridium,
+AZC5T_24,7239.441141403051,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-65,
+AZC5T_30,39482.711048153426,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCF_000403215.1
+AZC5T_34,42790.929208130234,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,GCA_002490635.1
+AZC5T_4,19948.493188175402,T,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,Oscillospiraceae,UBA9475,
+AZC5T_47,36482.846146472795,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Dorea,
+AZC5T_49,55086.493550736406,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC5T_51,12053.530643628976,T,Bacteria,Firmicutes,Bacilli,RF39,UBA660,UBA5026,
+AZC5T_53,52068.37384252268,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC5T_58,77427.23711744213,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC5T_61,13407.83777767272,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,
+AZC5T_63,13595.728998410992,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,unclassified Lachnospiraceae,
+AZC5T_64,47135.18875683179,T,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,UBA7001,
+AZC5T_65,24946.654094099547,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Eubacterium_F,
+AZC5T_66,21178.767196816563,T,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus_B,Lactobacillus_B murinus
+AZC5T_67,10227.318538031886,T,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,DTU089,Eubacterium_R,
+AZC5T_71,6387.515450563599,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-65,
+AZC5T_79,10786.027817401739,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-95,
+AZC5T_80,218523.4763743052,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Tannerellaceae,Parabacteroides,Parabacteroides goldsteinii
+AZC5T_82,7825.637683177165,T,Bacteria,Firmicutes_A,Clostridia,Oscillospirales,Oscillospiraceae,Oscillibacter,
+AZC5T_85,15844.38489980298,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCA_002358575.1
+AZC5T_90,6701.684541434012,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-95,
+AZC5T_93,680255.2910487761,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides xylanisolvens
+AZC5T_99,16923.452472436904,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,GCF_000403335.2
+AZC7E_111,55478.52629606448,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-1031,GCA_002492665.1
+AZC7E_114,59142.05002703382,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes,
+AZC7E_117,42791.52355509492,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes,
+AZC7E_22,42790.77469677336,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC7E_29,42790.43781587435,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Rikenellaceae,Alistipes_A,
+AZC7E_45,64020.89061573678,T,Bacteria,Desulfobacterota,Desulfovibrionia,Desulfovibrionales,Desulfovibrionaceae,Desulfovibrio,
+AZC7E_47,80372.81041189401,T,Bacteria,Patescibacteria,Saccharimonadia,Saccharimonadales,Saccharimonadaceae,Candidatus Southlakia,
+AZC7E_52,42790.96219432674,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC7E_55,6037.373594459262,T,Bacteria,Firmicutes,Bacilli,RF39,UBA660,CAG-582,
+AZC7E_57,36484.46153821556,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,CAG-95,GCF_000403495.2
+AZC7E_69,114308.96702078803,T,Bacteria,Proteobacteria,Gammaproteobacteria,Betaproteobacteriales,Burkholderiaceae,Parasutterella,
+AZC7E_71,16356.10362393946,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-873,
+AZC7E_72,50990.99698375744,T,Bacteria,Cyanobacteriota,Vampirovibrionia,Gastranaerophilales,Gastranaerophilaceae,Gastranaerophilus,Gastranaerophilus phascolarctosicola
+AZC7E_73,44186.78468672238,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides acidifaciens
+AZC7E_81,42790.54376248757,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,CAG-485,CAG-485 sp6
+AZC7E_90,21234.287835484705,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Muribaculaceae,UBA7173,
+AZC7E_96,23062.203269491303,T,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus_B,Lactobacillus_B murinus
+AZC9C_103,18738.059936806876,T,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-465,Clostridium,
+AZC9C_18,252948.22673379834,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Tannerellaceae,Parabacteroides,Parabacteroides goldsteinii
+AZC9C_34,18220.979777920296,T,Bacteria,Actinobacteriota,Actinobacteria,Actinomycetales,Bifidobacteriaceae,Bifidobacterium,Bifidobacterium pseudolongum_A
+AZC9C_58,6709.781252519283,T,Bacteria,Firmicutes_A,Clostridia,TANB77,CAG-508,UBA7001,
+AZC9C_60,33529.03473520857,T,Bacteria,Proteobacteria,Alphaproteobacteria,RF32,CAG-239,CAG-495,GCA_001917125.1
+AZC9C_71,33049.02388943083,T,Bacteria,Firmicutes,Bacilli,Lactobacillales,Lactobacillaceae,Lactobacillus_B,Lactobacillus_B murinus
+AZC9C_75,42513.91022050423,T,Bacteria,Bacteroidota,Bacteroidia,Bacteroidales,Bacteroidaceae,Bacteroides,Bacteroides congonensis
+AZC9C_86,9252.637081054505,T,Bacteria,Bacteroidota,Bacteroidia,Flavobacteriales,UBA1820,UBA1820,
+AZC9C_93,12206.647044216277,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,COE1,
+AZC9C_98,6923.994458134901,T,Bacteria,Firmicutes_A,Clostridia,Lachnospirales,Lachnospiraceae,Dorea,
