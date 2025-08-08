@@ -40,7 +40,7 @@ metabolites_to_plot <- c(
 
 palette <- c(
   'enriched' = 'red',
-  'depleted' = 'blue',
+  'depleted' = '#008CFF',
   'n.s.' = 'gray'
 )
 
@@ -58,7 +58,7 @@ fig_2a <- ggplot(total_t0_production, aes(x = log_fold_change, y = `-log10q_val`
   arrow = arrow(length = unit(0.01, "npc"), type = "closed"),
   color = "black") + 
   scale_color_manual(values = palette) +
-  scale_x_continuous(breaks = seq(-7, 16, by = 2)) +
+  scale_x_continuous(breaks = c(-5,-2.5,0,2.5,5,10,15)) +
   labs(
  # title = 'Differential Production Rates (T0) of IBS Patient vs. Donor',
   x = 'log2(Fold-Change)',
@@ -68,20 +68,18 @@ fig_2a <- ggplot(total_t0_production, aes(x = log_fold_change, y = `-log10q_val`
   theme(
     plot.title = element_text(hjust = 0.5),  # Center title
     panel.grid.minor = element_blank(),
-            axis.text = element_text(size = 12),
-      axis.title = element_text(size = 14)
+            axis.text = element_text(size = 10),
+      axis.title = element_text(size = 12)
   ) +
   theme(plot.margin = margin(10, 10, 10, 10)) +
   theme_cowplot()
 
 print(fig_2a)
-ggsave(filename = './figures/2A.png',
+ggsave(filename = './figures/2A.pdf',
        plot = fig_2a,
-       device = 'png',
-       width = 30, 
-       height = 30,
+       width = 5, 
+       height = 3,
        dpi = 600,
-       units = 'cm',
        bg = 'white'
        )
 ```
@@ -118,7 +116,7 @@ plot_list <- map2(names(metabolites_to_plot), metabolites_to_plot, function(met_
   
   ggplot(df, aes(x = sample, y = flux)) +
     geom_boxplot(show.legend = FALSE, outlier.shape = NA) +
-    geom_jitter(color = "black", size = 1, width = 0.1) +
+    geom_jitter(color = "black", size = 1, width = 0.1, alpha = 0.5) +
     geom_signif(
       comparisons    = list(c("donor", "recipient")),
       test           = "wilcox.test",
@@ -312,34 +310,34 @@ res_non_resp$color_group <- factor(res_non_resp$color_group, levels = all_levels
 
 pl1 <- ggplot(res_resp, aes(x = log2FoldChange, y = neglog10qval, color = color_group)) +
   geom_point(alpha = 0.7) +
-  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
-  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "grey80") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "grey80") +
   scale_color_manual(values = order_colors, name = "Order") +
   theme_cowplot() +
   xlab("log2(Normalized Effect)") +
   ylab("-log10(adjusted p-value)") +
   ggtitle("Responders") +
   annotate("text",
-           x = shared_xlim[1], y = 2.25,
+           x = shared_xlim[1], y = 2.5,
            label = "T0", hjust = 0, size = 6) +
   annotate("text",
-           x = shared_xlim[2], y = 2.25,
+           x = shared_xlim[2], y = 2.5,
            label = "T6", hjust = 1, size = 6) +  scale_x_continuous(breaks = seq(-15, 10, by = 2))
 
 pl2 <- ggplot(res_non_resp, aes(x = log2FoldChange, y = neglog10qval, color = color_group)) +
   geom_point(alpha = 0.7) +
-  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
-  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "grey80") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "grey80") +
   scale_color_manual(values = order_colors, name = "Order") +
   theme_cowplot() +
   xlab("log2(Normalized Effect)") +
   ylab("-log10(adjusted p-value)") +
    ggtitle("Non-Responders") +
   annotate("text",
-           x = shared_xlim[1], y = 2.25,
+           x = shared_xlim[1], y = 2.5,
            label = "T0", hjust = 0, size = 6) +
   annotate("text",
-           x = shared_xlim[2], y = 2.25,
+           x = shared_xlim[2], y = 2.5,
            label = "T6", hjust = 1, size = 6) +
   scale_x_continuous(breaks = seq(-15, 10, by = 2))
 
@@ -358,7 +356,7 @@ fig_2d <- (pl1 + pl2) +
   theme(legend.position = "bottom",
         legend.text = element_text(size = 8),
         legend.key.size = unit(0.5, "lines"),
-                axis.text = element_text(size = 12))
+                axis.text = element_text(size = 10))
 
 if (n_orders > 10) {
   fig_2d <- fig_2d & guides(color = guide_legend(nrow = 3))
@@ -367,10 +365,10 @@ if (n_orders > 10) {
 print(fig_2d)
 
 ggsave(
-  "./figures/2D.png",
+  "./figures/2D.pdf",
   fig_2d,
-  width = 25,
-  height = 10,
+  width = 5,
+  height = 3.5,
   dpi = 600,
   bg = 'white'
 )
