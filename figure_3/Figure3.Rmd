@@ -1,0 +1,218 @@
+---
+title: "Figure3_FMT_ZZ"
+output: html_document
+date: "2025-08-08"
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(cowplot)
+library(ggrepel)
+library(patchwork)
+library(ggpubr)
+library(RColorBrewer)
+
+pf <- read.csv('../utils/colorPalette.csv', stringsAsFactors = FALSE)
+palette_vec <- setNames(trimws(pf$x), trimws(pf$X))
+
+```
+
+
+```{R}
+
+
+bc_diss <- read.csv("data/3C.csv")
+response <- read.csv("../goll_et.al_2020_IBS_FMT/raw/DonorRecipientMapping.csv") %>%
+  mutate(
+    donor     = str_remove(donor, "_.*") %>% str_replace_all("-", "."),
+    recipient = str_remove(recipient, "-.*")
+  )
+
+```
+
+Let's use geom_tile to plot the dissimilarity matrix, clustering rows (recipients) and columns (donors).
+
+> head(bc_diss)
+  recipient      D.10      D.12     D.13U      D.14 D.15Fryst       D.2       D.3       D.4  D.5Fryst  D.6Fresk  D.7Fryst  D.9Fryst
+1        11 0.5861501 0.6042180 0.6527503 0.5552398 0.5751552 0.7208292 0.6764732 0.6749106 0.6665168 0.6339285 0.6969092 0.4997326
+2        12 0.5876840 0.6100868 0.6337578 0.6030260 0.5390170 0.8754520 0.6069322 0.7150471 0.7325169 0.5765722 0.7448518 0.6168122
+3        16 0.4698771 0.6172035 0.6043367 0.6136375 0.4402184 0.6829719 0.4547327 0.7050265 0.6905321 0.6050662 0.7655275 0.5700104
+4        18 0.5250156 0.6125568 0.5793931 0.6563840 0.5467460 0.6888743 0.5933801 0.6866636 0.7011149 0.5699655 0.9063957 0.6156128
+5        19 0.5065942 0.5437090 0.5611890 0.5109827 0.5645336 0.5805516 0.4571577 0.5732268 0.5728594 0.4977110 0.7115674 0.5142831
+6        22 0.6363769 0.5367623 0.6258775 0.5559320 0.5034018 0.5970147 0.7104370 0.6716761 0.6531240 0.6169059 0.6762535 0.6495689
+
+```{r}
+
+# build matrix and order as before
+mat <- bc_diss %>%
+  column_to_rownames("recipient") %>%
+  as.matrix()
+
+#row_ord <- hclust(dist(mat), method="complete")$order
+#col_ord <- hclust(dist(t(mat)), method="complete")$order
+#Couple of clustering algorithms
+#Ward.D2?
+#row_ord <- hclust(dist(mat), method="ward.D2")$order
+#col_ord <- hclust(dist(t(mat)), method="ward.D2")$order
+
+#bray curtis
+#row_ord <- hclust(as.dist(vegan::vegdist(mat, method="bray")), method="average")$order
+#col_ord <- hclust(as.dist(vegan::vegdist(t(mat), method="bray")), method="average")$order
+
+# rows: recipients; cols: features (abundances)
+d_row <- vegan::vegdist(mat, method = "bray")
+d_col <- vegan::vegdist(t(mat), method = "bray")
+
+row_ord <- hclust(d_row, method = "average")$order
+col_ord <- hclust(d_col, method = "average")$order
+
+rec_levels <- rownames(mat)[row_ord]
+don_levels <- colnames(mat)[col_ord]
+
+# reshape and factor‐level set
+plot_df <- bc_diss %>%
+  mutate(recipient = factor(recipient, levels = rec_levels)) %>%
+  pivot_longer(-recipient, names_to="donor", values_to="dissimilarity") %>%
+  mutate(donor = factor(donor, levels = don_levels))
+
+# attach response info
+highlight_df <- plot_df %>%
+  inner_join(response %>% 
+               mutate(recipient = as.character(recipient),
+                      donor     = as.character(donor)),
+             by = c("recipient","donor"))
+
+#get quantiles
+#qs <- quantile(1-mat, probs = c(0, 0.25, 0.5, 0.75, 1))
+
+# plot with colored borders
+tile <- ggplot(plot_df, aes(donor, recipient, fill = (1-dissimilarity)*100)) +
+  geom_tile(color = 'white', size = 0.15) +
+  geom_tile(
+    data = highlight_df,
+    aes(color = clinical_response),
+    fill  = NA,
+    size  = 1
+  ) +
+  scale_fill_distiller(
+    palette   = "RdBu",
+    direction =  -1,       # 1 for blue→white→red, -1 to flip
+    name      = "Temperature"
+  ) + # scale_color_discrete(name = "Response") +
+  scale_color_manual(values = c(responder="#FFD700", "non-responder"="grey70")) +
+  theme_cowplot() +
+    labs(fill = '% Engraftment', color = 'Clinical response') +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+    axis.title  = element_blank(),
+    legend.position = 'top',
+    legend.title.position = "top",
+    legend.title.align    = 0.5  
+  )
+
+# build a one‐column strip of recipient response
+resp_strip <- response %>%
+  select(recipient, clinical_response) %>% distinct() %>%
+  mutate(recipient = factor(recipient, levels = levels(tile$data$recipient))) %>%
+  ggplot(aes(x=1, y=recipient, fill=clinical_response)) +
+    geom_tile(color = 'white', size = 0.15) +
+    scale_fill_manual(
+      name = "Response",
+      values = c(responder="#FFD700", "non-responder"="grey70")
+    ) +
+    theme_void() +
+    theme(legend.position = 'none',
+
+      plot.margin = margin(5,5,5,0)
+    )
+
+# combine side‐by‐side
+final_plot <- (tile | resp_strip) +
+  plot_layout(widths = c(2, .1))
+final_plot
+
+ggsave("figures/figure3C.png", width = 3.5, height = 6, dpi = 300)
+
+```
+
+
+
+```{r}
+
+
+Figure_3d <- bc_diss %>%
+  mutate(recipient = as.character(recipient)) %>%
+  pivot_longer(-recipient, names_to = "donor", values_to = "value") %>%
+  left_join(response %>% select(recipient, donor, clinical_response), .,
+            by = c("recipient","donor")) %>%
+  mutate(
+    clinical_response = factor(clinical_response, c("responder","non-responder")),
+    engraft = (1 - value) * 100
+  ) %>% na.omit() %>% ggplot(aes(x = clinical_response, y = engraft)) +
+  stat_boxplot(geom = "errorbar", width = 0.2) +
+  geom_boxplot(width = 0.35, outlier.shape = NA) +
+  geom_jitter(aes(color = clinical_response),
+              height = 0, width = 0.2, alpha = 0.75, size = 1.6) +
+stat_compare_means(
+  comparisons = list(c("responder","non-responder")),
+  method = "t.test",
+  method.args = list(alternative = "greater"),   # <-- use method.args
+ # label = "p.format",
+ label = "p.signif",
+  tip.length = 0.01, size = 5
+) +
+  theme_cowplot() +
+  coord_cartesian(clip = "off") + #don't let significance asterisk get clipped off
+  scale_color_manual(
+    name = "Response",
+    values = c(responder = "#FFD700", `non-responder` = "grey70")
+  ) +
+  labs(x = "Clinical response", y = "% Engraftment") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.margin = margin(10, 10, 10, 10))
+
+Figure_3d 
+
+ggsave('../figure_3/figures/Figure3D.png', height = 3.5, width = 3.5
+)
+
+
+```
+
+
+
+```{r}
+
+engraftment_scores <- read.csv("data/3D.csv") %>% mutate(donor = str_replace_all(donor, "-", "."))
+
+p_donor <- engraftment_scores %>%
+  mutate(donor = factor(donor, levels = don_levels)) %>%
+  ggplot(., aes(donor, (1 - score)*100)) + 
+  stat_boxplot(geom ='errorbar', width = 0.2) + 
+  geom_boxplot(width = 0.2, outlier.shape = NA) + 
+  #geom_jitter(aes(color = as.character(recipient)), height = 0, width = 0.2) +
+  geom_jitter(height = 0, width = 0.2) +
+  theme_cowplot() +
+  labs(x = 'Donor', y = 'Engraftment Score') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+
+# 3b. recipient-ordered boxplot
+p_recipient <- engraftment_scores %>%
+  mutate(recipient = factor(recipient, levels = rec_levels)) %>%
+  ggplot(., aes(recipient, (1 - score)*100)) +
+  stat_boxplot(geom='errorbar', width=0.2) +
+  geom_boxplot(width=0.2, outlier.shape = NA) +
+  geom_jitter(aes(), height=0, width=0.2) +
+  theme_cowplot() +
+  labs(x='Recipient', y='Engraftment Score') +
+  theme(axis.text.x = element_text(angle=45, hjust=1))
+
+# print
+p_donor
+p_recipient
+
+plot_grid(p_donor, p_recipient, nrow = 2)
+
+```
