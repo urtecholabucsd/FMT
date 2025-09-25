@@ -1,0 +1,109 @@
+---
+title: "20250925_OpenBiome_FMT_Predictions"
+output: html_document
+date: "2025-09-25"
+---
+
+```{r setup, include=FALSE}
+setwd("/Users/guillaumeurtecho/Dropbox/UrtechoLab/Projects/2024/FMT_Metabolic_models_ZZ/FMT/OpenBiome_Predictions/scripts/")
+
+library(tidyverse)
+library(reshape2)
+library(cowplot)
+library(ranger)
+library(purrr)
+
+
+
+```
+
+
+Read in model inputs for openbiome donors
+```{r}
+
+#metabolc independence
+independence <- read.table('../input/model_files/genome_scores.tsv', sep = '\t', header =T) %>% 
+  rename(taxon=genome_name, met_independence = genome_score) %>% left_join(., read.table("../input/model_files/filtered_strain_taxa.tsv", sep = '\t', header = T), by = c('taxon'='MicrobeID')) %>% select(-taxon, -Strain) %>% rename('taxon'='NCBI.Taxonomy.ID')
+
+#Read in abundance files
+abundance_dat <- read.csv("../input/model_files/TaxonCounts_all_OpenBiome.csv") %>% rename('taxon'='taxon_id')
+
+#ShannonDiversity
+ShannonD <- read.csv("../input/model_files/ShannonDF_OpenBiome_All.csv") # filter(str_detect(sample, "-0$|^D-")) %>%
+  #rename('sample_id'='sample')
+
+#Metabolic Distance
+metabolic_distance <- read.csv("../input/model_files/nearest_neighbors_openbiome_donors.csv") %>% 
+  separate(comparison, into = c('donor', 'recipient'), sep = ' vs ', remove = F)
+
+```
+
+Read in recipient panel from goll et al 2020
+```{r}
+#Read in abundance files
+recipient_abundance_dat <- read.csv("../../../20250122_IBS_HumanFMT_Analysis/processed_data/TaxonCounts_all.csv") %>%
+                    rename('taxon'='taxon_id') %>% rename(pre_abundance = normalized_count)
+
+#ShannonDiversity
+recipient_ShannonD <- read.csv("../../../20250122_IBS_HumanFMT_Analysis/ref/ShannonDF_All.csv") %>% 
+  filter(str_detect(sample, "-0$")) %>% #Get day 0 recipient shannonD
+  rename(recipient_sd = 'shannonD') 
+
+recipient_data <- inner_join(recipient_abundance_dat, recipient_ShannonD) 
+
+rm(recipient_abundance_dat, recipient_ShannonD)
+
+```
+
+
+
+
+Assemble model df
+```{r}
+
+
+ALLMetabolicFeatures <- metabolic_distance %>% 
+  left_join(., independence, by = 'taxon') %>% #independence of taxa
+  left_join(., ShannonD %>% rename('donor_sd'=shannonD), by = c('donor'='sample')) %>% #shannon D donor
+  left_join(., recipient_data, by = c('recipient'='sample', 'taxon')) %>% #Shannon D recipient and abundances
+  mutate(diversity_ratio = donor_sd/recipient_sd) %>% #Calculate Ratio of shannonD
+  left_join(., abundance_dat %>% rename('donor' = 'sample', 'donor_abd' = 'normalized_count'), by = c('taxon', 'donor')) %>% #add donor abundance
+  mutate(log10_pre_abund = log10(pre_abundance))
+
+
+#there's like 225 taxa per pair
+ALLMetabolicFeatures %>% select(donor, recipient) %>% group_by(donor,recipient) %>% 
+  mutate(num_taxa = n()) %>% ungroup %>% distinct() %>%
+  ggplot(., aes(num_taxa)) + geom_histogram(bins = 5, fill = 'dodgerblue', color = 'black') + theme_cowplot()
+
+temp <- ALLMetabolicFeatures
+ALLMetabolicFeatures <- temp
+
+```
+
+
+Apply model
+```{r}
+ 
+#bring in ranger model:
+
+rf_mod <- readRDS("../../../20250122_IBS_HumanFMT_Analysis/processed_data/rf_model_IBS.rds")
+
+PredictedModel <- ALLMetabolicFeatures %>%
+  mutate(pred_log2_fc = predict(rf_mod, .)$predictions) %>% 
+  mutate(abd = (2^pred_log2_fc)*pre_abundance) %>%
+  select(taxon, comparison, abd) %>% 
+  tidyr::pivot_wider(names_from = comparison,
+                     values_from = abd,
+                     values_fill = 0) %>%
+  mutate(across(-taxon, ~ round(.x, 0)))
+
+
+write.csv(PredictedModel, "../output/SimulatedFMTCounts_OpenBiome.csv", row.names = F, quote = F)
+
+```
+
+
+
+
+

@@ -1,0 +1,81 @@
+---
+title: "20250925_OpenBiome_Donor_Prep"
+output: html_document
+date: "2025-09-25"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+setwd("/Users/guillaumeurtecho/Dropbox/UrtechoLab/Projects/2024/FMT_Metabolic_models_ZZ/FMT/OpenBiome_Predictions/scripts/")
+
+library(tidyverse)
+library(reshape2)
+library(cowplot)
+library(ggsignif)
+library(vegan)
+
+```
+
+
+Read in count table and add pseudocounts. Then normalize each sample (column) to be at similar depth so can compare across.
+```{r}
+#read in count tables, add a pseudocount
+counts <- read.csv("../input/OpenBiome_agora_mapped_counts.csv") %>% mutate(across(-1, ~ .x + 1)) #add pseudocount to all but taxon column
+
+
+# 1. compute each column’s sum and the median of those sums
+col_sums <- counts %>% 
+  select(-taxon_id) %>% 
+  summarise(across(everything(), sum)) %>% 
+  unlist()
+
+med_sum  <- median(col_sums)
+
+# 2. normalize each sample‐column to the median total
+counts_norm <- counts %>% 
+  mutate(across(-taxon_id, ~ .x / sum(.x) * med_sum))
+
+counts_long <- counts_norm %>%
+  pivot_longer(
+    cols      = -taxon_id,
+    names_to  = "sample",
+    values_to = "normalized_count"
+  )
+
+#Write out all count files
+write.csv(counts_long, "../input/model_files/TaxonCounts_all_OpenBiome.csv", quote = F, row.names = F)
+
+```
+
+Calculate shannon diversity
+```{r}
+
+# 2. Make a taxa × sample matrix
+counts_mat <- counts %>%
+  column_to_rownames("taxon_id") %>%
+  as.matrix()
+
+# 3. Compute Shannon per sample by transposing
+shannon_df <- diversity(t(counts_mat), index = "shannon") %>% as.data.frame() %>% rownames_to_column(., 'taxon')
+names(shannon_df) <- c('sample', "shannonD")
+
+write.csv(shannon_df, "../input/model_files/ShannonDF_OpenBiome_All.csv", row.names = F, quote = F)
+
+
+```
+
+
+```{r}
+
+
+
+
+```
+
+
+
+
+
+
+
