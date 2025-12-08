@@ -2,6 +2,7 @@ import pandas as pd
 import warnings
 from micom import interaction
 from micom.workflows import GrowthResults
+from micom.measures import production_rates
 from sklearn.metrics.pairwise import cosine_distances, euclidean_distances
 from typing import List, Optional, Literal
 from sklearn.metrics.pairwise import pairwise_distances
@@ -101,6 +102,15 @@ def metabolic_interaction_distance(donor_df: pd.DataFrame,
 
     dist_df = pd.DataFrame(distance_matrix, index=int_donor.index, columns=int_recipient.index)
     return dist_df
+    
+def production_rates_with_imputation(res: GrowthResults) -> pd.DataFrame:
+    """Calculate production rates with imputation for missing values."""
+    production = production_rates(res)
+    
+    production = production.pivot_table(index='sample_id', columns='metabolite', values='flux', fill_value=0.0)
+    # convert back to long format with imputation
+    production = production.reset_index().melt(id_vars='sample_id', var_name='metabolite', value_name='flux')
+    return production
 
 if __name__ == '__main__':
     pass
