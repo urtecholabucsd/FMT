@@ -1,0 +1,151 @@
+---
+title: "supp_figure_s2_FMT_ZZ"
+output: html_document
+date: "2026-04-08"
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library("ggdendro")
+library(tidyverse)
+library(phyloseq)
+library(ggtree)
+library(ggstance)
+library(ggrepel)
+library(patchwork)
+library(RColorBrewer)
+library(ggnewscale)
+library(cowplot)
+library(stringr)
+```
+
+```{r read necessary dataframes}
+# read relative abundance, bray_curtis distance, and bacteriodetes abundance dataframe
+abundance = read.csv('./data/supp_2B.csv', stringsAsFactors = FALSE, row.name = 1)
+bray_curtis_distance = read.csv('./data/bray_curtis_distance.csv', row.names = 1, check.names = FALSE)
+phylum_data = read.csv('./data/supp_2A.csv', check.names = FALSE, row.names = 1)
+
+# include only samples in phylum_bacteriodetes dataframe
+abundance <- abundance %>%
+  filter(sample_id %in% phylum_data$sample_id)
+
+meta <- abundance %>% 
+  select(sample_id, clinical_response, time) %>%
+  distinct()
+
+bray_curtis_distance <- bray_curtis_distance[abundance$sample_id, abundance$sample_id]
+
+meta <- meta %>%
+  arrange(match(sample_id, abundance$sample_id)) %>%
+  mutate(group_plot = case_when(
+    clinical_response == "donor" ~ "donor",
+    time == "T0" ~ "recipient T0",
+    time == "T6" & clinical_response == "responder" ~ "recipient_T6_responder",
+    time == "T6" & clinical_response == 'non-responder' ~ "recipient_T6_non_responder",
+    TRUE ~ "other"
+  ))
+
+unif = as.dist(as.matrix(bray_curtis_distance))
+
+# hierarchical clustering
+hc <- hclust(unif, method = "ward.D2")
+clus <- cutree(hc, 4)
+d = data.frame(
+  sample_id = names(clus),
+  member = factor(clus),
+  stringsAsFactors = FALSE
+)
+dd = left_join(d, meta, by = "sample_id")
+row.names(dd) = dd$sample_id
+```
+
+```{r}
+metadata_cols <- c("sample_id", "clinical_response", "time")
+composition_cols <- setdiff(colnames(abundance), metadata_cols)
+
+Taxonomies <- abundance %>%
+  select(sample_id, all_of(composition_cols)) %>%
+  pivot_longer(
+    cols = all_of(composition_cols),
+    names_to = "Taxon",
+    values_to = "Abundance"
+  ) %>%
+  rename(id = sample_id) %>%
+  mutate(Abundance = Abundance * 100)
+
+p = ggtree(hc, branch.length = "none") %<+% dd +
+  geom_tippoint(aes(fill = group_plot), size = 3, shape = 21) +
+  geom_tiplab(aes(color = group_plot), size = 2.8, align = TRUE, linetype = "blank", offset = 0.15, show.legend = FALSE) +
+  theme_tree2() +
+  theme(
+    axis.line = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank()
+  )
+
+p <- p + new_scale_fill()
+
+p3 <- facet_plot(
+  p,
+  panel = "Composition",
+  data = Taxonomies,
+  geom = geom_barh,
+  mapping = aes(x = Abundance, fill = Taxon),
+  stat = "identity",
+  color = "black"
+)
+
+p_final <- facet_widths(p3, widths = c(Tree = 2.8, Composition = 1.2))
+
+ggsave(
+  filename = "./figures/supp_2B.png",
+  plot = p_final,
+  width = 10,
+  height = 16,
+  dpi = 600,
+  bg = "transparent"
+)
+
+
+```
+
+```{r}
+phylum_data_T0 <- phylum_data %>% 
+  filter(time == "T0" | time == 'donor') %>%
+  mutate(group = case_when(
+    str_starts(sample_id, "D") ~ "donor",
+    TRUE ~ "recipient"
+  ))
+
+p <- ggplot(phylum_data_T0, aes(x = group, y = Bacteroidetes)) + 
+  geom_boxplot(outlier.shape = NA) +
+  geom_point(color = "black", size = 1, position = position_jitter(width = 0.15)) +
+  ggpubr::stat_compare_means(
+    comparisons = list(c("donor", "recipient")), 
+    method = "wilcox.test", 
+    label = "p.signif",
+    label.x = 1.5,
+    size = 3) +
+  labs(
+    title = "Percentage of Bacteriodetes Abundance",
+    y = "abundance",
+    x = "group"
+  ) + 
+  theme_minimal() +
+  theme_cowplot() + 
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14),
+    axis.text.x = element_text(size = 12),
+    axis.title.y = element_text(size = 12)
+  )
+
+ggsave(
+  filename = "./figures/supp_2B.png",
+  plot = p,
+  width = 6,
+  height = 10,
+  dpi = 600,
+  bg = "transparent"
+)
+```
