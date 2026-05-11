@@ -1,0 +1,176 @@
+---
+title: "20250506_IBS_FMT_dfPrep"
+output: html_document
+date: "2025-05-06"
+---
+
+```{r setup, include=FALSE}
+
+setwd("/Users/guillaumeurtecho/Dropbox/UrtechoLab/Projects/2024/FMT_Metabolic_models_ZZ/20250122_IBS_HumanFMT_Analysis/scripts/")
+
+library(tidyverse)
+library(reshape2)
+library(cowplot)
+library(ggsignif)
+library(vegan)
+
+#Get list of donor, recipients, and post fmt recipients
+DRmapping <- read.csv("../ref/DonorRecipientMapping.csv") %>% 
+  separate(donor, into = c('donor', 'trash'), remove = T, sep = '_S') %>%
+  separate(recipient, into = c('recipient_pre', 'trash'), remove = T, sep = '_S') %>% select(donor, recipient_pre, clinical_response) %>% 
+  mutate(recipient_post = gsub("-0", "-6", recipient_pre))
+
+#read in count tables, add a pseudocount
+counts <- read.csv("../processed_data/goll_agora_map.counts.csv") %>% mutate(across(-1, ~ .x + 1)) #add pseudocount to all but taxon column
+# 1. Rename sample columns: drop leading "X", replace "." with "-"
+new_names <- names(counts) %>%
+  # leave taxon_id alone, only transform sample names
+  { c("taxon_id", 
+      gsub("\\.", "-", gsub("^X", "", .[-1])) ) }
+names(counts) <- new_names
+
+
+```
+
+Get shannon diversity 
+```{r}
+
+
+# 2. Make a taxa × sample matrix
+counts_mat <- counts %>%
+  column_to_rownames("taxon_id") %>%
+  as.matrix()
+
+# 3. Compute Shannon per sample by transposing
+shannon_df <- diversity(t(counts_mat), index = "shannon") %>% as.data.frame() %>% rownames_to_column(., 'taxon')
+names(shannon_df) <- c('sample', "shannonD")
+
+write.csv(shannon_df, "../ref/ShannonDF_All.csv", row.names = F, quote = F)
+
+#write out diversity 
+DRmapping %>% left_join(., shannon_df %>% rename('donor_shannonD'=shannonD, 'donor'=sample)) %>%
+                      left_join(., shannon_df %>% rename('recipient_shannonD'=shannonD, 'recipient_pre'=sample)) %>%
+                      mutate(diversity_ratio = donor_shannonD/recipient_shannonD) %>% 
+                      select(-recipient_post) %>% 
+                      rename('recipient'=recipient_pre) %>%
+              write.csv("../processed_data/ZZ_modelInput/shannonDiversity.csv", quote = F, row.names = F)
+
+
+```
+
+
+Also, calculate pre,post abundances after normalizing to 
+need dataframe with taxon, recipient_t0, donor, recipient t6, fold change
+```{r}
+
+
+# 1. compute each column’s sum and the median of those sums
+col_sums <- counts %>% 
+  select(-taxon_id) %>% 
+  summarise(across(everything(), sum)) %>% 
+  unlist()
+
+med_sum  <- median(col_sums)
+
+# 2. normalize each sample‐column to the median total
+counts_norm <- counts %>% 
+  mutate(
+    across(
+      -taxon_id,
+      ~ .x / sum(.x) * med_sum
+    )
+  )
+
+counts_long <- counts_norm %>%
+  pivot_longer(
+    cols      = -taxon_id,
+    names_to  = "sample",
+    values_to = "normalized_count"
+  )
+
+#Write out all count files
+write.csv(counts_long, "../processed_data/TaxonCounts_all.csv", quote = F, row.names = F)
+
+
+#write out pre/post dataframe
+DRmapping %>% left_join(., counts_long %>% rename('pre_abundance'=normalized_count, 'recipient_pre'=sample)) %>%
+  left_join(., counts_long %>% rename('post_abundance'=normalized_count, 'recipient_post'=sample)) %>% 
+  mutate(log_fold_change=log2(post_abundance/pre_abundance)) %>% #calculate fold-change
+  select(-clinical_response, -recipient_post) %>% 
+  rename('recipient' = 'recipient_pre', 'taxon'='taxon_id') %>%
+  write.csv(., "../processed_data/ZZ_modelInput/pre_post_abundances.csv", quote = F, row.names = F)
+
+#write out donor abundances:
+
+counts_long %>% filter(sample %in%  DRmapping$donor) %>% rename(taxon=taxon_id,donor_abundance=normalized_count, donor =sample) %>%
+  write.csv(., "../processed_data/ZZ_modelInput/donor_abundances.csv", quote = F, row.names = F)
+
+```
+
+Get
+
+```{r}
+
+
+#1. Compute ΔShannonD
+DRmapping %>% left_join(., shannon_df %>% rename('donor_shannonD'=shannonD, 'donor'=sample)) %>%
+                      left_join(., shannon_df %>% rename('recipient_shannonD_pre'=shannonD, 'recipient_pre'=sample)) %>%
+                                 left_join(., shannon_df %>% rename('recipient_shannonD_post'=shannonD, 'recipient_post'=sample))  %>%
+  mutate(
+    delta_shannon = recipient_shannonD_post - recipient_shannonD_pre
+  ) %>% ggplot(., aes(x = clinical_response, y = delta_shannon, fill = clinical_response)) +
+  # error bars on the box
+  stat_boxplot(geom = "errorbar", width = 0.2) +
+  # main box
+  geom_boxplot(width = 0.5, outlier.shape = NA) +
+  # individual points
+  geom_jitter(width = 0.1, height = 0, alpha = 0.7) +
+  # significance annotation (t-test)
+  geom_signif(
+    comparisons = list(c("responder", "non-responder")),
+    test        = "t.test",
+    map_signif_level = TRUE
+  ) +
+  # styling
+  theme_cowplot() +
+  labs(
+    x = "Clinical Response",
+    y = expression(Delta ~ "Shannon Diversity"),
+    fill = "Response"
+  )
+
+```
+
+
+are there differences in shannon diversity? Nah, not really
+```{}
+
+DRmapping %>% left_join(., shannon_df %>% rename('donor_shannonD'=shannonD, 'donor'=sample)) %>%
+                      left_join(., shannon_df %>% rename('recipient_shannonD_pre'=shannonD, 'recipient_pre'=sample)) %>%
+                                 left_join(., shannon_df %>% rename('recipient_shannonD_post'=shannonD, 'recipient_post'=sample)) %>%
+   select(-donor, -recipient_post, -recipient_pre) %>%
+      melt(id.vars = 'clinical_response') %>%
+  ggplot(., aes(x = variable, y = value, fill = clinical_response)) +
+  # error bars
+  stat_boxplot(geom = "errorbar", width = 0.2) +
+  # main boxplot
+  geom_boxplot(width = 0.5, outlier.shape = NA) +
+  # jittered points
+  geom_jitter(height = 0, width = 0.1, alpha = 0.7) +
+  # add significance bar + p‐value
+  geom_signif(
+    comparisons = list(c("responder", "non-responder")),
+    test        = "t.test",
+    map_signif_level = TRUE
+  ) +
+  # cowplot theme + labels
+  theme_cowplot() +
+  labs(
+    x = "Clinical Response",
+    y = "Shannon Diversity",
+    fill = "Response Group"
+  )
+
+```
+
+

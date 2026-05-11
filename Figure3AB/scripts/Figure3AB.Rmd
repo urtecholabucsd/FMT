@@ -1,0 +1,594 @@
+
+
+
+```{r setup, include=FALSE}
+
+setwd("/Users/guillaumeurtecho/Dropbox/UrtechoLab/Projects/2024/FMT_Metabolic_models_ZZ/Github_Workshop/Figure3AB/scripts")
+library(tidyverse)
+library(reshape2)
+library(cowplot)
+library(ggsignif)
+library(ranger)
+
+#taxonomy data
+tax <- read.csv("../ref/taxonomy_counts.csv")
+
+#Mahalonibis distance for donor-recipient
+dist <- read.csv("../processed_data/ZZ_modelInput/nearest_neighbors_t0.csv") %>% 
+  separate(comparison, into = c('donor', 'recipient'), sep = ' vs ', remove = F )
+
+#growth rate
+growth <- read.csv("../processed_data/ZZ_modelInput/growth_rates_t0.csv") #%>% rename(donor=sample_id)
+
+
+#donor/recipient diversity ratios
+div <- read.csv("../processed_data/ZZ_modelInput/shannonDiversity.csv") %>% na.omit()
+
+#metabolc independence
+independence <- read.table('../processed_data/ZZ_modelInput/genome_scores.tsv', sep = '\t', header =T) %>% 
+  rename(taxon=genome_name, met_independence = genome_score) %>% left_join(., read.table("../ref/filtered_strain_taxa.tsv", sep = '\t', header = T), by = c('taxon'='MicrobeID')) %>% select(-taxon, -Strain) %>% rename('taxon'='NCBI.Taxonomy.ID')
+
+#assembled metabolic data together
+data <- dist %>% 
+  left_join(., div, by = c('donor', 'recipient')) %>% #diversity and ratios for donor and recipient
+  left_join(., independence, by = 'taxon') %>% #independence of taxa
+  select(-sample_id) 
+
+#Read in abundance files
+abundance_dat <- read.csv("../processed_data/ZZ_modelInput/pre_post_abundances.csv")
+donor_abd <- read.csv("../processed_data/ZZ_modelInput/donor_abundances.csv") 
+
+
+AllMetabolicFeatures <- data %>% left_join(., abundance_dat, by = c('donor', 'recipient', 'taxon')) %>% left_join(., donor_abd, by = c('donor', 'taxon'))
+   
+
+```
+
+
+
+Figure 3A
+```{r}
+library(ranger)
+library(cowplot)
+library(ggsignif)
+
+# ── Read palette (at top of script, after loading libraries) ─────────────
+human_palette <- read.csv("../../utils/human_order_palette.csv")
+order_colors <- setNames(human_palette$color, human_palette$order)
+named_orders <- setdiff(names(order_colors), "Other")
+
+
+
+# ── Shared feature set (used in every model below) ───────────────────────
+rf_features <- c("average_distance", #"degree_centrality", "growth_rate",
+                 "diversity_ratio", "met_independence", "log10_pre_abund")
+
+rf_formula <- as.formula(paste("log_fold_change ~", paste(rf_features, collapse = " + ")))
+
+# ── 1) Prepare RF training table ─────────────────────────────────────────
+df_rf <- AllMetabolicFeatures %>%
+  mutate(log10_pre_abund = log10(pre_abundance)) %>%
+  filter(is.finite(log_fold_change), is.finite(log10_pre_abund))
+
+# ── 2) Full model (OOB stats only, not used for figures) ─────────────────
+set.seed(123)
+rf_mod <- ranger(
+  formula       = rf_formula,
+  data          = df_rf,
+  num.trees     = 100,
+  mtry          = 3,
+  min.node.size = 2,
+  importance    = "permutation"
+)
+
+cat("RF OOB R-squared:", rf_mod$r.squared, "\n")
+cat("RF OOB MSE:", rf_mod$prediction.error, "\n")
+
+# ── 3) Leave-one-recipient-out cross-validation ──────────────────────────
+#    Tracks: abundance-level rho, fold-change rho, permutation importance
+recipients <- unique(df_rf$recipient)
+n_rec      <- length(recipients)
+
+df_rf$loo_pred_fc <- NA_real_
+
+loo_rho_abundance <- numeric(n_rec)
+loo_rho_fc        <- numeric(n_rec)
+imp_matrix        <- matrix(NA, nrow = n_rec, ncol = length(rf_features),
+                            dimnames = list(recipients, rf_features))
+
+for (i in seq_along(recipients)) {
+  rec      <- recipients[i]
+  train_df <- df_rf %>% filter(recipient != rec)
+  test_df  <- df_rf %>% filter(recipient == rec)
+  
+  mod <- ranger(
+    formula       = rf_formula,
+    data          = train_df,
+    num.trees     = 100,
+    mtry          = 3,
+    min.node.size = 2,
+    importance    = "permutation"
+  )
+  
+  preds <- predict(mod, data = test_df)$predictions
+  df_rf$loo_pred_fc[df_rf$recipient == rec] <- preds
+  
+  # Predicted post-FMT abundance
+  pred_abundance <- test_df$pre_abundance * 2^preds
+  
+  # Abundance-level rho (compositional concordance)
+  loo_rho_abundance[i] <- cor(test_df$post_abundance, pred_abundance,
+                              method = "spearman", use = "complete.obs")
+  
+  # Fold-change-level rho (more conservative)
+  loo_rho_fc[i] <- cor(test_df$log_fold_change, preds, method = "spearman")
+  
+  # Permutation importance from this fold
+  imp_matrix[i, ] <- mod$variable.importance
+}
+
+# Compute predicted abundance for all samples
+df_rf$loo_pred_abundance <- df_rf$pre_abundance * 2^df_rf$loo_pred_fc
+
+# ── Report LOO statistics ────────────────────────────────────────────────
+rho_overall_abd <- cor(df_rf$post_abundance, df_rf$loo_pred_abundance,
+                       method = "spearman", use = "complete.obs")
+rho_overall_fc  <- cor(df_rf$log_fold_change, df_rf$loo_pred_fc,
+                       method = "spearman")
+
+cat("LOO rho (abundance):", round(median(loo_rho_abundance), 2),
+    "+-", round(sd(loo_rho_abundance), 2), "\n")
+cat("Overall stitched LOO rho (abundance):", round(rho_overall_abd, 3), "\n")
+cat("LOO rho (fold-change):", round(median(loo_rho_fc), 2),
+    "+-", round(sd(loo_rho_fc), 2), "\n")
+cat("Overall stitched LOO rho (fold-change):", round(rho_overall_fc, 3), "\n")
+
+# ── 4) Figure 3A: observed vs LOO-predicted abundance ────────────────────
+
+
+df_plot <- df_rf %>%
+  left_join(select(tax, -sample_id, -abundance) %>% distinct(), by = c("taxon" = "id")) %>%
+  mutate(order_plot = if_else(order %in% named_orders, order, "Other"),
+         order_plot = factor(order_plot, levels = c(named_orders, "Other")))
+
+fig3a <- ggplot(df_plot, aes(x = log10(post_abundance + 1e-6),
+                             y = log10(loo_pred_abundance + 1e-6))) +
+  geom_point(aes(color = order_plot), alpha = 0.5) +
+ # geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "grey50") +
+  geom_smooth(method = "lm", se = FALSE, color = "red", linetype = "dashed") +
+  scale_colour_manual(values = order_colors, name = "Order") +
+  annotate("text",
+           x = min(log10(df_rf$post_abundance + 1e-6), na.rm = TRUE) + 1,
+           y = max(log10(df_rf$loo_pred_abundance + 1e-6), na.rm = TRUE) - 0.5,
+           label = paste0("rho == ", round(median(loo_rho_abundance), 2),
+                          "*','~~ p < 2.2e-16"),
+           parse = TRUE, hjust = 0, size = 4
+  ) +
+  labs(
+    x = expression(Observed~log[10](Post-FMT~Abundance)),
+    y = expression(Predicted~log[10](Post-FMT~Abundance)),
+    color = "Order"
+  ) +
+  theme_cowplot()
+
+print(fig3a)
+
+ggsave("../figs/Fig3A_LOO_predicted_vs_observed.pdf", fig3a, width = 5, height = 3)
+ggsave("../figs/Fig3A_LOO_predicted_vs_observed.png", fig3a, width = 5, height = 3, bg = "white")
+
+```
+
+
+
+
+Prediction accuracy by responder vs non-responder:
+
+```{r}
+rho_df <- tibble(
+  recipient         = recipients,
+  rho               = loo_rho_abundance,
+  clinical_response = map_chr(recipients, ~ unique(df_rf$clinical_response[df_rf$recipient == .x]))
+)
+
+cat("Responder LOO rho:", round(median(rho_df$rho[rho_df$clinical_response == "responder"]), 2), "+-",
+    round(sd(rho_df$rho[rho_df$clinical_response == "responder"]), 2), "\n")
+cat("Non-responder LOO rho:", round(median(rho_df$rho[rho_df$clinical_response == "non-responder"]), 2), "+-",
+    round(sd(rho_df$rho[rho_df$clinical_response == "non-responder"]), 2), "\n")
+
+fig3b <-  ggplot(rho_df, aes(x = clinical_response, y = rho, fill = clinical_response)) +
+  stat_boxplot(geom = "errorbar", width = 0.2) +
+  geom_boxplot(width = 0.5, outlier.shape = NA) +
+  geom_jitter(height = 0, width = 0.1, alpha = 0.7) +
+  geom_signif(
+    comparisons      = list(c("responder", "non-responder")),
+    test             = "wilcox.test",
+    map_signif_level = TRUE,
+    textsize         = 4,
+    y_position       = max(rho_df$rho, na.rm = TRUE) + 0.02
+  ) +
+  scale_fill_manual(values = c('grey90', '#F1E201FF')) +
+  scale_y_continuous(breaks = c(0.5,0.7, 0.9)) +
+  labs(x = "", y = expression(Spearman~rho)) +
+  theme_cowplot() +
+  theme(legend.position = "none", axis.text.x = element_text(hjust = 1, angle = 45))
+
+fig3b
+
+ggsave("../figs/Rho_Respondersvs_non_LOO.png", height = 3.5, width = 2, bg = "white")
+
+```
+
+```{r}
+plot_grid(fig3a, fig3b, labels = 'AUTO', rel_widths = c(1,0.3))
+
+ggsave("../figs/Fig3AB.pdf", width = 6, height = 3)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Permutation importance averaged across LOO folds:
+
+```{r}
+# ── Feature importance (averaged across all LOO folds) ───────────────────
+mean_imp <- colMeans(imp_matrix)
+sd_imp   <- apply(imp_matrix, 2, sd)
+
+imp_df <- data.frame(
+  Feature    = names(mean_imp),
+  Importance = mean_imp,
+  SD         = sd_imp
+) %>%
+  mutate(Feature = case_when(
+    Feature == "average_distance"  ~ "Metabolic\nDistance",
+    Feature == "met_independence"  ~ "Metabolic\nIndependence",
+    Feature == "log10_pre_abund"   ~ "Pre-FMT\nAbundance",
+    Feature == "diversity_ratio"   ~ "Diversity\nRatio",
+    Feature == "degree_centrality" ~ "Degree\nCentrality",
+    Feature == "growth_rate"       ~ "Growth\nRate",
+    TRUE ~ Feature
+  )) %>%
+  arrange(desc(Importance))
+
+imp_df$Feature <- factor(imp_df$Feature, levels = imp_df$Feature)
+
+p_imp <- ggplot(imp_df, aes(x = Feature, y = Importance)) +
+  geom_col(fill = "steelblue", color = "black", width = 0.6) +
+  geom_errorbar(aes(ymin = pmax(Importance - SD, 0), ymax = Importance + SD),
+                width = 0.2) +
+  labs(x = NULL, y = "Permutation Importance\n(mean +/- SD across LOO folds)") +
+  theme_cowplot()
+
+print(p_imp)
+
+ggsave("../figs/LOO_permutation_importance.pdf", p_imp, width = 5, height = 3)
+ggsave("../figs/LOO_permutation_importance.png", p_imp, width = 5, height = 3, bg = "white")
+
+print(imp_df)
+
+```
+
+Feature dropout analysis (LOO rho with each feature removed):
+
+```{}
+# ── For each feature, run full LOO without it, report rho ────────────────
+dropout_results <- map_dfr(rf_features, function(drop_feat) {
+  feats_subset <- setdiff(rf_features, drop_feat)
+  f_subset <- as.formula(paste("log_fold_change ~", paste(feats_subset, collapse = " + ")))
+  
+  rho_vec <- numeric(n_rec)
+  for (i in seq_along(recipients)) {
+    rec      <- recipients[i]
+    train_df <- df_rf %>% filter(recipient != rec)
+    test_df  <- df_rf %>% filter(recipient == rec)
+    
+    mod <- ranger(
+      formula       = f_subset,
+      data          = train_df,
+      num.trees     = 100,
+      mtry          = min(3, length(feats_subset)),
+      min.node.size = 2
+    )
+    
+    preds    <- predict(mod, data = test_df)$predictions
+    pred_abd <- test_df$pre_abundance * 2^preds
+    rho_vec[i] <- cor(test_df$post_abundance, pred_abd,
+                      method = "spearman", use = "complete.obs")
+  }
+  
+  tibble(dropped = drop_feat, mean_rho = mean(rho_vec), sd_rho = sd(rho_vec))
+})
+
+# Add full model baseline
+dropout_results <- bind_rows(
+  tibble(dropped   = "none (full model)",
+         mean_rho  = mean(loo_rho_abundance),
+         sd_rho    = sd(loo_rho_abundance)),
+  dropout_results
+) %>%
+  mutate(
+    delta_rho = mean_rho - mean_rho[dropped == "none (full model)"],
+    label = case_when(
+      dropped == "none (full model)"  ~ "Full Model",
+      dropped == "average_distance"   ~ "- Metabolic Distance",
+      dropped == "met_independence"   ~ "- Metabolic Independence",
+      dropped == "log10_pre_abund"    ~ "- Pre-FMT Abundance",
+      dropped == "diversity_ratio"    ~ "- Diversity Ratio",
+      dropped == "degree_centrality"  ~ "- Degree Centrality",
+      dropped == "growth_rate"        ~ "- Growth Rate",
+      TRUE ~ dropped
+    )
+  )
+
+dropout_results$label <- factor(dropout_results$label,
+                                levels = rev(dropout_results$label))
+
+p_dropout <- ggplot(dropout_results, aes(x = label, y = mean_rho)) +
+  geom_col(fill = "steelblue", color = "black", width = 0.6) +
+  geom_errorbar(aes(ymin = mean_rho - sd_rho, ymax = mean_rho + sd_rho),
+                width = 0.2) +
+  geom_hline(yintercept = mean(loo_rho_abundance), linetype = "dashed",
+             color = "red", linewidth = 0.5) +
+  coord_flip() +
+  labs(x = NULL, y = expression(LOO~Spearman~rho~(abundance))) +
+  theme_cowplot()
+
+print(p_dropout)
+
+ggsave("../figs/LOO_feature_dropout.pdf", p_dropout, width = 5, height = 3)
+ggsave("../figs/LOO_feature_dropout.png", p_dropout, width = 5, height = 3, bg = "white")
+
+print(dropout_results %>% select(label, mean_rho, sd_rho, delta_rho))
+
+```
+
+LOO composition PCoA panels:
+
+```{r}
+library(ape)
+library(vegan)
+
+make_pcoa_loo <- function(rec) {
+  sub <- df_rf %>% filter(recipient == rec)
+  
+  comp <- sub %>%
+    select(donor_abundance, pre_abundance, post_abundance, loo_pred_abundance, taxon) %>%
+    rename(pred_abundance = loo_pred_abundance) %>%
+    left_join(tax %>% select(id, family), by = c("taxon" = "id")) %>%
+    pivot_longer(
+      cols      = c(donor_abundance, pre_abundance, post_abundance, pred_abundance),
+      names_to  = "Sample",
+      values_to = "abundance"
+    ) %>%
+    group_by(Sample, family) %>%
+    summarize(abund = sum(abundance, na.rm = TRUE), .groups = "drop") %>%
+    group_by(Sample) %>%
+    mutate(prop = abund / sum(abund)) %>%
+    ungroup()
+  
+  comm <- comp %>%
+    select(Sample, family, prop) %>%
+    pivot_wider(names_from = family, values_from = prop, values_fill = 0) %>%
+    column_to_rownames("Sample")
+  
+  dist_mat <- vegdist(comm, method = "bray")
+  pcoa_res <- pcoa(dist_mat)
+  coords   <- as_tibble(pcoa_res$vectors[, 1:2], rownames = "Sample")
+  var_exp  <- round(100 * pcoa_res$values$Relative_eig[1:2], 1)
+  
+  rho <- cor(sub$post_abundance, sub$loo_pred_abundance,
+             method = "spearman", use = "complete.obs")
+  
+  ggplot(coords, aes(x = Axis.1, y = Axis.2, color = Sample)) +
+    geom_point(size = 3) +
+    labs(
+      title = sprintf("%s  |  rho = %.2f", rec, rho),
+      x     = paste0("PCoA1 (", var_exp[1], "%)"),
+      y     = paste0("PCoA2 (", var_exp[2], "%)")
+    ) +
+    scale_x_continuous(n.breaks = 3) +
+    theme_cowplot() +
+    theme(
+      plot.title      = element_text(size = 8),
+      legend.position = "none",
+      axis.title      = element_text(size = 6)
+    )
+}
+
+pcoa_panels <- map(unique(df_rf$recipient), make_pcoa_loo)
+
+legend_plot <- make_pcoa_loo(unique(df_rf$recipient)[1]) +
+  theme(legend.position = "right")
+shared_legend <- get_legend(legend_plot)
+
+main_panels <- plot_grid(plotlist = pcoa_panels, ncol = 7)
+
+final_with_legend <- ggdraw(main_panels) +
+  draw_plot(shared_legend,
+            x = 0.6, y = 0.05,
+            width = 0.5, height = 0.35)
+
+print(final_with_legend)
+
+ggsave("../figs/PCoA_leave1out_LOO.png", final_with_legend,
+       width = 15, height = 6, bg = "white")
+
+```
+
+LOO composition stacked bar plots:
+
+```{r}
+
+plots <- map(unique(df_rf$recipient), function(rec) {
+  test_df <- df_rf %>% filter(recipient == rec)
+  
+  rho <- cor(test_df$post_abundance, test_df$loo_pred_abundance,
+             method = "spearman", use = "complete.obs")
+  
+  comp <- test_df %>%
+    rename(pred_abundance = loo_pred_abundance) %>%
+    select(-abundance) %>%
+    left_join(tax %>% select(id, family), by = c("taxon" = "id")) %>%
+    pivot_longer(
+      cols      = c(donor_abundance, pre_abundance, post_abundance, pred_abundance),
+      names_to  = "stage",
+      values_to = "abundance"
+    ) %>%
+    group_by(recipient, stage, family) %>%
+    summarise(prop = sum(abundance, na.rm = TRUE), .groups = "drop") %>%
+    group_by(recipient, stage) %>%
+    mutate(prop = prop / sum(prop)) %>%
+    ungroup() %>%
+    mutate(stage = factor(stage,
+      levels = c("donor_abundance", "pre_abundance", "post_abundance", "pred_abundance"),
+      labels = c("Donor", "Pre-FMT", "Post-FMT", "Predicted")
+    ))
+  
+  ggplot(comp, aes(x = stage, y = prop, fill = family)) +
+    geom_col(width = 0.7) +
+    scale_y_continuous(labels = scales::percent) +
+    labs(
+      title = sprintf("%s  |  rho = %.2f", rec, rho),
+      x = NULL, y = "Relative abundance"
+    ) +
+    theme_cowplot() +
+    theme(
+      axis.text.x  = element_text(angle = 45, hjust = 1),
+      legend.position = "none",
+      plot.title   = element_text(size = 9)
+    )
+})
+
+plot_grid(plotlist = plots, ncol = 7)
+
+ggsave("../figs/PredictComposition_LOO.png", width = 18, height = 8, bg = "white")
+
+```
+
+
+
+Engraftment by responder vs non-responder:
+
+```{r}
+library(vegan)
+
+# Bray-Curtis: pre vs post per recipient
+bc_df <- df_rf %>%
+  group_by(recipient, taxon) %>%
+  summarise(
+    pre  = unique(pre_abundance),
+    post = unique(post_abundance),
+    clinical_response = unique(clinical_response),
+    .groups = "drop"
+  ) %>%
+  group_by(recipient, clinical_response) %>%
+  summarise(
+    bc = vegdist(rbind(pre, post), method = "bray")[1],
+    .groups = "drop"
+  )
+
+p_bc <- ggplot(bc_df, aes(x = clinical_response, y = bc, fill = clinical_response)) +
+  stat_boxplot(geom = "errorbar", width = 0.2) +
+  geom_boxplot(width = 0.5, outlier.shape = NA) +
+  geom_jitter(height = 0, width = 0.1, alpha = 0.7) +
+  geom_signif(
+    comparisons      = list(c("responder", "non-responder")),
+    test             = "wilcox.test",
+    map_signif_level = TRUE,
+    y_position       = max(bc_df$bc) + 0.05
+  ) +
+  labs(x = NULL, y = "Bray-Curtis\n(Pre vs Post)") +
+  theme_cowplot() +
+  theme(legend.position = "none", axis.text.x = element_text(hjust = 1, angle = 45))
+
+# Shannon change per recipient
+alpha_df <- df_rf %>%
+  group_by(recipient, clinical_response) %>%
+  summarise(
+    shannon_pre  = diversity(pre_abundance,  index = "shannon"),
+    shannon_post = diversity(post_abundance, index = "shannon"),
+    .groups = "drop"
+  ) %>%
+  mutate(delta_shannon = shannon_post - shannon_pre)
+
+p_alpha <- ggplot(alpha_df, aes(x = clinical_response, y = delta_shannon, fill = clinical_response)) +
+  stat_boxplot(geom = "errorbar", width = 0.2) +
+  geom_boxplot(width = 0.5, outlier.shape = NA) +
+  geom_jitter(height = 0, width = 0.1, alpha = 0.7) +
+  geom_signif(
+    comparisons      = list(c("responder", "non-responder")),
+    test             = "wilcox.test",
+    map_signif_level = TRUE,
+    y_position       = max(alpha_df$delta_shannon, na.rm = TRUE) + 0.1
+  ) +
+  labs(x = NULL, y = expression(Delta~"Shannon index")) +
+  theme_cowplot() +
+  theme(legend.position = "none", axis.text.x = element_text(hjust = 1, angle = 45))
+
+plot_grid(p_bc, p_alpha, ncol = 2)
+
+ggsave("../figs/EcologicalChanges_RespondersvsNon.png", height = 3.5, width = 4.5, bg = "white")
+
+```
+
+K-fold cross-validation across training fractions:
+
+```{r}
+library(rsample)
+
+subset_fracs <- c(.10, .2, .3, .4, .5, .6, .7, .8, .9)
+set.seed(123)
+
+rho_kfold <- map_dfr(subset_fracs, function(p) {
+  df_sub <- df_rf %>% sample_frac(p)
+  folds  <- vfold_cv(df_sub, v = 10, strata = log_fold_change)
+  
+  map_dfr(seq_along(folds$splits), function(i) {
+    split <- folds$splits[[i]]
+    tr    <- analysis(split)
+    te    <- assessment(split)
+    
+    mod <- ranger(
+      formula       = rf_formula,
+      data          = tr,
+      num.trees     = 100,
+      mtry          = 3,
+      min.node.size = 2,
+      num.threads   = parallel::detectCores() - 1
+    )
+    
+    pred <- predict(mod, te)$predictions
+    rho  <- cor(te$log_fold_change, pred, method = "spearman")
+    
+    tibble(subset = paste0(p * 100, "%"), fold = i, rho = rho)
+  })
+})
+
+ggplot(rho_kfold, aes(x = subset, y = rho)) +
+  geom_hline(yintercept = c(0.1, 0.3, 0.5, 0.7, 0.9),
+             linetype = "dashed", color = "grey80") +
+  stat_boxplot(geom = "errorbar", width = 0.3) +
+  geom_boxplot(width = 0.5, fill = "dodgerblue", outlier.shape = NA) +
+  geom_jitter(height = 0, alpha = 0.7, width = 0.2) +
+  theme_cowplot() +
+  scale_y_continuous(n.breaks = 10, limits = c(0, 1)) +
+  labs(x = "Training fraction", y = expression(Spearman~rho))
+
+ggsave("../figs/IBS_heldout_kfold.png", width = 4.5, height = 3, bg = "white")
+
+```
