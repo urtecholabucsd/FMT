@@ -1,0 +1,258 @@
+---
+title: "Figure4_FMT"
+output: html_document
+date: "2026-04-08"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(cowplot)
+library(ggrepel)
+library(patchwork)
+library(ggpubr)
+library(RColorBrewer)
+library(ggsignif)
+library(ggridges)
+
+setwd("/Users/guillaumeurtecho/Dropbox/UrtechoLab/Projects/2024/FMT_Metabolic_models_ZZ/Github_Workshop/Figure4")
+
+pf <- read.csv('../utils/colorPalette.csv', stringsAsFactors = FALSE)
+palette_vec <- setNames(trimws(pf$x), trimws(pf$X))
+
+response <- read.csv("../utils/DonorRecipientMapping.csv") %>%
+  mutate(
+    donor     = str_remove(donor, "_.*") %>% str_replace_all("-", "."),
+    recipient = str_remove(recipient, "-.*")
+  )
+
+superdonor_ob <- "SRR9224383"
+superdonor2   <- "SRR9224196"
+worst1        <- "SRR9224548"
+secondworst   <- "SRR9224546"
+
+highlight_ids <- c(superdonor_ob, superdonor2, worst1, secondworst)
+
+# Shared color palette for the 4 focal donors
+donor_colors <- c(
+  "Superdonor 1" = "firebrick2",
+  "Superdonor 2" = "salmon",
+  "Others"       = "grey70",
+  "Poor Donor 1"      = "steelblue3",
+  "Poor Donor 2"      = "lightblue3"
+)
+
+donor_levels <- c("Superdonor 1", "Superdonor 2", "Others", "Poor Donor 1", "Poor Donor 2")
+
+# Helper to assign donor group labels
+label_donor <- function(x) {
+  case_when(
+    x == superdonor_ob ~ "Superdonor 1",
+    x == superdonor2   ~ "Superdonor 2",
+    x == worst1        ~ "Poor Donor 1",
+    x == secondworst   ~ "Poor Donor 2",
+    TRUE               ~ "Others"
+  )
+}
+
+# Get sample orders from heatmap
+mat <- read.csv("../Figure3CE/data/3F.csv") %>% column_to_rownames('recipient') %>% as.matrix()
+mat <- (mat - min(mat, na.rm = TRUE)) / (max(mat, na.rm = TRUE) - min(mat, na.rm = TRUE))
+
+d_row <- vegan::vegdist(mat, method = "euclidean")
+d_col <- vegan::vegdist(t(mat), method = "euclidean")
+
+row_ord <- hclust(d_row, method = "average")$order
+col_ord <- hclust(d_col, method = "average")$order
+
+rec_levels <- rownames(mat)[row_ord]
+don_levels <- colnames(mat)[col_ord]
+```
+
+Median engraftment by superdonor
+```{r}
+
+plot_df <- read.csv("../Figure3CE/data/3F.csv") %>%
+  mutate(recipient = factor(recipient, levels = rec_levels)) %>%
+  pivot_longer(-recipient, names_to = "donor", values_to = "engraftment") %>%
+  mutate(donor = factor(donor, levels = don_levels)) %>%
+  mutate(engraft_scaled = (engraftment - min(engraftment, na.rm = TRUE)) /
+           (max(engraftment, na.rm = TRUE) - min(engraftment, na.rm = TRUE)))
+
+median((plot_df %>% filter(donor == superdonor_ob))$engraft_scaled)
+sd((plot_df %>% filter(donor == superdonor_ob))$engraft_scaled)
+
+median((plot_df %>% filter(donor == superdonor2))$engraft_scaled)
+sd((plot_df %>% filter(donor == superdonor2))$engraft_scaled)
+```
+
+
+Shannon diversity vs engraftment
+```{r}
+
+dat <- read.csv("../OpenBiome_Predictions/input/model_files/ShannonDF_OpenBiome_All.csv") %>%
+  left_join(plot_df, ., by = c('donor' = 'sample')) %>%
+  group_by(donor) %>% na.omit() %>%
+  mutate(median_engraft = median(engraftment)) %>% ungroup %>%
+  select(donor, median_engraft, shannonD) %>% distinct() %>%
+  mutate(group = label_donor(donor))
+
+# GAM fit
+gam_fit <- mgcv::gam(median_engraft ~ s(shannonD, k = 3), data = dat, method = "REML")
+r2_gam  <- summary(gam_fit)$r.sq
+p_gam   <- summary(gam_fit)$s.table[1, 4]
+y_anno  <- quantile(dat$median_engraft, 0.75, na.rm = TRUE)
+
+shannond_plot <- ggplot(dat, aes(shannonD, median_engraft)) +
+  geom_hline(yintercept = c(.1, .2, .3), linetype = 'dashed', color = 'grey80') +
+  geom_point(color = "black") +
+  geom_point(data = dat %>% filter(group != "Others"),
+             aes(color = group), size = 2.6) +
+  geom_point(data = dat %>% filter(group %in% c("Superdonor 2", "Poor Donor 2")),
+             aes(color = group), size = 2.6, shape = 17) +
+  scale_color_manual(values = donor_colors, name = NULL) +
+  stat_smooth(method = "gam", formula = y ~ s(x, k = 3),
+              color = "royalblue", se = TRUE) +
+  annotate("text", x = 1.4, y = y_anno,
+           label = sprintf("R2 = %.3f, p = %.2g", r2_gam, p_gam),
+           hjust = 0, size = 4) +
+  theme_cowplot() +
+  labs(x = "Donor Shannon Diversity", y = "Median Engraftment") +
+  theme(legend.position = "none")
+
+shannond_plot
+ggsave("figures/ShannonD_vs_engraftment.png", bg = 'white', width = 3.15, height = 3.1)
+```
+
+
+
+Metabolic distance: superdonors vs worst donors vs others
+```{r}
+
+metabolic_distance <- read.csv("../OpenBiome_Predictions/input/model_files/nearest_neighbors_openbiome_donors.csv") %>%
+  separate(comparison, into = c("donor", "recipient"), sep = " vs ", remove = FALSE)
+
+plot_df_md <- metabolic_distance %>%
+  mutate(group = label_donor(donor),
+         group = factor(group, levels = donor_levels),
+         average_distance = as.numeric(average_distance)) %>%
+  filter(!is.na(average_distance))
+
+set.seed(123)
+plot_df_sub <- bind_rows(
+  plot_df_md %>% filter(group != "Others"),
+  plot_df_md %>% filter(group == "Others") %>% sample_frac(0.05)
+)
+
+superdonor_metDist <- ggplot(plot_df_sub, aes(x = group, y = average_distance)) +
+  geom_hline(yintercept = c(5, 10, 15, 20), linetype = 'dashed', color = 'grey80') +
+  stat_boxplot(geom = 'errorbar', color = 'royalblue', width = 0.1) +
+  geom_jitter(width = 0.15, height = 0, alpha = 0.1, size = 1) +
+  geom_signif(
+    comparisons = list(
+      c("Superdonor 1", "Others"),
+      c("Superdonor 2", "Others"),
+      c("Poor Donor 1", "Others"),
+      c("Poor Donor 2", "Others")
+    ),
+    test = "wilcox.test",
+    map_signif_level = TRUE,
+    tip_length = 0.02,
+    step_increase = 0.08
+  ) +
+  geom_boxplot(width = 0.2, outlier.shape = NA, color = 'royalblue', fill = 'white') +
+  coord_cartesian(ylim = c(0, max(plot_df_sub$average_distance, na.rm = TRUE) * 1.3),
+                  clip = "off") +
+  labs(x = NULL, y = "Metabolic distance") +
+  theme_cowplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+print(superdonor_metDist)
+```
+
+
+
+Metabolic independence: ridgeline plot per donor group
+```{r}
+
+independence <- read.table('../OpenBiome_Predictions/input/model_files/genome_scores.tsv',
+                           sep = '\t', header = T) %>%
+  rename(taxon = genome_name, met_independence = genome_score) %>%
+  left_join(., read.table("../OpenBiome_Predictions/input/model_files/filtered_strain_taxa.tsv",
+                          sep = '\t', header = T),
+            by = c('taxon' = 'MicrobeID')) %>%
+  select(-taxon, -Strain) %>%
+  rename('taxon' = 'NCBI.Taxonomy.ID')
+
+abundance_dat <- read.csv("../OpenBiome_Predictions/input/model_files/TaxonCounts_all_OpenBiome.csv") %>%
+  rename('taxon' = 'taxon_id')
+ind_dat <- left_join(abundance_dat, independence)
+
+plot_w <- ind_dat %>%
+  mutate(
+    group = label_donor(sample),
+    group = factor(group, levels = rev(donor_levels)),
+    met_independence = as.numeric(met_independence),
+    normalized_count = as.numeric(normalized_count)
+  ) %>%
+  filter(!is.na(met_independence), !is.na(normalized_count), normalized_count > 0)
+
+# Weighted mean per group for annotation
+wmean_df <- plot_w %>%
+  group_by(group) %>%
+  summarise(wmean = sum(met_independence * normalized_count) / sum(normalized_count),
+            .groups = "drop")
+
+# Pairwise Wilcoxon vs Others for each focal donor
+others_mi <- plot_w %>% filter(group == "Others") %>% pull(met_independence)
+
+stat_labels <- plot_w %>%
+  filter(group != "Others") %>%
+  group_split(group) %>%
+  map_dfr(function(d) {
+    if (nrow(d) < 2) return(NULL)
+    tibble(
+      group = d$group[1],
+      p = wilcox.test(d$met_independence, others_mi)$p.value
+    )
+  }) %>%
+  mutate(label = ifelse(p < 0.001, sprintf("p = %.1e", p), sprintf("p = %.3f", p)))
+
+
+met_ind <- ggplot(plot_w, aes(x = met_independence, y = group,
+                               fill = group, weight = normalized_count)) +
+  geom_density_ridges(alpha = 0.6, scale = 0.9, rel_min_height = 0.01) +
+  geom_point(data = wmean_df, aes(x = wmean, y = group),
+             inherit.aes = FALSE, shape = 18, size = 3) +
+  geom_text(data = stat_labels,
+            aes(x = max(plot_w$met_independence, na.rm = TRUE) - 2,
+                y = as.numeric(group) + 0.3, label = label),
+            inherit.aes = FALSE, size = 3, hjust = 1) +
+  scale_fill_manual(values = donor_colors) +
+  labs(x = "Metabolic independence", y = NULL) +
+  theme_cowplot() +
+  theme(legend.position = "none") + xlim(15,35)
+
+print(met_ind)
+```
+
+
+
+
+Assemble figure
+```{r, fig.width=10, fig.height=8}
+
+top_row <- plot_grid(shannond_plot, superdonor_metDist, labels = c("A", "B"),
+                     nrow = 2, rel_heights = c(1, 1.3))
+
+#bot_row <- plot_grid(met_ind, nicheEvenness, labels = c("C", "D"),
+  #                   nrow = 1, rel_widths = c(1, 1))
+
+plot_grid(top_row, met_ind, ncol = 2, rel_widths = c(1, 1.2))
+
+ggsave("figures/metabolicParameters_Superdonor.pdf", bg = 'white',
+       width = 6, height = 6, dpi = 300)
+```
+
+
+
+

@@ -1,0 +1,168 @@
+---
+title: "Metabolic Interaction Network Analysis: ENBI, Cross-feeding, and Engraftment"
+author: ""
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.width = 7, fig.height = 5, dpi = 150)
+```
+
+# Setup
+
+```{r libraries}
+library(tidyverse)
+library(cowplot)
+library(ggrepel)
+library(igraph)
+library(ggsignif)
+library(Hmisc)   # rcorr for correlation p-values
+library(broom)
+
+setwd("/Users/guillaumeurtecho/Dropbox/UrtechoLab/Projects/2024/FMT_Metabolic_models_ZZ/Github_Workshop/Figure4D")
+
+```
+
+```{r file-paths}
+# ── FILE PATHS ────────────────────────────────────────────────────────────────
+# UPDATE interactions_file to point to the full MICOM interactions output.
+# The file should have columns: sample_id, focal, partner, class, flux,
+# mass_flux, C_flux, N_flux, n_ints (same schema as ExcerptInteractions).
+interactions_file   <- "input/interactions_western_openbiome_summary.csv"       
+taxonomy_file       <- "../utils/full_taxonomy.csv"
+engraftment_file    <- "../Figure3CE/data/MedianEngraftmentScores_Openbiome.csv"
+genome_scores_file  <- "../OpenBiome_Predictions/input/model_files/genome_scores.tsv"
+superdonor_file     <- "../OpenBiome_Predictions/output/SuperdonorEngraftmentScores.csv"
+```
+
+```{r highlighted-samples}
+# Highlighted donor microbiomes
+highlight_ids <- c(
+  superdonor_ob = "SRR9224383",
+  superdonor2   = "SRR9224196",
+  worst1        = "SRR9224548",
+  secondworst   = "SRR9224546"
+)
+
+highlight_labels <- c(
+  SRR9224383 = "Super-donor",
+  SRR9224196 = "Super-donor 2",
+  SRR9224548 = "Poor Donor 1",
+  SRR9224546 = "Poor Donor 2"
+)
+
+highlight_colors <- c(
+  SRR9224383 = "firebrick2",
+  SRR9224196 = "salmon",
+  SRR9224548 = "steelblue3",
+  SRR9224546 = "lightblue3"
+)
+
+
+```
+
+```{r load-data}
+interactions <- read_csv(interactions_file, show_col_types = FALSE)
+taxonomy     <- read_csv(taxonomy_file, show_col_types = FALSE)
+engraftment  <- read_csv(engraftment_file, show_col_types = FALSE)
+genome_scores <- read_tsv(genome_scores_file, show_col_types = FALSE)
+superdonor   <- read_csv(superdonor_file, show_col_types = FALSE)
+
+cat("Interactions:", nrow(interactions), "rows,",
+    n_distinct(interactions$sample_id), "samples\n")
+cat("Engraftment scores:", nrow(engraftment), "donors\n")
+```
+
+
+# Part 1: Community-level Interaction Balance vs Engraftment
+
+The net interaction balance (rho) follows Corral Lopez et al. (2026, *Science*):
+
+$$\rho = \frac{\sum \text{cross-feeding flux} - \sum \text{competitive flux}}{\sum \text{cross-feeding flux} + \sum \text{competitive flux}}$$
+
+where cross-feeding = `provided` + `received` and competition = `co-consumed`.
+Because we lack a canonical healthy baseline, we report raw rho per sample and
+also compute an ENBI-like score using the cohort median rho as reference.
+
+```{r part1-calculate-rho}
+# Classify interaction types and aggregate per sample
+sample_metrics <- interactions %>%
+  mutate(
+    int_type = case_when(
+      class == "co-consumed" ~ "competition",
+      class %in% c("provided", "received") ~ "cross_feeding"
+    )
+  ) %>% #Label as competition or cross-feeding
+  group_by(sample_id, int_type) %>%
+  summarise(total_flux = sum(flux, na.rm = TRUE), .groups = "drop") %>% #sum flux of competition vs crossfeeding
+  pivot_wider(names_from = int_type, values_from = total_flux,
+              values_fill = 0) %>%
+  mutate(
+    rho  = (cross_feeding - competition) / (cross_feeding + competition), #calculate net interaction balance
+    enbi = rho - median(rho, na.rm = TRUE) #center around median
+  )
+
+cat("Samples with rho calculated:", nrow(sample_metrics), "\n")
+summary(sample_metrics$rho)
+```
+
+```{r part1-merge-engraftment}
+# The engraftment file uses "donor" as the ID column.
+# Most entries are SRR IDs that match sample_id directly.
+sample_eng <- sample_metrics %>%
+  inner_join(engraftment, by = c("sample_id" = "donor")) %>%
+  mutate(
+    highlight = if_else(sample_id %in% highlight_ids, sample_id, NA_character_),  #label samples
+    label     = highlight_labels[highlight]
+  )
+```
+
+
+
+ENBI vs engraftment
+
+```{r}
+cor_rho <- cor.test(sample_eng$rho, sample_eng$med_engraft,
+                    method = "spearman")
+
+# Format p-value: replace machine-zero with < 2.2e-16
+p_fmt <- if (cor_rho$p.value == 0) {
+  "italic(p) < 2.2 %*% 10^{-16}"
+} else {
+  paste0("italic(p) == ", signif(cor_rho$p.value, 3))
+}
+
+rho_label <- paste0("rho == ", round(cor_rho$estimate, 3))
+
+p1a <- ggplot(sample_eng, aes(x = rho, y = med_engraft)) +
+  geom_smooth(method = "lm", se = TRUE, color = "grey50",
+              linewidth = 0.6, linetype = "dashed") +
+  geom_point(aes(color = highlight), size = 2.2, alpha = 0.8) +
+  geom_point(data = filter(sample_eng, !is.na(highlight)),
+             aes(color = highlight), size = 3.5) +
+  geom_text_repel(data = filter(sample_eng, !is.na(highlight)),
+                  aes(label = label, color = highlight),
+                  size = 4, fontface = "bold",
+                  box.padding = 0.5, max.overlaps = 20) +
+  scale_color_manual(values = highlight_colors, na.value = "grey60",
+                     guide = "none") +
+  annotate("text", x = -Inf, y = Inf, label = rho_label,
+           parse = TRUE, hjust = -0.05, vjust = 1.3, size = 5) +
+  annotate("text", x = -Inf, y = Inf, label = p_fmt,
+           parse = TRUE, hjust = -0.05, vjust = 3.0, size = 5) +
+  labs(x = "Ecological Network Balance Index (ENBI)",
+       y = "Median engraftment score") +
+  theme_cowplot()
+
+p1a
+
+ggsave("figs/Fig4D_ENBIvsEngraftment.pdf", width = 3, height = 3)
+
+```
+
