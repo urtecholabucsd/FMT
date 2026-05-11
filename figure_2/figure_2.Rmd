@@ -1,0 +1,390 @@
+---
+title: "figure_2"
+output: html_document
+date: "2025-08-04"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(cowplot)
+library(ggrepel)
+library(patchwork)
+library(ggpubr)
+library(phyloseq)
+library(DESeq2)
+```
+
+```{r figure 2A}
+total_t0_production = read.csv('./data/2A.csv', check.names = FALSE)
+
+metabolites_to_plot <- c(
+  'Valeric Acid' = 'M03134[e]',
+  'Sulfite' = 'so3[e]',
+  'Hydrogen' = 'h2[e]',
+  'propionate' = 'ppa[e]',
+  'acetate' = 'ac[e]',
+  'butyrate' = 'but[e]',
+  'thiosulfate(2-)' = 'tsul[e]',
+  'Formate' = 'for[e]',
+  'Methanethiol' = 'ch4s[e]'
+)
+
+palette <- c(
+  'enriched' = 'red',
+  'depleted' = 'blue',
+  'n.s.' = 'gray'
+)
+
+p <- ggplot(total_t0_production, aes(x = log_fold_change, y = `-log10q_val`, color = enrichment)) + 
+  geom_point(size = 1.5) + 
+  geom_hline(yintercept = -log10(0.05), color = 'gray', linetype = 'dashed') + 
+  geom_vline(xintercept = c(-1, 1), color = 'gray', linetype = 'dashed') +
+  geom_text_repel(
+  data = total_t0_production[total_t0_production$name %in% names(metabolites_to_plot), ],
+  aes(label = name),
+  size = 2,  # Equivalent to fontsize=6 in matplotlib
+  point.padding = 0.5,
+  box.padding = 1.5,
+  force = 1,
+  arrow = arrow(length = unit(0.01, "npc"), type = "closed"),
+  color = "black") + 
+  scale_color_manual(values = palette) +
+  scale_x_continuous(breaks = seq(-7, 16, by = 2)) +
+  labs(
+  title = 'Differential Production Rates (T0) of IBS Patient vs. Donor',
+  x = 'log2_fold_change',
+  y = '-log10_qval') + 
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5),  # Center title
+    panel.grid.minor = element_blank()
+  ) +
+  theme(plot.margin = margin(10, 10, 10, 10)) +
+  theme_cowplot()
+
+print(p)
+ggsave(filename = './figures/2A.png',
+       plot = p,
+       device = 'png',
+       width = 30, 
+       height = 30,
+       dpi = 600,
+       units = 'cm',
+       bg = 'white'
+       )
+```
+
+```{r figure 2B}
+metabolites_to_plot <- c(
+  'Formate' = 'for[e]', 
+  'acetate' = 'ac[e]', 
+  'propionate' = 'ppa[e]', 
+  'butyrate' = 'but[e]', 
+  'Valeric Acid' = 'M03134[e]', 
+  'Sulfite' = 'so3[e]', 
+  'thiosulfate(2-)' = 'tsul[e]', 
+  'Methanethiol' = 'ch4s[e]',
+  'Hydrogen' = 'h2[e]'
+)
+metabolite_order <- unname(metabolites_to_plot)
+
+flux_metabolites <- read.csv('./data/2B.csv', check.names = FALSE, row.names = 1) %>% 
+  mutate(
+    metabolite = factor(metabolite, levels = metabolite_order),
+    metabolite_name = names(metabolites_to_plot)[match(metabolite, metabolite_order)],
+    sample = factor(sample, levels = c("donor", "recipient"))
+  )
+
+samples <- unique(flux_metabolites$sample_id)
+
+plot_list <- map2(names(metabolites_to_plot), metabolites_to_plot, function(met_name, met_id) {
+  df <- flux_metabolites %>%
+    filter(metabolite == met_id) 
+  
+  ggplot(df, aes(x = sample, y = flux)) +
+    geom_boxplot(show.legend = FALSE, outlier.shape = NA) +
+    geom_jitter(color = "black", size = 1, width = 0.1) +
+    ggtitle(met_name) +
+    ylab("flux (mmol/gDW/h)") +
+    xlab("") + 
+    theme_minimal() + 
+    theme_cowplot() + 
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 10),
+      panel.grid = element_blank()
+    ) +
+    stat_compare_means(
+      comparisons = list(c("donor", "recipient")),
+      method = "wilcox.test",
+      label = "p.signif",
+      label.x = 1.5,
+      size = 3
+    )
+})
+
+combined_plot <- ggarrange(
+  plotlist = plot_list,
+  ncol = 3,
+  nrow = 3,
+  common.legend = FALSE
+)
+
+print(combined_plot)
+
+ggsave(
+  "./figures/2B.png",
+  combined_plot,
+  width = 25,
+  height = 25,
+  dpi = 600,
+  bg = "white"
+)
+
+```
+
+```{r figure 2D}
+raw <- read.csv('./data/abundance_raw_subset_filtered.csv', check.names = FALSE)
+taxonomy <- read.csv('../goll_et.al_2020_IBS_FMT/processed/full_taxonomy.csv', check.names = FALSE)
+DonorRecipientMapping <- read.csv('../goll_et.al_2020_IBS_FMT/raw/DonorRecipientMapping.csv', check.names = FALSE)
+
+sample_info_t6 <- DonorRecipientMapping %>% 
+  select(recipient, clinical_response) %>%
+  mutate(
+    recipient = str_split_fixed(recipient, "_", 2)[,1]
+  ) %>% 
+  pivot_longer(
+    cols      = c(recipient),
+    names_to  = "type",
+    values_to = "sample"        
+  ) %>% mutate(
+    sample = str_replace(sample, "-0", "-6"),
+    time = "T6",
+  ) %>% 
+  select(-type) %>%
+  column_to_rownames(var = "sample")
+
+sample_info_t0 <- DonorRecipientMapping %>% 
+  select(recipient, clinical_response) %>%
+  mutate(
+    recipient = str_split_fixed(recipient, "_", 2)[,1]
+  ) %>%
+  pivot_longer(
+    cols      = c(recipient),
+    names_to  = "type",
+    values_to = "sample"        
+  ) %>% 
+  mutate(
+    time = "T0"
+  ) %>% 
+  select(-type) %>%
+  column_to_rownames(var = "sample")
+
+sample_info <- bind_rows(sample_info_t0, sample_info_t6) %>% mutate(
+  subject_id = str_split_fixed(rownames(.), "-", 2)[,1]
+)
+
+sample_info_R <- sample_info %>% filter(clinical_response == 'responder')
+sample_info_NR <- sample_info %>% filter(clinical_response == 'non-responder')
+rownames(taxonomy) <- taxonomy$taxon_id
+taxonomy <- as.matrix(taxonomy)
+rownames(raw) <- raw$taxon_id
+raw <- raw %>% select(-taxon_id)
+raw <- as.matrix(raw)
+
+raw <- raw[, colnames(raw) %in% rownames(sample_info)]
+sample_info <- sample_info[colnames(raw), , drop = FALSE]
+OTU <- otu_table(raw, taxa_are_rows = TRUE)
+TAX <- tax_table(taxonomy)
+SAM <- sample_data(sample_info)
+physeq <- phyloseq(OTU, TAX, SAM)
+
+sample_data(physeq)$time <- factor(sample_data(physeq)$time, levels = c("T0", "T6"))
+sample_data(physeq)$clinical_response <- factor(sample_data(physeq)$clinical_response, 
+                                               levels = c("non-responder", "responder"))
+
+sample_data(physeq)$subject_id <- factor(sample_data(physeq)$subject_id)
+dds_resp <- phyloseq_to_deseq2(
+  subset_samples(physeq, clinical_response == "responder"),
+  ~ subject_id + time
+) %>% DESeq()
+
+dds_non_resp <- phyloseq_to_deseq2(
+  subset_samples(physeq, clinical_response == "non-responder"),
+  ~ subject_id + time
+) %>% DESeq()
+
+res_resp <- results(
+  dds_resp,
+  contrast = c("time", "T6", "T0"),
+  alpha = 0.05,
+  independentFiltering = FALSE,
+  cooksCutoff = FALSE
+) %>% as.data.frame() %>%
+  rownames_to_column("taxon") %>%
+  mutate(
+    neglog10qval = -log10(padj),
+    significance = case_when(
+      padj < 0.05 & log2FoldChange > 0 ~ "enriched",
+      padj < 0.05 & log2FoldChange < 0 ~ "depleted",
+      TRUE ~ "n.s."
+    )
+  )
+
+res_non_resp <- results(
+  dds_non_resp,
+  contrast = c("time", "T6", "T0"),
+  alpha = 0.05,
+  independentFiltering = FALSE,
+  cooksCutoff = FALSE
+) %>% as.data.frame() %>%
+  rownames_to_column("taxon") %>%
+  mutate(
+    neglog10qval = -log10(padj),
+    significance = case_when(
+      padj < 0.05 & log2FoldChange > 0 ~ "enriched",
+      padj < 0.05 & log2FoldChange < 0 ~ "depleted",
+      TRUE ~ "n.s."
+    )
+  )
+
+taxonomy_copy <- taxonomy %>%
+  as.data.frame() %>%
+  rownames_to_column('taxon')
+res_resp <- res_resp %>%
+  left_join(taxonomy_copy, by = 'taxon') 
+  
+res_non_resp <- res_non_resp %>%
+  left_join(taxonomy_copy, by = 'taxon')
+
+all_orders <- unique(c(
+  res_resp$order[res_resp$significance %in% c("enriched", "depleted")],
+  res_non_resp$order[res_non_resp$significance %in% c("enriched", "depleted")]
+))
+
+n_orders <- length(all_orders)
+if (n_orders > 0) {
+  if (n_orders <= 26) {
+    order_colors <- setNames(
+      palette.colors(n = n_orders, palette = "alphabet"),
+      all_orders
+    )
+  } else {
+    order_colors <- setNames(rainbow(n_orders), all_orders)
+  }
+} else {
+  order_colors <- c()
+}
+
+order_colors <- c(order_colors, "n.s." = "gray")
+res_resp <- res_resp %>%
+  mutate(
+    color_group = ifelse(significance %in% c("enriched", "depleted"), order, "n.s.")
+  )
+
+res_non_resp <- res_non_resp %>%
+  mutate(
+    color_group = ifelse(significance %in% c("enriched", "depleted"), order, "n.s.")
+  )
+
+all_levels <- c(all_orders, "n.s.")
+res_resp$color_group <- factor(res_resp$color_group, levels = all_levels)
+res_non_resp$color_group <- factor(res_non_resp$color_group, levels = all_levels)
+
+pl1 <- ggplot(res_resp, aes(x = log2FoldChange, y = neglog10qval, color = color_group)) +
+  geom_point(alpha = 0.7) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  scale_color_manual(values = order_colors, name = "Order") +
+  theme_cowplot() +
+  xlab("log2(Normalized Effect)") +
+  ylab("-log10(adjusted p-value)") +
+  ggtitle("Responder T6 vs T0") +
+  scale_x_continuous(breaks = seq(-15, 10, by = 2))
+
+pl2 <- ggplot(res_non_resp, aes(x = log2FoldChange, y = neglog10qval, color = color_group)) +
+  geom_point(alpha = 0.7) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  scale_color_manual(values = order_colors, name = "Order") +
+  theme_cowplot() +
+  xlab("log2(Normalized Effect)") +
+  ylab("-log10(adjusted p-value)") +
+  ggtitle("Non-Responder T6 vs T0") +
+  scale_x_continuous(breaks = seq(-15, 10, by = 2))
+
+shared_xlim <- c(-4, 6)
+shared_ylim <- c(0, max(
+  c(res_resp$neglog10qval, res_non_resp$neglog10qval), 
+  na.rm = TRUE
+))
+
+pl1 <- pl1 + coord_cartesian(xlim = shared_xlim, ylim = shared_ylim)
+pl2 <- pl2 + coord_cartesian(xlim = shared_xlim, ylim = shared_ylim)
+
+final_plot <- (pl1 + pl2) +
+  plot_layout(ncol = 2, guides = "collect") +
+  plot_annotation(title = "Differential Abundance by Taxonomic Order") &
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 8),
+        legend.key.size = unit(0.5, "lines"))
+
+if (n_orders > 10) {
+  final_plot <- final_plot & guides(color = guide_legend(nrow = 3))
+}
+
+print(final_plot)
+
+ggsave(
+  "./figures/2D.png",
+  final_plot,
+  width = 25,
+  height = 10,
+  dpi = 600,
+  bg = 'white'
+)
+
+```
+
+```{r figure 2E}
+scfa_production <- read.csv('./data/2E.csv', check.names = FALSE, row.names = 1) %>%
+  mutate(
+    clinical_response = factor(clinical_response, 
+                               levels = c('responder', 'non-responder', 'donor')),
+    time = factor(time, levels = c('T0', 'T6'))
+    )
+
+p <- ggplot(scfa_production, 
+            aes(x = clinical_response, y = flux, color = time, fill = time)) +
+  geom_boxplot(show.legend = TRUE, outlier.shape = NA, position = position_dodge(0.8)) +
+  geom_point(position = position_dodge(0.8), color = "black", size = 1) +
+  scale_fill_brewer(palette = "Set2") +
+  scale_color_brewer(palette = "Set2") +
+  labs(
+    title = "Total SCFA Production",
+    y = "flux (mmol/gDW/h)",
+    x = "Clinical Response"
+  ) +
+  theme_minimal() +
+  theme_cowplot() + 
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14),
+    axis.text.x = element_text(size = 12),
+    axis.title.y = element_text(size = 12)
+  )
+
+print(p)
+ggsave(
+  "./figures/2E.png",
+  p,
+  width = 15,
+  height = 10,
+  dpi = 600,
+  bg = 'white'
+)
+```
