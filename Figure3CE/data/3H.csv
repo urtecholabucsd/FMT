@@ -1,0 +1,144 @@
+,niche_breadth,clinical_response
+11-0,119,recipient T0
+11-6,119,responder
+12-0,109,recipient T0
+12-6,111,non-responder
+16-0,115,recipient T0
+16-6,117,responder
+18-0,126,recipient T0
+18-6,125,non-responder
+19-0,107,recipient T0
+19-6,119,responder
+22-0,110,recipient T0
+22-6,113,non-responder
+23-0,108,recipient T0
+24-0,104,recipient T0
+24-6,123,responder
+25-0,123,recipient T0
+25-6,133,responder
+3-0,109,recipient T0
+3-6,127,responder
+30-0,122,recipient T0
+30-6,109,responder
+31-0,120,recipient T0
+31-6,118,responder
+32-0,121,recipient T0
+32-6,113,non-responder
+33-0,112,recipient T0
+36-0,128,recipient T0
+37-0,116,recipient T0
+54-0,113,recipient T0
+56-0,110,recipient T0
+56-6,112,non-responder
+59-0,133,recipient T0
+59-6,120,responder
+70-0,123,recipient T0
+71-0,118,recipient T0
+75-0,111,recipient T0
+75-6,112,non-responder
+77-0,126,recipient T0
+77-6,114,responder
+78-0,124,recipient T0
+78-6,118,responder
+88-0,106,recipient T0
+88-6,109,responder
+89-0,113,recipient T0
+89-6,125,responder
+90-0,116,recipient T0
+90-6,124,responder
+D-10,110,donor
+D-12,111,donor
+D-13U,114,donor
+D-14,110,donor
+D-15Fryst,113,donor
+D-2,106,donor
+D-3,109,donor
+D-4,103,donor
+D-5Fryst,105,donor
+D-6Fresk,115,donor
+D-7Fryst,105,donor
+D-9Fryst,110,donor
+SRR9224007,108,openbiome donor
+SRR9224009,104,openbiome donor
+SRR9224011,101,openbiome donor
+SRR9224013,106,openbiome donor
+SRR9224015,104,openbiome donor
+SRR9224028,104,openbiome donor
+SRR9224030,109,openbiome donor
+SRR9224032,107,openbiome donor
+SRR9224034,106,openbiome donor
+SRR9224036,108,openbiome donor
+SRR9224038,109,openbiome donor
+SRR9224040,105,openbiome donor
+SRR9224043,104,openbiome donor
+SRR9224046,108,openbiome donor
+SRR9224049,116,openbiome donor
+SRR9224051,104,openbiome donor
+SRR9224055,106,openbiome donor
+SRR9224057,119,openbiome donor
+SRR9224059,104,openbiome donor
+SRR9224065,113,openbiome donor
+SRR9224076,111,openbiome donor
+SRR9224080,108,openbiome donor
+SRR9224124,118,openbiome donor
+SRR9224126,108,openbiome donor
+SRR9224128,108,openbiome donor
+SRR9224130,102,openbiome donor
+SRR9224132,104,openbiome donor
+SRR9224145,104,openbiome donor
+SRR9224148,111,openbiome donor
+SRR9224150,118,openbiome donor
+SRR9224152,110,openbiome donor
+SRR9224154,104,openbiome donor
+SRR9224157,110,openbiome donor
+SRR9224170,118,openbiome donor
+SRR9224186,120,openbiome donor
+SRR9224188,106,openbiome donor
+SRR9224190,101,openbiome donor
+SRR9224193,104,openbiome donor
+SRR9224194,105,openbiome donor
+SRR9224196,110,openbiome donor
+SRR9224200,106,openbiome donor
+SRR9224203,105,openbiome donor
+SRR9224221,104,openbiome donor
+SRR9224222,109,openbiome donor
+SRR9224225,111,openbiome donor
+SRR9224227,108,openbiome donor
+SRR9224231,105,openbiome donor
+SRR9224263,111,openbiome donor
+SRR9224320,105,openbiome donor
+SRR9224357,113,openbiome donor
+SRR9224374,108,openbiome donor
+SRR9224376,110,openbiome donor
+SRR9224377,106,openbiome donor
+SRR9224379,102,openbiome donor
+SRR9224381,115,openbiome donor
+SRR9224383,109,openbiome donor
+SRR9224385,97,openbiome donor
+SRR9224387,105,openbiome donor
+SRR9224388,102,openbiome donor
+SRR9224407,110,openbiome donor
+SRR9224409,110,openbiome donor
+SRR9224411,116,openbiome donor
+SRR9224413,106,openbiome donor
+SRR9224432,104,openbiome donor
+SRR9224433,112,openbiome donor
+SRR9224435,107,openbiome donor
+SRR9224437,111,openbiome donor
+SRR9224439,104,openbiome donor
+SRR9224443,107,openbiome donor
+SRR9224458,108,openbiome donor
+SRR9224460,107,openbiome donor
+SRR9224464,111,openbiome donor
+SRR9224466,106,openbiome donor
+SRR9224468,101,openbiome donor
+SRR9224492,121,openbiome donor
+SRR9224543,108,openbiome donor
+SRR9224544,107,openbiome donor
+SRR9224546,101,openbiome donor
+SRR9224548,166,openbiome donor
+SRR9224550,103,openbiome donor
+SRR9224553,106,openbiome donor
+SRR9224555,115,openbiome donor
+SRR9224557,106,openbiome donor
+SRR9224559,107,openbiome donor

@@ -1,0 +1,331 @@
+---
+title: "Figure3_FMT_ZZ"
+output: html_document
+date: "2025-08-08"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(cowplot)
+library(ggrepel)
+library(patchwork)
+library(ggpubr)
+library(RColorBrewer)
+library(ggsignif)
+
+
+pf <- read.csv('../utils/colorPalette.csv', stringsAsFactors = FALSE)
+palette_vec <- setNames(trimws(pf$x), trimws(pf$X))
+
+response <- read.csv("ref/DonorRecipientMapping.csv") %>%
+  mutate(
+    donor     = str_remove(donor, "_.*") %>% str_replace_all("-", "."),
+    recipient = str_remove(recipient, "-.*")
+  )
+
+superdonor_ob <- "SRR9224383"
+superdonor2   <- "SRR9224196"
+worst1        <- "SRR9224548"
+secondworst   <- "SRR9224546"
+
+highlight_ids <- c(superdonor_ob, superdonor2, worst1, secondworst)
+
+# Shared color palette for the 4 focal donors
+donor_colors <- c(
+  "Superdonor 1" = "firebrick2",
+  "Superdonor 2" = "salmon",
+  "Others"       = "grey70",
+  "Worst 1"      = "steelblue3",
+  "Worst 2"      = "lightblue3"
+)
+
+donor_levels <- c("Superdonor 1", "Superdonor 2", "Others", "Worst 1", "Worst 2")
+
+
+```
+
+3c
+```{r}
+bc_diss <- read.csv("data/3c_bcdiss_goll.csv")
+
+Figure_3c <- bc_diss %>%
+  mutate(recipient = as.character(recipient)) %>%
+  pivot_longer(-recipient, names_to = "donor", values_to = "value") %>%
+  left_join(response %>% select(recipient, donor, clinical_response), .,
+            by = c("recipient","donor")) %>%
+  mutate(
+    clinical_response = factor(clinical_response, c("responder","non-responder")),
+    engraft = (1 - value) * 100
+  ) %>% na.omit() %>% ggplot(aes(x = clinical_response, y = engraft)) +
+  stat_boxplot(geom = "errorbar", width = 0.2) +
+  geom_boxplot(width = 0.35, outlier.shape = NA) +
+  geom_jitter(aes(color = clinical_response),
+              height = 0, width = 0.2, alpha = 0.75, size = 1.6) +
+stat_compare_means(
+  comparisons = list(c("responder","non-responder")),
+  method = "t.test",
+  method.args = list(alternative = "greater"),   # <-- use method.args
+ # label = "p.format",
+ label = "p.signif",
+  tip.length = 0.01, size = 5
+) +
+  theme_cowplot() +
+  coord_cartesian(clip = "off") + #don't let significance asterisk get clipped off
+  scale_color_manual(
+    name = "Response",
+    values = c(responder = "#FFD700", `non-responder` = "grey70")
+  ) +
+  labs(x = "Clinical response", y = "% Engraftment") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.margin = margin(10, 10, 10, 10))
+
+Figure_3c 
+
+ggsave('../figure_3/figures/Figure3c.png', height = 3.5, width = 3.5
+)
+
+```
+
+UPDATED FIGURES 3E:
+```{r}
+
+
+mat <- read.csv("./data/3F.csv") %>% column_to_rownames('recipient') %>% as.matrix()# +min(mat)+.01
+mat <- (mat - min(mat, na.rm = TRUE)) / (max(mat, na.rm = TRUE) - min(mat, na.rm = TRUE)) #scale from 0 to 1?
+
+
+# rows: recipients; cols: features (abundances)
+d_row <- vegan::vegdist(mat, method = "euclidean")
+d_col <- vegan::vegdist(t(mat), method = "euclidean")
+
+row_ord <- hclust(d_row, method = "average")$order
+col_ord <- hclust(d_col, method = "average")$order
+
+rec_levels <- rownames(mat)[row_ord]
+don_levels <- colnames(mat)[col_ord]
+
+# reshape and factor‐level set
+plot_df <- read.csv("./data/3F.csv") %>%
+  mutate(recipient = factor(recipient, levels = rec_levels)) %>%
+  pivot_longer(-recipient, names_to="donor", values_to="engraftment") %>%
+  mutate(donor = factor(donor, levels = don_levels))
+
+#identify highest donor 
+superdonor_ob <- (plot_df %>% select(donor, engraftment) %>% group_by(donor) %>% 
+  mutate(med_engraft = median(engraftment)) %>% ungroup() %>%
+  select(donor, med_engraft) %>% distinct() %>% filter(med_engraft == max(med_engraft)) %>% mutate(donor = as.character(donor)))$donor
+
+# attach response info
+highlight_df <- plot_df %>%
+  inner_join(response %>% 
+               mutate(recipient = as.character(recipient),
+                      donor     = as.character(donor)),
+             by = c("recipient","donor"))
+
+#get quantiles
+#qs <- quantile(1-mat, probs = c(0, 0.25, 0.5, 0.75, 1))
+
+# plot with colored borders
+tile <- ggplot(plot_df, aes(donor, recipient, fill = engraftment)) +
+  geom_tile(color = 'white', size = 0.15) +
+  geom_tile(fill = NA, color = 'white', size = .2) +
+  geom_tile(
+    data = highlight_df,
+    aes(color = clinical_response),
+    fill  = NA,
+    size  = .66
+  ) +
+  scale_fill_distiller(
+    palette   = "RdBu",
+    direction =  -1,       # 1 for blue→white→red, -1 to flip
+    name      = "Engraftment"
+  ) + # scale_color_discrete(name = "Response") +
+  scale_color_manual(values = c(responder="#FFD700", "non-responder"="grey70")) +
+  theme_cowplot() +
+    labs(fill = '% Engraftment', color = 'Clinical response', x = 'Donors', y = 'Recipients') +
+  theme(
+    #axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+    axis.text = element_blank(),
+    #axis.title  = element_blank(),
+    legend.position = 'top',
+    legend.title.position = "top",
+    legend.title.align    = 0.5  
+  )
+
+tile 
+
+ggsave("figures/Figure3E.pdf", width = 6, height = 3.5)
+
+```
+
+Add the boxplots above
+```{r}
+
+
+
+# ── Prep the data ────────────────────────────────────────────────────────
+box_df <- plot_df %>%
+  mutate(engraft_scaled = (engraftment - min(engraftment, na.rm = TRUE)) /
+           (max(engraftment, na.rm = TRUE) - min(engraftment, na.rm = TRUE)),
+         donor = gsub("-", "\\.", donor)) %>%
+  mutate(donor = factor(donor, levels = colnames(mat)[col_ord]),
+         donor_group = case_when(
+           donor == gsub("-", "\\.", superdonor_ob) ~ "Superdonor 1",
+           donor == gsub("-", "\\.", superdonor2)   ~ "Superdonor 2",
+           donor == gsub("-", "\\.", worst1)        ~ "Worst 1",
+           donor == gsub("-", "\\.", secondworst)   ~ "Worst 2",
+           TRUE                                    ~ "Others"
+         ),
+         donor_group = factor(donor_group, levels = donor_levels))
+
+# ── Arrow annotation data ────────────────────────────────────────────────
+arrow_df <- box_df %>%
+  filter(donor_group != "Others") %>%
+  group_by(donor, donor_group) %>%
+  summarise(median_eng = median(engraft_scaled, na.rm = TRUE), .groups = "drop") %>%
+  mutate(
+    x_pos  = as.numeric(donor),
+    y_start = -0.12,
+    y_end   = -0.04
+  )
+
+# ── Plot ─────────────────────────────────────────────────────────────────
+ggplot(box_df, aes(x = donor, y = engraft_scaled, fill = donor_group)) +
+  geom_hline(yintercept = c(.25, .75), linetype = "dashed", color = "grey80", alpha = 0.5) +
+  stat_boxplot(geom = "errorbar", width = 0.2) +
+  geom_boxplot(width = 0.3, outlier.shape = NA, color = "black") +
+  geom_segment(
+    data = arrow_df,
+    aes(x = x_pos, xend = x_pos, y = y_start, yend = y_end, color = donor_group),
+    arrow = arrow(length = unit(0.12, "cm"), type = "closed"),
+    linewidth = 0.7,
+    inherit.aes = FALSE
+  ) +
+  scale_fill_manual(values = donor_colors, name = "Donor") +
+  scale_color_manual(values = donor_colors, guide = "none") +
+  coord_cartesian(ylim = c(-0.15, 1), clip = "off") +
+  labs(x = "", y = "Engraftment") +
+  theme_cowplot() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_blank(),
+    plot.margin = margin(5, 5, 15, 5)
+  )
+
+ggsave("figures/engraftmentRates_3e.pdf", width = 6, height = 1.5)
+
+#write out engraftment scores
+plot_df %>%
+  mutate(engraft_scaled = (engraftment - min(engraftment, na.rm = TRUE)) /
+           (max(engraftment, na.rm = TRUE) - min(engraftment, na.rm = TRUE)),
+         donor = gsub("-","\\.", donor)) %>% group_by(donor) %>% 
+  mutate(med_engraft = median(engraft_scaled)) %>% 
+  select(donor, med_engraft) %>% distinct() %>%
+  write.csv("data/MedianEngraftmentScores_Openbiome.csv", quote = F, row.names = F)
+
+
+
+
+```
+
+
+
+
+Does Donor or Recipient control FMT success?
+
+```{r}
+
+
+
+set.seed(123)
+n_boot <- 100
+frac <- 0.5
+
+boot_var <- map_dfr(seq_len(n_boot), function(i) {
+  sub <- plot_df %>% slice_sample(prop = frac)
+  
+  total_var <- var(sub$engraftment)
+  
+  # Variance of donor means = between-donor variance
+  donor_var <- sub %>%
+    group_by(donor) %>%
+    summarise(mean_eng = mean(engraftment), .groups = "drop") %>%
+    pull(mean_eng) %>%
+    var()
+  
+  # Variance of recipient means = between-recipient variance
+  recipient_var <- sub %>%
+    group_by(recipient) %>%
+    summarise(mean_eng = mean(engraftment), .groups = "drop") %>%
+    pull(mean_eng) %>%
+    var()
+  
+  tibble(iter = i,
+         Donor = donor_var / total_var * 100,
+         Recipient = recipient_var / total_var * 100)
+})
+
+boot_long <- boot_var %>%
+  pivot_longer(-iter, names_to = "factor", values_to = "pct_variance") %>%
+  mutate(factor = factor(factor, levels = c("Donor", "Recipient")))
+
+
+# Plot
+p <- ggplot(boot_long, aes(x = factor, y = pct_variance)) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  geom_boxplot(width = 0.4, outlier.shape = NA, fill = "grey90") +
+  geom_jitter(width = 0.12, height = 0, size = 0.5, alpha = 0.15) +
+  ggsignif::geom_signif(comparisons = list(c("Donor", "Recipient")), test = "wilcox.test") +
+  labs(
+    x = NULL,
+    y = "% of total variance explained",
+  #  title = "Donor vs. recipient contribution to engraftment variance",
+  #  subtitle = paste0(n_boot, " subsamples at ", frac * 100, "% of data")
+  ) +
+  theme_cowplot()
+
+print(p)
+
+boot_long %>%
+  group_by(factor) %>%
+  summarise(median = median(pct_variance), se = sd(pct_variance))
+
+#ggsave("subsample_variance.pdf", p, width = 4.5, height = 5)
+#ggsave("subsample_variance.png", p, width = 4.5, height = 5, dpi = 300)
+```
+
+
+
+
+Deprecated strategy using lm
+```{r}
+
+anova(lm(engraftment ~ donor + recipient, data = plot_df))
+# Analysis of Variance Table
+# 
+# Response: engraftment
+#             Df Sum Sq Mean Sq F value    Pr(>F)    
+# donor       95 13.976 0.14712  28.881 < 2.2e-16 ***
+# recipient   26 17.387 0.66873 131.278 < 2.2e-16 ***
+# Residuals 2470 12.582 0.00509         
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
