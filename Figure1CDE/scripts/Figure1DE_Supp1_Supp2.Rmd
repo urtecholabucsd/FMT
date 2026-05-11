@@ -1,0 +1,226 @@
+---
+title: "20241222_PairwiseFMT"
+output: html_document
+date: "2024-12-22"
+---
+
+```{r setup, include=FALSE}
+
+setwd("/Users/guillaumeurtecho/Dropbox/UrtechoLab/Projects/2024/FMT_Metabolic_models_ZZ/Figure1/scripts")
+
+library(tidyverse)
+library(reshape2)
+library(cowplot)
+library(ggsignif)
+library(pROC)
+library(RColorBrewer)
+
+#taxonomy data
+tax <- read.csv("../ref/assembly.taxonomy_parsed_filled.csv") %>% rename('taxon'='assembly')
+
+#metabolic distance
+dist <- read.csv("../processed_data/distance_d0.csv") %>% mutate(donor = substr(sample_id, 1, 1), recipient = substr(sample_id,4,4))
+
+#metabolic independence
+independence <- read.csv('../processed_data/MetabolicIndependence_score.csv') %>% rename(taxon=genome, independence = score)
+
+#vendor diversity
+diversity_scores <- read.csv("../processed_data/vendor_diversity.csv")
+
+#donor abundances
+donor_abd <- read.csv("../processed_data/donor_abundances.csv")
+
+#Read in colonization files
+
+# Define the file path
+file_path <- "../../20241201_JvE_ModelFeatures/processed_data/DEseq_Pairwise"
+
+# Define the mapping of root names to Magtypes
+magtypes <- c("J" = "AZC3J", "C" = "AZC9C", "E" = "AZC7E", "T" = "AZC5T")
+
+# Read and process each file
+all_data <- list.files(path = file_path, pattern = "_DESeq\\.csv$", full.names = TRUE) %>%
+  map_df(~ read_csv(.x) %>%
+           mutate(
+             file_name = str_remove(basename(.x), "_DESeq\\.csv$"),
+             sample_id = file_name %>%
+               str_split("_from_") %>%
+               map_chr(~ paste0(magtypes[.x[2]], "from", magtypes[.x[1]])) %>%
+               str_remove_all("_")
+           )) %>%
+  select(taxon=assembly, sample_id, mean_d0_abundance, fold_change, colonization) %>% filter(colonization == 'colonized' | colonization == 'non-colonized' ) %>%
+  mutate(colonization_binary = ifelse(colonization == "colonized", 1, 0))
+
+AllMetabolicFeatures <- all_data %>% mutate(donor = substr(sample_id, 5, 5),
+         recipient = substr(sample_id,nchar(sample_id), nchar(sample_id))) %>%  select(-sample_id) %>%
+  inner_join(dist, ., by = c('donor', 'taxon', 'recipient')) %>% left_join(., independence) %>% ungroup() %>%
+  # Add donor diversity
+  left_join(.,
+    diversity_scores %>%
+      rename(donor_diversity = shannon_diversity),
+    by = c("donor" = "supplier")
+  ) %>%
+  # Add recipient diversity
+  left_join(.,
+    diversity_scores %>% 
+      rename(recipient_diversity = shannon_diversity),
+    by = c("recipient" = "supplier")
+  ) %>%
+  # Compute ratio
+  mutate(diversity_ratio = donor_diversity / recipient_diversity) %>% left_join(., donor_abd, by = c('donor', 'taxon'))
+
+write.csv(AllMetabolicFeatures, "../processed_data/AllMetabolicFeatures.csv", row.names = F, quote = F)
+
+```
+
+First, verify how many transfers anyway? FIGURE S1
+```{r}
+
+# Add a new column for the 5th character of 'sample_id'
+comparison <- all_data %>%
+  mutate(donor = substr(sample_id, 5, 5),
+         recipient = substr(sample_id,nchar(sample_id), nchar(sample_id))) %>% ungroup()
+
+comparison$donor <-factor(comparison$donor,      # Reordering group factor levels
+                         levels = c("E","C","J","T"))
+
+comparison$recipient <-factor(comparison$recipient,      # Reordering group factor levels
+                         levels = c("T","J","C","E"))
+
+grid <- expand_grid(donor=as.factor(c('T','J','C','E')),recipient=as.factor(c('T','J','C','E'))) %>% mutate(num_transfers = 0)
+
+
+ s1a <- comparison %>%
+  filter(colonization == "colonized") %>%
+  group_by(donor, recipient) %>%
+  summarise(num_transfers = n(), .groups = "drop") %>%
+  rbind(., anti_join(grid,., by = c('donor', 'recipient'))) %>%
+  ggplot(aes(y = donor, x = recipient, fill = num_transfers)) +
+  geom_tile(size = 0.5, fill = 'white') +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "firebrick2") +
+  geom_text(aes(label = num_transfers), size = 8) +
+  labs(x = 'Recipient', y = 'Donor', fill = '# of OTUs Transferred') +
+  theme_cowplot() +
+  theme(
+    panel.background = element_rect(fill = "white"),
+    axis.text.y = element_text(size = 14),
+    axis.title.x = element_text(size = 14),
+    axis.title.y = element_text(size = 14),
+    axis.text.x = element_text(size = 14),
+    strip.text = element_text(size = 10),
+    panel.spacing = unit(0.2, "lines"),
+    legend.position = 'none',
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    plot.background = element_blank(),
+    strip.background = element_blank()
+  )
+
+s1a
+
+ggsave("../figs/FigureS1A.png", width = 3, height = 3, dpi = 300)
+
+```
+
+
+Plot boxplots for all FIGURE 1C 1D
+
+```{r}
+
+# Create a function to generate a boxplot for a given y-axis variable
+make_boxplot <- function(data, y_var, y_label) {
+  ggplot(data, aes(x = colonization, y = !!sym(y_var), fill = colonization)) +
+    stat_boxplot(geom = "errorbar", width = 0.3) +
+    geom_boxplot(outlier.shape = NA, width = 0.5) +
+    geom_jitter(size = 0.25, width = 0.25, height = 0, alpha = 0.3) +
+    geom_signif(
+      comparisons = list(c("colonized", "non-colonized")),
+      test = "wilcox.test",
+      textsize = 3
+    ) +
+    scale_fill_manual(values = c("colonized" = "steelblue", "non-colonized" = "lightcoral")) +
+    labs(x = NULL, y = y_label) +
+    coord_cartesian(clip = "off") +
+scale_y_continuous(expand = expansion(mult = c(0.05, 0.15))) +
+    theme_cowplot() +
+    theme(legend.position = "none", axis.text.x = element_text(angle = 45, hjust = 1),
+          plot.margin = margin(t = 5, r = 5, b = 5, l = 20))
+}
+
+# Generate individual plots
+
+fig1D <- make_boxplot(AllMetabolicFeatures, "distance", "Metabolic Distance")
+fig1E <- make_boxplot(AllMetabolicFeatures, "independence", "Metabolic Independence")
+
+# Combine plots into a 2x2 grid
+combined_plot <- plot_grid(
+                           fig1D + ggtitle("D"),
+                           fig1E + ggtitle("E"),
+                           ncol = 2)
+
+# Display the plot
+combined_plot
+ggsave("../figs/Figure1DE.png", width = 4, height = 3, dpi = 300)
+
+```
+
+How are other distance metrics? FIGURE 2S
+```{r}
+
+L1 <- read.csv("../processed_data/distances/distance_d0_L1.csv") %>% rename("L1"='distance')
+L2 <- read.csv("../processed_data/distances/distance_d0_L2.csv") %>% rename("L2" = 'distance')
+cosine_dis <- read.csv("../processed_data/distances/distance_d0_cosine.csv") %>% rename("Cosine Distance" = 'distance')
+
+temp <- AllMetabolicFeatures %>% select(taxon, sample_id, colonization, mahalonobis=distance) %>%
+  left_join(., L1, by = c("taxon", "sample_id")) %>%
+  left_join(., L2, by = c("taxon", "sample_id")) %>%
+  left_join(., cosine_dis, by = c("taxon", "sample_id"))
+
+
+# Define the metrics and their display labels
+metrics <- c(
+  "mahalonobis"       = "Mahalanobis Distance",
+  "L1"                = "L1 Distance",
+  "L2"                = "L2 Distance",
+  "Cosine Distance" = "Cosine Distance"
+)
+
+# Generate all plots
+plot_list <- imap(metrics, ~ make_boxplot(temp, .y, .x))
+
+# Combine with panel labels
+combined_plot <- plot_grid(
+  plotlist = imap(plot_list, ~ .x + ggtitle(LETTERS[match(.y, names(metrics))])),
+  ncol = 2
+)
+
+combined_plot
+
+ggsave("../figs/supp2_DistanceComparisons.png", width = 5.5, height = 5.5)
+
+```
+
+
+TRAIN INITIAL REGRESSION MODEL, continued in later scripts
+```{r setup, include=FALSE}
+# --------------------------------
+# RANDOM FOREST with 'ranger'
+# --------------------------------
+
+# install.packages("ranger")  # if not already installed
+library(ranger)
+
+# For reproducibility
+set.seed(123)
+
+dataframe <- AllMetabolicFeatures %>% mutate(
+    mean_d0_abundance = log10(mean_d0_abundance),
+    colonization_binary = factor(colonization_binary, levels = c(0,1))
+  )
+
+
+```
+
+

@@ -1,0 +1,565 @@
+---
+title: "AlternativeModels_FMT"
+output: html_document
+date: "2025-01-18"
+---
+
+This is to be done after running main script
+```{r setup, include=FALSE}
+# --------------------------------
+# RANDOM FOREST with 'ranger'
+# --------------------------------
+
+# install.packages("ranger")  # if not already installed
+library(ranger)
+library(PRROC)
+
+# For reproducibility
+set.seed(123)
+
+# 'ranger' can do probability predictions when probability=TRUE
+rf_ranger_model <- dataframe %>% mutate(mean_d0_abundance = log10(mean_d0_abundance + 1e-6)) %>% ranger(
+  formula = factor(colonization_binary) ~ distance + independence + mean_d0_abundance + diversity_ratio,
+  data    = .,
+  probability = TRUE,    # needed for class probabilities
+  num.trees   = 50,
+  mtry        = 2,       # number of variables to try at each split
+  importance  = "impurity"  # measure feature importance
+)
+
+# Predict probabilities for the "colonized" class (second column)
+rf_ranger_preds <- predict(rf_ranger_model, data = dataframe)$predictions
+rf_ranger_probs <- rf_ranger_preds[, "1"]  # Probability of class "1"
+
+# Compute ROC and AUROC
+rf_ranger_roc <- roc(dataframe$colonization_binary, rf_ranger_probs)
+rf_ranger_auc <- auc(rf_ranger_roc)
+cat("Ranger Random Forest AUC:", rf_ranger_auc, "\n")
+
+# Plot the ROC curve
+s2a <- ggroc(rf_ranger_roc, color = "darkgreen") +
+  annotate("text", x = 0.5, y = 0.05, 
+           label = paste0("AUROC: ", round(rf_ranger_auc, 3)), size = 5) +
+  labs(
+    x = "False Positive Rate", 
+    y = "True Positive Rate",
+  ) +
+  theme_cowplot()
+
+print(s2a)
+
+# Check feature importance in the Ranger model
+importance_values <- rf_ranger_model$variable.importance
+print(importance_values)
+
+ggsave("../figs/supplement/random_forestROC.png", s2a, width = 3, height = 3)
+
+```
+
+PR-AUC with null model comparison (S2B):
+
+```{r}
+
+set.seed(123)  # For reproducibility
+
+n_iter <- 20
+train_frac <- 0.3
+recall_grid <- seq(0, 1, length.out = 100)  # for interpolation
+
+# Functions to help with interpolation
+interpolate_pr <- function(curve, recall_grid) {
+  # 'curve' is a matrix with columns [recall, precision, threshold]
+  approx(x = curve[, 1], y = curve[, 2], xout = recall_grid, 
+         method = "linear", rule = 2)$y
+}
+
+# Initialize storage
+precision_matrix_model <- matrix(NA, nrow = length(recall_grid), ncol = n_iter)
+precision_matrix_null  <- matrix(NA, nrow = length(recall_grid), ncol = n_iter)
+
+auc_pr_list       <- numeric(n_iter)
+auc_pr_list_null  <- numeric(n_iter)
+
+for (i in seq_len(n_iter)) {
+  # Random train/test split
+  train_indices <- sample(seq_len(nrow(dataframe)), 
+                          size = round(train_frac * nrow(dataframe)), 
+                          replace = FALSE)
+  train_data <- dataframe[train_indices, ]
+  test_data  <- dataframe[-train_indices, ]
+  
+  # ------------------------------
+  # 1) Train a Random Forest model
+  # ------------------------------
+  rf_model <- train_data %>%
+    mutate(mean_d0_abundance = log10(mean_d0_abundance + 1e-6)) %>%
+    ranger(
+      formula     = factor(colonization_binary) ~ distance + independence + 
+                    mean_d0_abundance + diversity_ratio,
+      data        = .,
+      probability = TRUE,
+      num.trees   = 50, 
+      mtry        = 2,
+      importance  = "impurity"
+    )
+  
+  # Predict probabilities for the "colonized" class (i.e. '1')
+  rf_predictions <- predict(rf_model, data = test_data)$predictions
+  prob_predictions <- rf_predictions[, "1"]
+  
+  # True labels
+  true_labels <- test_data$colonization_binary
+  
+  # ------------------------------
+  # 2) PR Curve for the Model
+  # ------------------------------
+  pr_curve_model <- pr.curve(
+    scores.class0 = prob_predictions[true_labels == 1],
+    scores.class1 = prob_predictions[true_labels == 0],
+    curve = TRUE
+  )
+  
+  # ------------------------------
+  # 3) Null Model (Shuffle Labels)
+  # ------------------------------
+  shuffled_labels <- sample(true_labels)
+  pr_curve_null <- pr.curve(
+    scores.class0 = prob_predictions[shuffled_labels == 1],
+    scores.class1 = prob_predictions[shuffled_labels == 0],
+    curve = TRUE
+  )
+  
+  # Store AUC (integral)
+  auc_pr_list[i]      <- pr_curve_model$auc.integral
+  auc_pr_list_null[i] <- pr_curve_null$auc.integral
+  
+  # Interpolate curves onto a common recall grid
+  precision_matrix_model[, i] <- interpolate_pr(pr_curve_model$curve, recall_grid)
+  precision_matrix_null[, i]  <- interpolate_pr(pr_curve_null$curve, recall_grid)
+}
+
+# Compute average and SD precision at each recall point
+mean_precision_model <- rowMeans(precision_matrix_model, na.rm = TRUE)
+sd_precision_model   <- apply(precision_matrix_model, 1, sd, na.rm = TRUE)
+
+mean_precision_null  <- rowMeans(precision_matrix_null, na.rm = TRUE)
+sd_precision_null    <- apply(precision_matrix_null, 1, sd, na.rm = TRUE)
+
+# Average AUC-PR
+mean_auc_pr_model <- mean(auc_pr_list)
+mean_auc_pr_null  <- mean(auc_pr_list_null)
+
+# Construct data frames for plotting
+plot_data_model <- data.frame(
+  recall            = recall_grid,
+  precision         = mean_precision_model,
+  precision_lower   = mean_precision_model - sd_precision_model,
+  precision_upper   = mean_precision_model + sd_precision_model,
+  model             = "Random Forest"
+)
+
+plot_data_null <- data.frame(
+  recall            = recall_grid,
+  precision         = mean_precision_null,
+  precision_lower   = mean_precision_null - sd_precision_null,
+  precision_upper   = mean_precision_null + sd_precision_null,
+  model             = "Null"
+)
+
+s2b <- ggplot() +
+  # Model with ribbon
+  geom_ribbon(
+    data = plot_data_model,
+    aes(x = recall, ymin = precision_lower, ymax = precision_upper),
+    fill = "darkorange", alpha = 0.2
+  ) +
+  geom_line(
+    data = plot_data_model,
+    aes(x = recall, y = precision),
+    color = "darkorange", size = 1
+  ) +
+  # Null with ribbon
+  geom_ribbon(
+    data = plot_data_null,
+    aes(x = recall, ymin = precision_lower, ymax = precision_upper),
+    fill = "steelblue", alpha = 0.2
+  ) +
+  geom_line(
+    data = plot_data_null,
+    aes(x = recall, y = precision),
+    color = "steelblue", size = 1
+  ) +
+  annotate(
+    "text", x = 0.5, y = 0.5,
+    label = paste0("Avg prAUC (RF): ", round(mean_auc_pr_model, 3),
+                   "\nAvg prAUC (Null): ", round(mean_auc_pr_null, 3)),
+    size = 4, color = "black"
+  ) +
+  labs(x = "Recall", y = "Precision") +
+  theme_cowplot()
+s2b
+ggsave("../figs/supplement/AUC-PR-rf.png", s2b, width = 4, height = 4)
+
+# Print out final AUC-PR results
+cat("Mean AUC-PR (RF):", mean_auc_pr_model, "\n")
+cat("Mean AUC-PR (Null):", mean_auc_pr_null, "\n")
+
+```
+
+Cross-fold validation for different subsets of training data (S2C):
+
+```{r}
+set.seed(123)
+
+# We'll store AUROC results in a list keyed by training proportion
+auroc_results <- list()
+
+# Define the training proportions to try
+target_proportions <- c(0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
+
+####################################
+# 1) First loop: 
+#    Evaluate a random forest classifier for each train/test split proportion
+####################################
+
+for (prop in target_proportions) {
+  smp_size <- floor(prop * nrow(dataframe))
+  train_ind <- sample(seq_len(nrow(dataframe)), size = smp_size)
+  
+  train <- dataframe[train_ind, ]
+  test  <- dataframe[-train_ind, ]
+
+  # Guard against single-class splits at low proportions
+  if (length(unique(train$colonization_binary)) < 2 |
+      length(unique(test$colonization_binary)) < 2) next
+
+  rf_fit <- train %>%
+    mutate(mean_d0_abundance = log10(mean_d0_abundance + 1e-6)) %>%
+    ranger(
+      formula     = factor(colonization_binary) ~ distance + independence + mean_d0_abundance + diversity_ratio,
+      data        = .,
+      probability = TRUE,
+      num.trees   = 50,
+      mtry        = 2
+    )
+  
+  test_preds <- predict(rf_fit, data = test)
+  test$predicted_prob <- test_preds$predictions[, "1"]
+  
+  roc_obj <- roc(test$colonization_binary, test$predicted_prob, quiet = TRUE)
+  auroc_results[[as.character(prop)]] <- auc(roc_obj)
+}
+
+####################################
+# 2) Second loop:
+#    Repeat 19 more runs with the same model to get variance estimates
+####################################
+
+set.seed(456)
+for (n in 1:19) {
+  for (prop in target_proportions) {
+    smp_size <- floor(prop * nrow(dataframe))
+    train_ind <- sample(seq_len(nrow(dataframe)), size = smp_size)
+    
+    train <- dataframe[train_ind, ]
+    test  <- dataframe[-train_ind, ]
+
+    # Guard against single-class splits at low proportions
+    if (length(unique(train$colonization_binary)) < 2 |
+        length(unique(test$colonization_binary)) < 2) next
+
+    rf_fit <- train %>%
+      mutate(mean_d0_abundance = log10(mean_d0_abundance + 1e-6)) %>%
+      ranger(
+        formula     = factor(colonization_binary) ~ distance + independence + mean_d0_abundance + diversity_ratio,
+        data        = .,
+        probability = TRUE,
+        num.trees   = 50,
+        mtry        = 2
+      )
+    
+    test_preds <- predict(rf_fit, data = test)
+    test$predicted_prob <- test_preds$predictions[, "1"]
+    
+    roc_obj <- roc(test$colonization_binary, test$predicted_prob, quiet = TRUE)
+    
+    auroc_results[[as.character(prop)]] <- c(
+      auroc_results[[as.character(prop)]],
+      auc(roc_obj)
+    )
+  }
+}
+
+####################################
+# 3) Convert AUROC results to a data frame for plotting
+####################################
+
+auroc_df <- do.call(rbind, lapply(names(auroc_results), function(prop) {
+  data.frame(
+    TrainPercent = as.numeric(prop),
+    AUROC = unlist(auroc_results[[prop]])
+  )
+}))
+
+####################################
+# 4) Boxplot of AUROC vs. training proportion
+####################################
+
+s2c <- ggplot(auroc_df, aes(x = factor(TrainPercent), y = AUROC)) +
+  geom_hline(yintercept = c(.6, .7, .8, .9, 1), linetype = 'dashed', color = 'grey80') +
+  geom_boxplot(outlier.shape = NA, fill = "lightblue", color = "black") +
+  geom_jitter(width = 0.2, size = 2, color = "darkblue", alpha = .4, height = 0) +
+  labs(
+    x = "Training Percentage",
+    y = "AUROC"
+  ) +
+  theme_cowplot()
+
+print(s2c)
+
+ggsave("../figs/supplement/TrainingSubset.png", s2c, width = 4, height = 3)
+
+# Report median AUROC at 10% training
+cat("Median AUROC at 10% training:", median((auroc_df %>% filter(TrainPercent == 0.1))$AUROC), "\n")
+
+```
+
+ANOVA variance explained by each predictor (S2D):
+
+```{r}
+####################################
+# Logistic regression ANOVA to assess variance explained by each predictor
+####################################
+
+glm_full <- glm(
+  colonization_binary ~ distance + independence + (mean_d0_abundance + diversity_ratio,
+  data   = dataframe,
+  family = binomial
+)
+
+# Type II ANOVA via car::Anova
+# If car is not available, use base anova() on the glm
+if (requireNamespace("car", quietly = TRUE)) {
+  anova_results <- car::Anova(glm_full, type = "II", test.statistic = "LR")
+  anova_df <- data.frame(
+    Feature  = rownames(anova_results),
+    LR_Chisq = anova_results[["LR Chisq"]]
+  )
+} else {
+  # Fallback: sequential deviance decomposition
+  anova_results <- anova(glm_full, test = "Chisq")
+  anova_df <- data.frame(
+    Feature  = rownames(anova_results)[-1],
+    LR_Chisq = anova_results[["Deviance"]][-1]
+  )
+}
+
+# Calculate percent of total deviance explained
+anova_df <- anova_df %>%
+  filter(!is.na(LR_Chisq)) %>%
+  mutate(
+    Percent_Variance = 100 * LR_Chisq / sum(LR_Chisq),
+    Feature = case_when(
+      grepl("distance", Feature)      ~ "Metabolic\nDistance",
+      grepl("independence", Feature)  ~ "Metabolic\nIndependence",
+      grepl("mean_d0", Feature)       ~ "Pre-FMT\nAbundance",
+      grepl("diversity", Feature)     ~ "Diversity\nRatio",
+      TRUE                            ~ Feature
+    )
+  ) %>%
+  arrange(desc(Percent_Variance))
+
+# Reorder factor by variance explained
+anova_df$Feature <- factor(anova_df$Feature, levels = anova_df$Feature)
+
+s2d <- ggplot(anova_df, aes(x = Feature, y = Percent_Variance)) +
+  geom_col(fill = "steelblue", color = "black", width = 0.6) +
+  geom_text(aes(label = paste0(round(Percent_Variance, 1), "%")),
+            vjust = -0.5, size = 4) +
+  labs(
+    x = NULL,
+    y = "Variance Explained (%)"
+  ) +
+  ylim(0, max(anova_df$Percent_Variance) * 1.15) +
+  theme_cowplot()
+
+print(s2d)
+
+ggsave("../figs/supplement/ANOVA_variance_explained.png", s2d, width = 4, height = 3)
+
+# Print ANOVA summary
+print(anova_df)
+
+```
+
+Quantitative prediction with random forest (Figure 1E) with 10-fold CV:
+
+```{r}
+# -------------------------------------
+# 1) Prepare dataframe for regression
+# -------------------------------------
+df_regression <- AllMetabolicFeatures %>%
+  left_join(
+    diversity_scores %>% rename(donor_diversity = shannon_diversity),
+    by = c("donor" = "supplier")
+  ) %>%
+  left_join(
+    diversity_scores %>% rename(recipient_diversity = shannon_diversity),
+    by = c("recipient" = "supplier")
+  ) %>%
+  mutate(
+    log_fold_change = log(fold_change + 1e-4),
+    diversity_ratio = donor_diversity / recipient_diversity
+  )
+
+# -------------------------------------
+# 2) Random Forest regression (full model for plotting)
+# -------------------------------------
+set.seed(123)
+
+model_rf <- AllMetabolicFeatures %>%
+  mutate(mean_d0_abundance = log10(mean_d0_abundance + 1e-6),
+         log_fold_change = log(fold_change + 1e-4)) %>%
+  ranger(
+    formula = log_fold_change ~ #degree.centrality + growth_rate +
+      distance + diversity_ratio + independence + mean_d0_abundance,
+    data = .,
+    num.trees = 50,
+    mtry = 2,
+    importance = "impurity"
+  )
+
+cat("Random Forest R-squared (OOB):", model_rf$r.squared, "\n")
+cat("Random Forest MSE (OOB):", model_rf$prediction.error, "\n")
+
+# -------------------------------------
+# 3) 10-Fold Cross-Validation for R^2
+# -------------------------------------
+set.seed(42)
+n_folds <- 10
+fold_ids <- sample(rep(1:n_folds, length.out = nrow(df_regression)))
+
+cv_r2 <- numeric(n_folds)
+
+for (k in 1:n_folds) {
+  train_cv <- df_regression[fold_ids != k, ]
+  test_cv  <- df_regression[fold_ids == k, ]
+  
+  rf_cv <- train_cv %>%
+    mutate(mean_d0_abundance = log10(mean_d0_abundance + 1e-6)) %>%
+    ranger(
+     formula = log_fold_change ~ #degree.centrality + growth_rate +
+      distance + diversity_ratio + independence + mean_d0_abundance,
+      data = .,
+      num.trees = 50,
+      mtry = 2
+    )
+  
+  preds_cv <- predict(rf_cv, data = test_cv)$predictions
+  ss_res <- sum((test_cv$log_fold_change - preds_cv)^2)
+  ss_tot <- sum((test_cv$log_fold_change - mean(test_cv$log_fold_change))^2)
+  cv_r2[k] <- 1 - ss_res / ss_tot
+}
+
+cat("10-fold CV R-squared:", round(mean(cv_r2) * 100, 1), "% +-", round(sd(cv_r2) * 100, 1), "%\n")
+cat("Individual fold R2 values:", round(cv_r2, 3), "\n")
+
+# -------------------------------------
+# 4) Generate predictions (full model, for plotting)
+# -------------------------------------
+df_regression$predicted_log_fold_change <- predict(model_rf, df_regression)$predictions
+
+# -------------------------------------
+# 5) Plot observed vs predicted (Figure 1E)
+# -------------------------------------
+r_value <- cor.test(df_regression$log_fold_change, df_regression$predicted_log_fold_change, method = 'spearman')$estimate
+p_value <- cor.test(df_regression$log_fold_change, df_regression$predicted_log_fold_change, method = 'spearman')$p.value
+
+# If you have a tax table to join:
+df_regression_plot <- df_regression %>%
+  left_join(tax, by = "taxon")
+
+fig1e <- ggplot(df_regression_plot, aes(x = log_fold_change, y = predicted_log_fold_change)) +
+  geom_point(alpha = 0.6, aes(color = order, shape = donor)) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  annotate("text",
+           x = min(df_regression$log_fold_change) + 5,
+           y = max(df_regression$predicted_log_fold_change) - 0.2,
+           label = paste0("R\u00B2 = ", round(model_rf$r.squared, 2),
+                          "\n\u03C1 = ", round(r_value, 2),
+                          "\np < 2.2e-16"),
+           size = 4
+  ) +
+  xlab("Observed log(Fold-Change)") +
+  ylab("Predicted log(Fold-Change)") +
+  theme_cowplot() +
+  theme(
+    axis.title = element_text(size = 14),
+    axis.text  = element_text(size = 14)
+  )
+
+print(fig1e)
+
+ggsave('../figs/RandomForest_Regression_Fig1E.png', fig1e, width = 8, height = 4)
+
+```
+
+Assemble supplementary figure S2 (panels A-D):
+
+```{r}
+library(cowplot)
+
+s2_composite <- plot_grid(
+  s2a, s2b, s2c, s2d,
+  labels = c("A", "B", "C", "D"),
+  nrow = 2,
+  ncol = 2,
+  rel_widths  = c(1, 1),
+  rel_heights = c(1, 1)
+)
+
+print(s2_composite)
+
+ggsave("../figs/supplement/FigureS2_composite.png", s2_composite,
+       width = 10, height = 8, bg = 'white')
+
+```
+
+
+```{r}
+# --------------------------------
+# GAM with LOESS-like Smoothing (mgcv)
+# --------------------------------
+# install.packages("mgcv") if needed
+library(mgcv)
+
+# Fit a GAM as logistic regression with smooth terms
+gam_model <- gam(colonization_binary ~ s(distance) + s(independence) + s(log(mean_d0_abundance + 1e-6)) + s(diversity_ratio),
+  data = dataframe,
+  family = binomial
+)
+
+# Predictions and ROC
+gam_probs <- predict(gam_model, type = "response")
+gam_roc <- roc(dataframe$colonization_binary, gam_probs)
+gam_auc <- auc(gam_roc)
+
+cat("GAM AUC:", gam_auc, "\n")
+
+gam_roc_plot <- ggroc(gam_roc, color = "darkorange") +
+  annotate("text", x = 0.5, y = 0.05, 
+           label = paste0("AUROC: ", round(gam_auc, 3)), size = 5) +
+  labs(
+    x = "False Positive Rate",
+    y = "True Positive Rate",
+    title = "GAM with Loess-like Smooths"
+  ) +
+  theme_cowplot()
+
+print(gam_roc_plot)
+
+# Check summary
+summary(gam_model)
+plot(gam_model, pages = 1)
+
+```

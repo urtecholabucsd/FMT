@@ -1,0 +1,780 @@
+---
+title: "Metabolic Niche Analysis"
+subtitle: "PCoA + Hypervolume of MICOM exchange fluxes"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+
+setwd("/Users/guillaumeurtecho/Dropbox/UrtechoLab/Projects/2024/FMT_Metabolic_models_ZZ/20260312_NicheRangeAnalysis_JCrTE/scripts")
+
+library(tidyverse)
+library(proxy)
+library(ape)
+library(ggplot2)
+library(ggrepel)
+library(hypervolume)
+library(viridis)
+library(patchwork)
+library(cluster)     # pam(), silhouette()
+library(factoextra)  # fviz_silhouette()
+library(cowplot)
+
+flux <- read.csv("../input/exchanges_d0_high_fiber.csv") %>%
+  filter(!grepl("medium", taxon, ignore.case = TRUE)) #remove medium
+
+#scale by abundance?
+flux <- flux %>%
+  mutate(flux = (flux / abundance) * median(abundance))
+
+tax <- read.csv("../ref/assembly.taxonomy_parsed_filled.csv")
+
+
+# ── Load shared palette ───────────────────────────────────────────────────
+palette_df <- read.csv("../../FMT/utils/colorPalette.csv", row.names = 1)
+order_colors <- setNames(palette_df$x, rownames(palette_df))
+named_orders <- setdiff(names(order_colors), "Other")
+
+#color palette
+make_top_order_palette <- function(data, tax_col = "order", n_top = 12,
+                                   other_label = "Other", other_colour = "grey75") {
+  top_orders <- data %>%
+    count(.data[[tax_col]], sort = TRUE) %>%
+    slice_head(n = n_top) %>%
+    pull(.data[[tax_col]])
+
+  colours <- setNames(
+    c(RColorBrewer::brewer.pal(n_top, "Set3"), other_colour),
+    c(top_orders, other_label)
+  )
+  list(top_orders = top_orders, colours = colours, other_label = other_label)
+}
+
+
+```
+
+## 1 · Build & Preprocess the Flux Matrix
+
+Rows are `taxon__sample_id` combinations; columns are `metabolite_direction`
+(e.g. `cit_e_import`, `cit_e_export`) with absolute flux values. Zeros receive
+a data-adaptive pseudocount (1% of the minimum observed non-zero flux) before
+log transformation. 
+
+NO MORE ###No abundance weighting is applied — each taxon is treated
+##as an equal member of its community.
+
+```{r build-matrix}
+# ── Wide matrix ───────────────────────────────────────────────────────────────
+flux_wide <- flux %>%
+  mutate(
+    taxon_sample = paste(taxon, sample_id, sep = "__"),
+    feature      = paste(metabolite, direction, sep = "_"),
+    flux_abs     = abs(flux)
+  ) %>%
+  pivot_wider(
+    id_cols     = c(taxon_sample, sample_id),
+    names_from  = feature,
+    values_from = flux_abs,
+    values_fill = 0,
+    values_fn   = mean   # average if duplicate reaction rows exist
+  )
+
+meta <- flux_wide %>% select(taxon_sample, sample_id)
+mat  <- flux_wide %>% select(-taxon_sample, -sample_id) %>% as.matrix()
+rownames(mat) <- flux_wide$taxon_sample
+
+message(sprintf("Matrix: %d taxon×sample rows  ×  %d features", nrow(mat), ncol(mat)))
+message(sprintf("Sparsity: %.1f%% zeros", mean(mat == 0) * 100))
+
+# ── Pseudocount + log transform ───────────────────────────────────────────────
+pseudocount <- min(mat[mat > 0], na.rm = TRUE) * 0.01
+message(sprintf("Pseudocount: %.2e", pseudocount))
+
+mat_log <- log(mat + pseudocount)
+```
+
+## 2 · Prevalence Filtering
+
+Keep only metabolite-direction features exchanged by ≥ `prev_threshold` of
+all taxa×sample rows globally. The diagnostic plot shows the full prevalence
+distribution — adjust the threshold based on where the distribution drops off.
+
+```{r filter-features, fig.height=4}
+# ── Set threshold ─────────────────────────────────────────────────────────────
+prev_threshold <- 0.01   # <-- adjust: proportion of taxa that must exchange
+                          #     a metabolite for it to be retained
+
+# ── Prevalence per feature ────────────────────────────────────────────────────
+prevalence <- colMeans(mat > 0)
+
+prev_df <- tibble(feature = names(prevalence), prevalence = prevalence)
+n_pass  <- sum(prevalence >= prev_threshold)
+
+# ── Diagnostic plot ───────────────────────────────────────────────────────────
+p_prev <- ggplot(prev_df, aes(x = prevalence)) +
+  geom_histogram(bins = 60, fill = "steelblue", alpha = 0.8, colour = "white") +
+  geom_vline(xintercept = prev_threshold, colour = "firebrick",
+             linetype = "dashed", linewidth = 0.9) +
+  annotate("text",
+           x = prev_threshold + 0.01, y = Inf, vjust = 1.5, hjust = 0,
+           label = sprintf("threshold = %.0f%%  |  %d / %d features retained",
+                           prev_threshold * 100, n_pass, ncol(mat)),
+           colour = "firebrick", size = 3.5) +
+  scale_x_continuous(labels = scales::percent_format()) +
+  labs(
+    title    = "Feature prevalence distribution (pre-filter)",
+    subtitle = "Each feature = one metabolite × direction pair",
+    x        = "Prevalence (proportion of taxa with non-zero flux)",
+    y        = "Number of features"
+  ) +
+  theme_bw(base_size = 12) +
+  theme(plot.title = element_text(face = "bold"))
+
+print(p_prev)
+message(sprintf("Retaining %d / %d features (>= %.0f%% prevalence)",
+                n_pass, ncol(mat), prev_threshold * 100))
+
+# ── Apply filter & overwrite mat_log for all downstream steps ─────────────────
+keep_features <- names(prevalence[prevalence >= prev_threshold])
+mat_filt      <- mat[, keep_features]
+mat_log       <- log(mat_filt + pseudocount)
+
+message(sprintf("Matrix after filtering: %d rows x %d features  |  sparsity %.1f%%",
+                nrow(mat_log), ncol(mat_log), mean(mat_filt == 0) * 100))
+```
+
+## 3 · Cosine Distance & PCoA
+
+Cosine distance (`1 − cosine similarity`) captures differences in niche
+*shape* independently of overall flux magnitude. The Cailliez correction
+handles any negative eigenvalues that cosine distances can occasionally
+produce.
+
+```{r pcoa, fig.height=9}
+# ── Cosine distance ───────────────────────────────────────────────────────────
+cos_dist <- as.dist(1 - as.matrix(proxy::simil(mat_log, method = "cosine")))
+
+# ── PCoA ──────────────────────────────────────────────────────────────────────
+pcoa_res <- ape::pcoa(cos_dist, correction = "cailliez")
+var_exp  <- round(pcoa_res$values$Rel_corr_eig * 100, 2)
+
+message(sprintf("PCo1: %.1f%%  PCo2: %.1f%%  PCo3: %.1f%%",
+                var_exp[1], var_exp[2], var_exp[3]))
+
+# ── Tidy coordinates + centroids ──────────────────────────────────────────────
+pcoa_coords <- as.data.frame(pcoa_res$vectors.cor) %>%
+  rownames_to_column("taxon_sample") %>%
+  left_join(meta, by = "taxon_sample")
+
+centroids <- pcoa_coords %>%
+  group_by(sample_id) %>%
+  summarise(across(starts_with("Axis."), mean), .groups = "drop")
+
+sample_colours <- setNames(
+  viridis::turbo(n_distinct(meta$sample_id)),
+  sort(unique(meta$sample_id))
+)
+
+
+
+
+# ── PCoA plot ─────────────────────────────────────────────────────────────────
+p_pcoa <- ggplot(pcoa_coords, aes(Axis.1, Axis.2, colour = sample_id)) +
+  stat_ellipse(aes(group = sample_id), type = "norm",
+               linetype = "dashed", alpha = 0.5, linewidth = 0.7) +
+  geom_point(alpha = 0.55, size = 1.8) +
+  geom_point(data = centroids, shape = 3, size = 6, stroke = 2.5) +
+  ggrepel::geom_label_repel(
+    data = centroids, aes(label = sample_id),
+    size = 3.8, fontface = "bold", show.legend = FALSE,
+    box.padding = 0.4, seed = 42
+  ) +
+  scale_colour_manual(values = sample_colours, name = "Sample group") +
+  labs(
+    title    = "Metabolic Niche Space — PCoA (Cosine Distance)",
+    subtitle = "Each point = one taxon in one sample  |  ✚ = community centroid  |  Dashed = 95% ellipse",
+    x = paste0("PCo1 (", var_exp[1], "%)"),
+    y = paste0("PCo2 (", var_exp[2], "%)")
+  ) +
+  theme_bw(base_size = 13) +
+  theme(plot.title = element_text(face = "bold"),
+        plot.subtitle = element_text(size = 9, colour = "grey40"))
+
+# ── Scree plot ────────────────────────────────────────────────────────────────
+scree_df <- tibble(
+  axis   = seq_len(min(20, length(var_exp))),
+  var    = var_exp[seq_len(min(20, length(var_exp)))],
+  cumvar = cumsum(var_exp)[seq_len(min(20, length(var_exp)))]
+)
+
+p_scree <- ggplot(scree_df, aes(x = axis)) +
+  geom_col(aes(y = var), fill = "steelblue", alpha = 0.8) +
+  geom_line(aes(y = cumvar), colour = "firebrick", linewidth = 1) +
+  geom_point(aes(y = cumvar), colour = "firebrick", size = 2) +
+  geom_hline(yintercept = 80, linetype = "dashed", colour = "grey40") +
+  annotate("text", x = max(scree_df$axis) * 0.75, y = 82,
+           label = "80% threshold", colour = "grey40", size = 3.5) +
+  scale_x_continuous(breaks = scree_df$axis) +
+  labs(title = "PCoA Scree Plot", x = "PCoA Axis", y = "Variance explained (%)") +
+  theme_bw(base_size = 12)
+
+(p_pcoa) / (p_scree)
+
+#can also get boxplots, but these aren't significant!
+
+
+
+```
+
+## 4 · Niche Count (PAM Clustering)
+
+For each sample group, PAM clustering is run on the subset of the cosine
+distance matrix at k = 2 through `k_max`. The optimal k is chosen by the
+highest mean silhouette width — a score near 1 means taxa are tightly assigned
+to their niche, near 0 means the boundary is ambiguous. Cluster assignments
+are then projected back onto the PCoA for visual inspection.
+
+```{r niche-count, fig.height=6}
+# ── Parameters ────────────────────────────────────────────────────────────────
+k_max <- 50   # <-- maximum number of niches to test per sample
+
+# ── PAM + silhouette per sample group ─────────────────────────────────────────
+cos_dist_mat        <- as.matrix(cos_dist)
+niche_count_results <- list()
+cluster_assignments <- list()
+
+for (s in sort(unique(meta$sample_id))) {
+  idx    <- meta$taxon_sample[meta$sample_id == s]
+  n_taxa <- length(idx)
+  submat <- cos_dist_mat[idx, idx]
+
+  k_range <- 2:min(k_max, n_taxa - 1)
+  if (length(k_range) < 1) {
+    warning(sprintf("Sample '%s': too few taxa to cluster (%d)", s, n_taxa))
+    next
+  }
+
+  # Run PAM at each k, record mean silhouette width
+  sil_scores <- sapply(k_range, function(k) {
+    pam_fit <- pam(as.dist(submat), k = k, diss = TRUE)
+    mean(silhouette(pam_fit$clustering, as.dist(submat))[, "sil_width"])
+  })
+
+  best_k   <- k_range[which.max(sil_scores)]
+  best_sil <- max(sil_scores)
+  message(sprintf("Sample %s: optimal k = %d  (mean silhouette = %.3f)",
+                  s, best_k, best_sil))
+
+  pam_best <- pam(as.dist(submat), k = best_k, diss = TRUE)
+
+  niche_count_results[[s]] <- tibble(
+    sample_id       = s,
+    n_taxa          = n_taxa,
+    n_niches        = best_k,
+    mean_silhouette = best_sil
+  )
+
+  cluster_assignments[[s]] <- tibble(
+    taxon_sample = idx,
+    sample_id    = s,
+    niche        = factor(pam_best$clustering)
+  )
+
+  # Per-sample silhouette bar plot
+  sil_df <- as.data.frame(silhouette(pam_best$clustering, as.dist(submat))) %>%
+    arrange(cluster, sil_width) %>%
+    mutate(rank = row_number(), cluster = factor(cluster))
+
+  p_sil <- ggplot(sil_df, aes(x = rank, y = sil_width, fill = cluster)) +
+    geom_col(width = 1, colour = NA) +
+    geom_hline(yintercept = best_sil, linetype = "dashed",
+               colour = "grey30", linewidth = 0.7) +
+    scale_fill_viridis_d(option = "turbo", name = "Niche") +
+    scale_y_continuous(limits = c(NA, 1)) +
+    labs(
+      title    = sprintf("Sample %s — silhouette (k = %d)", s, best_k),
+      subtitle = sprintf("Mean silhouette width = %.3f", best_sil),
+      x = "Taxa (sorted within cluster)", y = "Silhouette width"
+    ) +
+    theme_bw(base_size = 11) +
+    theme(plot.title    = element_text(face = "bold"),
+          plot.subtitle = element_text(size = 9, colour = "grey40"))
+
+  print(p_sil)
+}
+
+# ── Summary table ─────────────────────────────────────────────────────────────
+niche_summary <- bind_rows(niche_count_results)
+print(niche_summary)
+
+# ── Project cluster assignments onto PCoA ─────────────────────────────────────
+pcoa_clust <- pcoa_coords %>%
+  left_join(bind_rows(cluster_assignments), by = c("taxon_sample", "sample_id"))
+
+pcoa_clust <- pcoa_clust %>%
+  mutate(order_plot = if_else(order %in% named_orders, order, "Other"),
+         order_plot = factor(order_plot, levels = c(named_orders, "Other")))
+
+# ── PCoA faceted by sample, coloured by niche cluster ─────────────────────────
+p_pcoa_clust <- ggplot(pcoa_clust, aes(Axis.1, Axis.2, colour = niche)) +
+  geom_point(alpha = 0.7, size = 2) +
+  facet_wrap(~ sample_id, nrow = 2) +
+  scale_colour_manual(values = order_colors, name = "Order") +
+  scale_fill_manual(values = order_colors, name = "Order") +  labs(
+    title    = "Metabolic Niches in PCoA Space",
+    subtitle = "Each panel = one sample  |  colour = PAM niche cluster (optimal k)",
+    x = paste0("PCo1 (", var_exp[1], "%)"),
+    y = paste0("PCo2 (", var_exp[2], "%)")
+  ) +
+  theme_bw(base_size = 12) +
+  theme(plot.title    = element_text(face = "bold"),
+        plot.subtitle = element_text(size = 9, colour = "grey40"),
+        strip.text    = element_text(face = "bold"))
+
+print(p_pcoa_clust)
+
+
+```
+
+#orr, plot by taxonomy!
+```{r}
+
+# make_top_order_palette <- function(data, tax_col = "order", n_top = 12,
+#                                    other_label = "Other", other_colour = "grey75") {
+#   top_orders <- data %>%
+#     count(.data[[tax_col]], sort = TRUE) %>%
+#     slice_head(n = n_top) %>%
+#     pull(.data[[tax_col]])
+# 
+#   colours <- setNames(
+#     c(RColorBrewer::brewer.pal(n_top, "Set3"), other_colour),
+#     c(top_orders, other_label)
+#   )
+#   list(top_orders = top_orders, colours = colours, other_label = other_label)
+# }
+
+# 1. Build pcoa_clust with taxonomy first
+pcoa_clust <- pcoa_coords %>%
+  left_join(bind_rows(cluster_assignments), by = c("taxon_sample", "sample_id")) %>%
+  mutate(assembly = sub("__.*$", "", taxon_sample)) %>%
+  left_join(tax, by = "assembly")
+
+# 2. Then build palette from it
+order_pal <- make_top_order_palette(pcoa_clust)
+
+# 3. Then add order_plot
+pcoa_clust <- pcoa_clust %>%
+  mutate(order_plot = if_else(order %in% order_pal$top_orders, order, order_pal$other_label),
+         order_plot = factor(order_plot, levels = c(order_pal$top_orders, order_pal$other_label)))
+
+# 4. Plot
+p_pcoa_clust <- ggplot(pcoa_clust, aes(Axis.1, Axis.2, colour = order_plot, fill = order_plot)) +
+  geom_point(shape = 21, size = 2.5, alpha = 0.85, stroke = 0.6) +
+  facet_wrap(~ sample_id, nrow = 2) +
+  scale_colour_manual(values = order_pal$colours, name = "Order") +
+  scale_fill_manual(values = order_pal$colours, name = "Order") +
+  labs(
+   # title    = "Metabolic Niches in PCoA Space",
+  #  subtitle = "Each panel = one sample  |  colour = taxonomic order",
+    x = paste0("PCo1 (", var_exp[1], "%)"),
+    y = paste0("PCo2 (", var_exp[2], "%)")
+  ) +
+  theme_bw(base_size = 12) +
+  theme(plot.title      = element_text(face = "bold"),
+        plot.subtitle   = element_text(size = 9, colour = "grey40"),
+        strip.text      = element_text(face = "bold"),
+        strip.background = element_blank(),
+        legend.text     = element_text(size = 10, face = 'italic'),
+        legend.key.size = unit(0.4, "cm"),
+        axis.text = element_blank())
+
+print(p_pcoa_clust)
+
+
+
+ggsave("../figs/niche_tax_clust.pdf", width = 5, height = 3.5)
+
+```
+
+## 5 · Grid Occupancy & Density
+
+A shared global grid is overlaid on PCo1 × PCo2 space (covering all samples
+together) at two resolutions: 10×10 and 20×20. For each sample and each
+resolution, two metrics are computed: **occupancy** — the number of cells
+containing at least one taxon (niche diversity), and **mean density within
+occupied cells** — the average taxa count per non-empty cell (niche packing).
+The heatmaps use a shared colour scale across samples so cross-group comparisons
+are direct.
+
+```{r grid-occupancy, fig.height=10}
+#grid_sizes <- c(10, 20)
+grid_sizes <- c(20)
+
+ax1_range <- range(pcoa_coords$Axis.1)
+ax2_range <- range(pcoa_coords$Axis.2)
+
+pad <- 0.01
+ax1_range <- ax1_range + c(-pad, pad) * diff(ax1_range)
+ax2_range <- ax2_range + c(-pad, pad) * diff(ax2_range)
+
+grid_results <- list()
+heat_plots   <- list()
+
+for (g in grid_sizes) {
+  breaks1 <- seq(ax1_range[1], ax1_range[2], length.out = g + 1)
+  breaks2 <- seq(ax2_range[1], ax2_range[2], length.out = g + 1)
+
+  pcoa_binned <- pcoa_coords %>%
+    mutate(
+      bin1 = cut(Axis.1, breaks = breaks1, include.lowest = TRUE, labels = FALSE),
+      bin2 = cut(Axis.2, breaks = breaks2, include.lowest = TRUE, labels = FALSE)
+    )
+
+  cell_counts <- pcoa_binned %>%
+    group_by(sample_id, bin1, bin2) %>%
+    summarise(n = n(), .groups = "drop")
+
+  grid_summary <- cell_counts %>%
+    group_by(sample_id) %>%
+    summarise(
+      occupancy    = n(),
+      total_cells  = g * g,
+      pct_occupied = occupancy / total_cells * 100,
+      mean_density = mean(n),
+      max_density  = max(n),
+      .groups = "drop"
+    ) %>%
+    mutate(grid = paste0(g, "×", g))
+
+  full_grid <- expand.grid(
+    sample_id = unique(pcoa_coords$sample_id),
+    bin1      = seq_len(g),
+    bin2      = seq_len(g)
+  ) %>%
+    left_join(cell_counts, by = c("sample_id", "bin1", "bin2")) %>%
+    replace_na(list(n = 0)) %>%
+    mutate(
+      x_mid = breaks1[bin1] + diff(breaks1[1:2]) / 2,
+      y_mid = breaks2[bin2] + diff(breaks2[1:2]) / 2
+    )
+
+  grid_results[[as.character(g)]] <- list(
+    summary     = grid_summary,
+    cell_counts = cell_counts %>% mutate(grid = paste0(g, "×", g)),
+    full_grid   = full_grid %>% mutate(grid = paste0(g, "×", g)),
+    breaks1     = breaks1,
+    breaks2     = breaks2
+  )
+
+  cell_w <- diff(breaks1[1:2])
+  cell_h <- diff(breaks2[1:2])
+
+p_heat <- ggplot(full_grid,
+                   aes(x = x_mid, y = y_mid, fill = n)) +
+    geom_tile(aes(width = cell_w, height = cell_h), colour = "white", linewidth = 0.2) +
+    facet_wrap(~ sample_id, nrow = 2) +
+    scale_fill_viridis_c(
+      option    = "magma",
+      direction = -1,
+      name      = "Taxa\nper cell",
+      limits    = c(0, max(full_grid$n))
+    ) +
+ #   geom_text(
+#      data = grid_summary,
+#      aes(x = mean(ax1_range), y = ax2_range[2] * 0.92,
+#          label = sprintf("occ: %d/%d  |  density: %.1f",
+#                          occupancy, total_cells, mean_density)),
+#      inherit.aes = FALSE,
+#      size = 3, colour = "grey20", fontface = "bold"
+#    ) +
+    coord_fixed() +
+    labs(
+    #  title    = sprintf("Grid occupancy — %d×%d (shared global grid)", g, g),
+   #   subtitle = "occ = occupied cells  |  density = mean taxa per occupied cell",
+      x = paste0("PCo1 (", var_exp[1], "%)"),
+      y = paste0("PCo2 (", var_exp[2], "%)")
+    ) +
+    theme_bw(base_size = 12) +
+    theme(plot.title    = element_text(face = "bold"),
+          plot.subtitle = element_text(size = 9, colour = "grey40"),
+          strip.text    = element_text(face = "bold"),
+          strip.background = element_blank(),
+          panel.grid    = element_blank(),
+          axis.text = element_blank())
+
+  heat_plots[[paste0("p_heat_", g)]] <- p_heat
+  print(p_heat)
+}
+
+ggsave("../figs/niche_cell_clust.pdf", width = 4.25, height = 3.5)
+
+
+# ── Combined summary ──────────────────────────────────────────────────────────
+grid_summary_all <- bind_rows(lapply(grid_results, `[[`, "summary")) %>%
+  select(grid, sample_id, occupancy, total_cells, pct_occupied, mean_density, max_density) %>%
+  arrange(grid, sample_id)
+
+print(grid_summary_all)
+
+# ── Occupancy bar chart (raw cell count) ──────────────────────────────────────
+p_occ <- ggplot(grid_summary_all,
+                aes(x = sample_id, y = occupancy, fill = sample_id)) +
+  geom_col(width = 0.6, show.legend = FALSE) +
+  geom_text(aes(label = sprintf("%d", occupancy)),
+            vjust = -0.4, size = 3.2) +
+  facet_wrap(~ grid) +
+  scale_fill_manual(values = sample_colours) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  labs(
+    title    = "Niche space occupancy by community",
+    subtitle = "Number of global grid cells containing ≥1 taxon",
+    x = NULL, y = "Occupied cells (count)"
+  ) +
+  theme_bw(base_size = 12) +
+  theme(plot.title    = element_text(face = "bold"),
+        plot.subtitle = element_text(size = 9, colour = "grey40"),
+        strip.text    = element_text(face = "bold"),
+        strip.background = element_blank())
+
+p_dens <- ggplot(grid_summary_all,
+                 aes(x = sample_id, y = mean_density, fill = sample_id)) +
+  geom_col(width = 0.6, show.legend = FALSE) +
+  geom_text(aes(label = sprintf("%.1f", mean_density)),
+            vjust = -0.4, size = 3.2) +
+  facet_wrap(~ grid) +
+  scale_fill_manual(values = sample_colours) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  labs(
+    title    = "Niche density by community",
+    subtitle = "Mean taxa per occupied grid cell",
+    x = NULL, y = "Mean taxa per\noccupied cell"
+  ) +
+  theme_bw(base_size = 12) +
+  theme(plot.title    = element_text(face = "bold"),
+        plot.subtitle = element_text(size = 9, colour = "grey40"),
+        strip.text    = element_text(face = "bold"),
+        strip.background = element_blank())
+
+print(p_occ / p_dens)
+
+
+
+#alternative boxplot:
+
+# ── Per-cell density data (one row per occupied cell per sample per grid) ──────
+cell_density_all <- bind_rows(lapply(grid_results, `[[`, "full_grid")) %>%
+  select(sample_id, n, grid, bin1, bin2) %>%
+  group_by(grid, bin1, bin2) %>%
+  filter(any(n > 0)) %>%          # keep cell only if occupied in at least one sample
+  ungroup() %>%
+  select(sample_id, n, grid)
+
+# All pairwise comparisons for geom_signif
+sample_levels  <- sort(unique(meta$sample_id))
+signif_pairs   <- combn(sample_levels, 2, simplify = FALSE)
+
+p_dens_boxplot <- ggplot(cell_density_all,
+                 aes(x = sample_id, y = n, fill = sample_id)) +
+  stat_boxplot(geom = "errorbar", width = 0.25, colour = "grey30") +
+  geom_boxplot(
+    width = 0.45,
+    outlier.shape = NA,   # outliers shown via jitter instead
+    show.legend = FALSE
+  ) +
+  geom_jitter(
+    width  = 0.15,
+    height = 0,
+    size   = 1.5,
+    alpha  = 0.5,
+    show.legend = FALSE
+  ) +
+  ggsignif::geom_signif(
+    comparisons  = signif_pairs,
+    test         = "wilcox.test",
+    step_increase = 0.1,
+    tip_length   = 0.01,
+    textsize     = 3,
+    colour       = "grey30",
+    map_signif_level = T
+  ) +
+  facet_wrap(~ grid, scales = 'free') +
+  scale_fill_manual(values = sample_colours) +
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.2))) +
+  labs(
+    title    = "Niche density by community",
+    subtitle = "Taxa per occupied grid cell  |  error bars = mean ± SE  |  Wilcoxon p-values",
+    x = NULL, y = "Taxa per occupied cell"
+  ) +
+  theme_cowplot() +
+  theme(plot.title    = element_text(face = "bold"),
+        plot.subtitle = element_text(size = 9, colour = "grey40"),
+        strip.text    = element_text(face = "bold"),
+        strip.background = element_blank())
+
+p_dens_boxplot
+ggsave("../figs/OccupiedCells.pdf", width = 1.5, height = 3.5)
+
+```
+
+Let's marginal bar plot?
+```{r}
+p_occ_side <- ggplot(grid_summary,
+                     aes(y = occupancy, x = sample_id, fill = sample_id)) +
+  geom_col(width = 0.3, show.legend = FALSE) +
+  geom_text(aes(label = occupancy), vjust = -1, size = 3.5) +
+  scale_fill_manual(values = sample_colours) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.4))) +
+  facet_wrap(~sample_id, scales = 'free_x') +
+  labs(y = "Occupied\ncells", x = NULL) +
+  theme_cowplot() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        strip.background = element_blank())
+
+p_occ_side
+
+```
+
+
+
+
+## 7 · Hypervolume & Niche Breadth
+
+The number of PCoA axes needed to explain ≥80% of variance is determined
+automatically. If that exceeds 20 axes, the hypervolume becomes computationally
+unreliable in high dimensions, so the analysis falls back to **mean pairwise
+cosine distance** within each sample group — a direct, interpretable measure of
+how spread out each community's taxa are in niche space.
+
+```{r hypervolume, fig.height=6}
+# ── Determine axes & choose method ───────────────────────────────────────────
+cumvar       <- cumsum(var_exp)
+n_axes_80    <- which(cumvar >= 80)[1]
+n_hv_axes    <- min(n_axes_80, 50)          # hard cap: hypervolume unreliable >~20D
+use_fallback <- is.na(n_axes_80) | n_hv_axes > 20
+
+message(sprintf("Axes for ≥80%% variance: %s  |  Method: %s",
+                ifelse(is.na(n_axes_80), ">all", n_axes_80),
+                ifelse(use_fallback, "mean pairwise cosine distance", 
+                       paste0("hypervolume (", n_hv_axes, "D)"))))
+
+# ── Niche breadth calculation ─────────────────────────────────────────────────
+if (use_fallback) {
+  # Mean pairwise cosine distance within each sample group.
+  # Higher = taxa occupy more spread-out, distinct metabolic niches.
+  niche_breadth <- meta %>%
+    group_by(sample_id) %>%
+    group_map(function(d, g) {
+      idx  <- d$taxon_sample
+      subm <- as.matrix(cos_dist)[idx, idx]
+      tibble(
+        sample_id     = g$sample_id,
+        niche_breadth = mean(subm[upper.tri(subm)]),
+        n_taxa        = nrow(d),
+        metric        = "mean pairwise cosine distance"
+      )
+    }) %>%
+    bind_rows()
+
+} else {
+  # Gaussian hypervolume on top n_hv_axes PCoA axes
+  hv_axis_cols <- paste0("Axis.", seq_len(n_hv_axes))
+
+  hv_list <- list()
+  for (s in sort(unique(meta$sample_id))) {
+    coords_s <- pcoa_coords %>%
+      filter(sample_id == s) %>%
+      select(all_of(hv_axis_cols)) %>%
+      as.matrix()
+
+    if (nrow(coords_s) < 5) {
+      warning(sprintf("Sample '%s': only %d taxa, skipping (min=5)", s, nrow(coords_s)))
+      next
+    }
+    message(sprintf("Fitting hypervolume — %s (%d taxa)", s, nrow(coords_s)))
+    hv_list[[s]] <- hypervolume_gaussian(coords_s, name = s, verbose = FALSE)
+  }
+
+  # Pairwise Sørensen overlaps
+  n_s         <- length(hv_list)
+  overlap_mat <- matrix(NA, n_s, n_s, dimnames = list(names(hv_list), names(hv_list)))
+  diag(overlap_mat) <- 1
+  if (n_s >= 2) {
+    for (i in seq_len(n_s - 1)) {
+      for (j in (i + 1):n_s) {
+        pair     <- hypervolume_set(hv_list[[i]], hv_list[[j]], check.memory = FALSE)
+        sorensen <- pair@HVList$Intersection@Volume * 2 /
+                    (hv_list[[i]]@Volume + hv_list[[j]]@Volume)
+        overlap_mat[i, j] <- overlap_mat[j, i] <- sorensen
+      }
+    }
+    message("Pairwise Sørensen overlaps:")
+    print(round(overlap_mat, 3))
+  }
+
+  niche_breadth <- tibble(
+    sample_id     = names(hv_list),
+    niche_breadth = sapply(hv_list, \(h) h@Volume),
+    n_taxa        = sapply(names(hv_list), \(s) sum(meta$sample_id == s)),
+    metric        = paste0("hypervolume (", n_hv_axes, "D)")
+  )
+}
+
+print(niche_breadth)
+
+# ── Niche breadth bar plot ────────────────────────────────────────────────────
+metric_label <- unique(niche_breadth$metric)
+
+p_hv <- ggplot(niche_breadth,
+               aes(reorder(sample_id, -niche_breadth), niche_breadth, fill = sample_id)) +
+  geom_col(width = 0.6, show.legend = FALSE) +
+  geom_text(aes(label = paste0("n=", n_taxa)), vjust = -0.5, size = 3.5) +
+  scale_fill_manual(values = sample_colours) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.12))) +
+  labs(
+    title    = "Metabolic distance within by Community",
+    subtitle = paste0("Metric: ", metric_label),
+    x = NULL, y = metric_label
+  ) +
+  theme_bw(base_size = 13) +
+  theme(plot.title    = element_text(face = "bold"),
+        plot.subtitle = element_text(size = 9, colour = "grey40"))
+
+print(p_hv)
+```
+
+## 8 · Export Results
+
+```{r export}
+ggsave("../figs/niche_pcoa.pdf",         plot = p_pcoa,                    width = 5, height = 3.5)
+ggsave("../figs/niche_clusters.pdf",     plot = p_pcoa_clust,              width = 6, height = 5)
+ggsave("../figs/niche_grid.pdf",         plot = p_occ / p_dens,            width = 4.5, height = 4.5)
+ggsave("../figs/niche_breadth.pdf",      plot = p_hv,                      width = 3.5,  height = 2.5)
+#ggsave("../figs/niche_heat_10.pdf",      plot = heat_plots[["p_heat_10"]], width = 8, height = 6)
+ggsave("../figs/niche_heat_20.pdf",      plot = heat_plots[["p_heat_20"]], width = 4, height = 5)
+ggsave("../figs/dens_Boxplot.pdf",         plot = p_dens_boxplot,                    width = 5, height = 3.5)
+
+
+
+```
+#write_csv(pcoa_coords,       "pcoa_coordinates.csv")
+#write_csv(niche_summary,     "niche_count_results.csv")
+#write_csv(niche_breadth,     "niche_breadth_results.csv")
+#write_csv(grid_summary_all,  "grid_occupancy_results.csv")
+write_csv(pcoa_clust %>% select(taxon_sample, sample_id, niche),
+          "cluster_assignments.csv")
+
+if (!use_fallback && exists("overlap_mat")) {
+  as.data.frame(overlap_mat) %>%
+    rownames_to_column("sample_id") %>%
+    write_csv("hypervolume_pairwise_overlap.csv")
+}
+
+message("All outputs saved.")
+```
