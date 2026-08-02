@@ -6,14 +6,25 @@ date: "2026-04-08"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
-dir.create("../figures", showWarnings = FALSE, recursive = TRUE)
+
+# ggtree 3.14 calls this helper, which was removed from ggplot2 4.0.
+# Keeping the helper local makes the original plotting code work with either
+# the older or current ggplot2 installation.
+if (!exists("is.waive", mode = "function")) {
+  is.waive <- function(x) inherits(x, "waiver")
+}
 
 library(tidyverse)
-library(ggdendro)
-library(patchwork)
+library(ape)
+library(ggtree)
+library(ggstance)
+library(ggnewscale)
+
+figure_dir <- "../figures"
+dir.create(figure_dir, showWarnings = FALSE, recursive = TRUE)
 ```
 
-## Load and validate the processed data
+## Load data
 
 ```{r load-data}
 abundance <- read.csv(
@@ -31,7 +42,7 @@ bray_curtis_distance <- read.csv(
 
 metadata_cols <- c("sample_id", "clinical_response", "time")
 missing_metadata <- setdiff(metadata_cols, colnames(abundance))
-if (length(missing_metadata)) {
+if (length(missing_metadata) > 0) {
   stop("Missing metadata columns: ", paste(missing_metadata, collapse = ", "))
 }
 
@@ -40,9 +51,11 @@ missing_distances <- setdiff(
   sample_ids,
   intersect(rownames(bray_curtis_distance), colnames(bray_curtis_distance))
 )
-if (length(missing_distances)) {
-  stop("Samples missing from the Bray-Curtis matrix: ",
-       paste(missing_distances, collapse = ", "))
+if (length(missing_distances) > 0) {
+  stop(
+    "Samples missing from the Bray-Curtis matrix: ",
+    paste(missing_distances, collapse = ", ")
+  )
 }
 
 bray_curtis_distance <- bray_curtis_distance[
@@ -51,104 +64,100 @@ bray_curtis_distance <- bray_curtis_distance[
   drop = FALSE
 ]
 
+tree <- bray_curtis_distance %>%
+  as.dist() %>%
+  hclust(method = "ward.D2") %>%
+  as.phylo()
+
 meta <- abundance %>%
   transmute(
     label = sample_id,
     group_plot = case_when(
       clinical_response == "donor" ~ "donor",
       time == "T0" ~ "recipient T0",
-      time == "T6" & clinical_response == "responder" ~
-        "recipient T6 responder",
       time == "T6" & clinical_response == "non-responder" ~
-        "recipient T6 non-responder",
-      TRUE ~ "other"
+        "recipient_T6_non_responder",
+      time == "T6" & clinical_response == "responder" ~
+        "recipient_T6_responder",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  mutate(
+    group_plot = factor(
+      group_plot,
+      levels = c(
+        "donor",
+        "recipient T0",
+        "recipient_T6_non_responder",
+        "recipient_T6_responder"
+      )
     )
   )
 
-hc <- hclust(as.dist(as.matrix(bray_curtis_distance)), method = "ward.D2")
-```
+if (anyNA(meta$group_plot)) {
+  stop("One or more samples could not be assigned to a plotting group.")
+}
 
-## Supplementary Figure 4
-
-```{r supplementary-figure-4, fig.width=10, fig.height=14}
-composition_cols <- setdiff(colnames(abundance), metadata_cols)
-
+taxa_cols <- setdiff(colnames(abundance), metadata_cols)
 taxonomies <- abundance %>%
-  select(sample_id, all_of(composition_cols)) %>%
+  select(sample_id, all_of(taxa_cols)) %>%
   pivot_longer(
-    cols = all_of(composition_cols),
+    cols = all_of(taxa_cols),
     names_to = "Taxon",
     values_to = "Abundance"
   ) %>%
   filter(is.finite(Abundance), Abundance > 0) %>%
   transmute(
-    id = sample_id,
+    label = sample_id,
     Taxon,
     Abundance = Abundance * 100
   )
+```
 
-sample_order <- hc$labels[hc$order]
-meta <- meta %>%
-  mutate(
-    sample_id = factor(label, levels = sample_order),
-    x = match(label, sample_order)
-  )
-taxonomies <- taxonomies %>%
-  mutate(id = factor(id, levels = sample_order))
+## Supplementary Figure 4
 
-dendrogram_segments <- ggdendro::segment(
-  ggdendro::dendro_data(hc, type = "rectangle")
-)
-
-group_colors <- c(
-    "donor" = "#1b9e77",
-    "recipient T0" = "#7570b3",
-    "recipient T6 responder" = "#d95f02",
-    "recipient T6 non-responder" = "#e7298a",
-    "other" = "grey70"
-)
-
-tree_plot <- ggplot(dendrogram_segments) +
-  geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_point(
-    data = meta,
-    aes(x = x, y = 0, color = group_plot),
+```{r supplementary-figure-4, fig.width=10, fig.height=16}
+supplementary_figure_4 <- ggtree(tree) %<+% meta +
+  geom_tippoint(
+    aes(fill = group_plot),
+    shape = 21,
+    color = "black",
     size = 2.5,
-    inherit.aes = FALSE
+    stroke = 0.5
   ) +
-  scale_color_manual(values = group_colors, name = "Sample group") +
-  scale_x_continuous(limits = c(0.5, length(sample_order) + 0.5)) +
-  labs(y = "Clustering height") +
-  theme_classic() +
-  theme(
-    axis.title.x = element_blank(),
-    axis.text.x = element_blank(),
-    axis.ticks.x = element_blank()
-  )
+  geom_tiplab(
+    aes(color = group_plot),
+    size = 3,
+    show.legend = FALSE,
+    offset = 0.05
+  ) +
+  scale_fill_discrete(name = "group_plot") +
+  scale_color_discrete(guide = "none") +
+  new_scale_fill()
 
-composition_plot <- ggplot(
-  taxonomies,
-  aes(x = id, y = Abundance, fill = Taxon)
-) +
-  geom_col(width = 1, color = "black", linewidth = 0.1) +
-  scale_fill_viridis_d(option = "turbo", end = 0.9) +
-  labs(x = "Sample", y = "Relative abundance (%)", fill = "Phylum") +
-  theme_classic() +
-  theme(
-    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 5)
-  )
+supplementary_figure_4 <- facet_plot(
+  supplementary_figure_4,
+  panel = "Composition",
+  data = taxonomies,
+  geom = ggstance::geom_barh,
+  mapping = aes(x = Abundance, fill = Taxon),
+  stat = "identity",
+  color = "black",
+  linewidth = 0.2
+)
 
-supplementary_figure_4 <- tree_plot / composition_plot +
-  plot_layout(heights = c(1, 2), guides = "collect") +
-  plot_annotation(title = "Supplementary Figure 4")
+supplementary_figure_4 <- facet_widths(
+  supplementary_figure_4,
+  widths = c(2.2, 2)
+)
 
 supplementary_figure_4
 
 ggsave(
-  filename = "../figures/supplementary_figure_4.png",
+  filename = file.path(figure_dir, "supplementary_figure_4.png"),
   plot = supplementary_figure_4,
   width = 10,
-  height = 14,
+  height = 16,
   dpi = 600,
   bg = "white"
 )
