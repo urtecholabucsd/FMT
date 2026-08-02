@@ -16,9 +16,11 @@ Figure3CE/
 Figure4ABC/
 Figure4D/
 
+# Large generated Li et al. model results remain local.
+li_et.al_2016_FMT/models/
+
 # Analysis outputs are reproducible and should remain local.
 Figure1/figs/
 Figure2/figures/
 Figure3/figures/
 Figure4/figures/
-Figure3/processed_data/TaxonCounts_all.csv

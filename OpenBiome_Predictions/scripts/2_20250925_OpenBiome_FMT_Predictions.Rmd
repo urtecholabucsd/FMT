@@ -36,15 +36,17 @@ metabolic_distance <- read.csv("../raw/nearest_neighbors_openbiome_donors.csv") 
 Read in recipient panel from goll et al 2020
 ```{r}
 #Read in abundance files
-recipient_abundance_dat <- read.csv("../../Figure3/processed_data/TaxonCounts_all.csv") %>%
-                    rename('taxon'='taxon_id') %>% rename(pre_abundance = normalized_count)
+recipient_abundance_dat <- read.csv("../../Figure3/processed_data/pre_post_abundances.csv") %>%
+  select(taxon, recipient, pre_abundance) %>%
+  distinct() %>%
+  rename(sample = recipient)
 
 #ShannonDiversity
 recipient_ShannonD <- read.csv("../../Figure3/ref/ShannonDF_All.csv") %>%
   filter(str_detect(sample, "-0$")) %>% #Get day 0 recipient shannonD
   rename(recipient_sd = 'shannonD') 
 
-recipient_data <- inner_join(recipient_abundance_dat, recipient_ShannonD) 
+recipient_data <- inner_join(recipient_abundance_dat, recipient_ShannonD, by = "sample")
 
 rm(recipient_abundance_dat, recipient_ShannonD)
 
@@ -94,6 +96,5 @@ PredictedModel <- ALLMetabolicFeatures %>%
 write.csv(PredictedModel, "../processed/SimulatedFMTCounts_OpenBiome.csv", row.names = F, quote = F)
 
 ```
-
 
 

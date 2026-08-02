@@ -18,7 +18,7 @@ DRmapping <- read.csv("../ref/DonorRecipientMapping.csv") %>%
   mutate(recipient_post = gsub("-0", "-6", recipient_pre))
 
 #read in count tables, add a pseudocount
-counts <- read.csv("../processed_data/goll_agora_map.counts.csv") %>% mutate(across(-1, ~ .x + 1)) #add pseudocount to all but taxon column
+counts <- read.csv("../../goll_et.al_2020_IBS_FMT/raw/goll_agora_map.counts.csv") %>% mutate(across(-1, ~ .x + 1)) #add pseudocount to all but taxon column
 # 1. Rename sample columns: drop leading "X", replace "." with "-"
 new_names <- names(counts) %>%
   # leave taxon_id alone, only transform sample names
@@ -50,7 +50,7 @@ DRmapping %>% left_join(., shannon_df %>% rename('donor_shannonD'=shannonD, 'don
                       mutate(diversity_ratio = donor_shannonD/recipient_shannonD) %>% 
                       select(-recipient_post) %>% 
                       rename('recipient'=recipient_pre) %>%
-              write.csv("../processed_data/ZZ_modelInput/shannonDiversity.csv", quote = F, row.names = F)
+              write.csv("../processed_data/shannonDiversity.csv", quote = F, row.names = F)
 
 
 ```
@@ -85,22 +85,18 @@ counts_long <- counts_norm %>%
     values_to = "normalized_count"
   )
 
-#Write out all count files
-write.csv(counts_long, "../processed_data/TaxonCounts_all.csv", quote = F, row.names = F)
-
-
 #write out pre/post dataframe
 DRmapping %>% left_join(., counts_long %>% rename('pre_abundance'=normalized_count, 'recipient_pre'=sample)) %>%
   left_join(., counts_long %>% rename('post_abundance'=normalized_count, 'recipient_post'=sample)) %>% 
   mutate(log_fold_change=log2(post_abundance/pre_abundance)) %>% #calculate fold-change
   select(-clinical_response, -recipient_post) %>% 
   rename('recipient' = 'recipient_pre', 'taxon'='taxon_id') %>%
-  write.csv(., "../processed_data/ZZ_modelInput/pre_post_abundances.csv", quote = F, row.names = F)
+  write.csv(., "../processed_data/pre_post_abundances.csv", quote = F, row.names = F)
 
 #write out donor abundances:
 
 counts_long %>% filter(sample %in%  DRmapping$donor) %>% rename(taxon=taxon_id,donor_abundance=normalized_count, donor =sample) %>%
-  write.csv(., "../processed_data/ZZ_modelInput/donor_abundances.csv", quote = F, row.names = F)
+  write.csv(., "../processed_data/donor_abundances.csv", quote = F, row.names = F)
 
 ```
 

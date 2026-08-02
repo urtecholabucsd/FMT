@@ -12,18 +12,18 @@ library(ranger)
 tax <- read.csv("../ref/taxonomy_counts.csv")
 
 #Mahalonibis distance for donor-recipient
-dist <- read.csv("../processed_data/ZZ_modelInput/nearest_neighbors_t0.csv") %>%
+dist <- read.csv("../processed_data/nearest_neighbors_t0.csv") %>%
   separate(comparison, into = c('donor', 'recipient'), sep = ' vs ', remove = F )
 
 #growth rate
-growth <- read.csv("../processed_data/ZZ_modelInput/growth_rates_t0.csv") #%>% rename(donor=sample_id)
+growth <- read.csv("../processed_data/growth_rates_t0.csv") #%>% rename(donor=sample_id)
 
 
 #donor/recipient diversity ratios
-div <- read.csv("../processed_data/ZZ_modelInput/shannonDiversity.csv") %>% na.omit()
+div <- read.csv("../processed_data/shannonDiversity.csv") %>% na.omit()
 
 #metabolc independence
-independence <- read.table("../processed_data/ZZ_modelInput/genome_scores.tsv", sep = '\t', header =T) %>%
+independence <- read.table("../processed_data/genome_scores.tsv", sep = '\t', header =T) %>%
   rename(taxon=genome_name, met_independence = genome_score) %>% left_join(., read.table("../ref/filtered_strain_taxa.tsv", sep = '\t', header = T), by = c('taxon'='MicrobeID')) %>% select(-taxon, -Strain) %>% rename('taxon'='NCBI.Taxonomy.ID')
 
 #assembled metabolic data together
@@ -33,8 +33,8 @@ data <- dist %>%
   select(-sample_id) 
 
 #Read in abundance files
-abundance_dat <- read.csv("../processed_data/ZZ_modelInput/pre_post_abundances.csv")
-donor_abd <- read.csv("../processed_data/ZZ_modelInput/donor_abundances.csv")
+abundance_dat <- read.csv("../processed_data/pre_post_abundances.csv")
+donor_abd <- read.csv("../processed_data/donor_abundances.csv")
 
 
 AllMetabolicFeatures <- data %>% left_join(., abundance_dat, by = c('donor', 'recipient', 'taxon')) %>% left_join(., donor_abd, by = c('donor', 'taxon'))
