@@ -10,9 +10,6 @@ library(reshape2)
 library(cowplot)
 library(ranger)
 library(purrr)
-
-
-
 ```
 
 
@@ -58,8 +55,6 @@ rm(recipient_abundance_dat, recipient_ShannonD)
 
 Assemble model df
 ```{r}
-
-
 ALLMetabolicFeatures <- metabolic_distance %>% 
   left_join(., independence, by = 'taxon') %>% #independence of taxa
   left_join(., ShannonD %>% rename('donor_sd'=shannonD), by = c('donor'='sample')) %>% #shannon D donor
@@ -76,7 +71,6 @@ ALLMetabolicFeatures %>% select(donor, recipient) %>% group_by(donor,recipient) 
 
 temp <- ALLMetabolicFeatures
 ALLMetabolicFeatures <- temp
-
 ```
 
 

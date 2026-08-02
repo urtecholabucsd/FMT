@@ -64,13 +64,6 @@ write.csv(shannon_df, "../raw/ShannonDF_OpenBiome_All.csv", row.names = F, quote
 ```
 
 
-```{r}
-
-
-
-
-```
-
 
 
 
