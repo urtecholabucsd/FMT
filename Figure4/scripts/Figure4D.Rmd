@@ -33,7 +33,7 @@ library(broom)
 # Prefer the full local MICOM output when available. The small tracked excerpt
 # has the same schema and supports input validation without committing 814 MB.
 interactions_full_file <- "../../goll_et.al_2020_IBS_FMT/openbiome_simulated_models/interactions_western_openbiome_summary.csv"
-interactions_excerpt_file <- "../misc/ExcerptInteractions.xlsx"
+interactions_excerpt_file <- "../data/ExcerptInteractions.xlsx"
 engraftment_file <- "../../Figure3/data/MedianEngraftmentScores_Openbiome.csv"
 ```
 

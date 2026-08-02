@@ -6,7 +6,7 @@ date: "2025-08-04"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-dir.create("figures", showWarnings = FALSE)
+dir.create("../figures", showWarnings = FALSE)
 ```
 
 ```{r}
@@ -20,15 +20,15 @@ library(ggpubr)
 library(phyloseq)
 library(DESeq2)
 
-pf <- read.csv("../utils/colorPalette.csv", stringsAsFactors = FALSE)
+pf <- read.csv("../../utils/colorPalette.csv", stringsAsFactors = FALSE)
 palette_vec <- setNames(trimws(pf$x), trimws(pf$X))
 ```
 
 
 ```{r figure 2A}
-raw <- read.csv("data/abundance_raw_subset_filtered.csv", check.names = FALSE)
-taxonomy <- read.csv("../goll_et.al_2020_IBS_FMT/processed/full_taxonomy.csv", check.names = FALSE)
-DonorRecipientMapping <- read.csv("../goll_et.al_2020_IBS_FMT/raw/DonorRecipientMapping.csv", check.names = FALSE)
+raw <- read.csv("../data/abundance_raw_subset_filtered.csv", check.names = FALSE)
+taxonomy <- read.csv("../../goll_et.al_2020_IBS_FMT/processed/full_taxonomy.csv", check.names = FALSE)
+DonorRecipientMapping <- read.csv("../../goll_et.al_2020_IBS_FMT/raw/DonorRecipientMapping.csv", check.names = FALSE)
 
 sample_info_t6 <- DonorRecipientMapping %>% 
   select(recipient, clinical_response) %>%
@@ -232,7 +232,7 @@ if (n_orders > 10) {
 print(fig_2a)
 
 ggsave(
-  "figures/2a.pdf",
+  "../figures/2a.pdf",
   fig_2a,
   width = 5,
   height = 3.5,
@@ -244,7 +244,7 @@ ggsave(
 
 
 ```{r figure 2B}
-total_t0_production = read.csv("data/2A.csv", check.names = FALSE)
+total_t0_production = read.csv("../data/2A.csv", check.names = FALSE)
 
 metabolites_to_plot <- c(
   'Valeric Acid' = 'M03134[e]',
@@ -295,7 +295,7 @@ fig_2b <- ggplot(total_t0_production, aes(x = log_fold_change, y = `-log10q_val`
   theme_cowplot()
 
 print(fig_2b)
-ggsave(filename = "figures/2b.pdf",
+ggsave(filename = "../figures/2b.pdf",
        plot = fig_2b,
        width = 5, 
        height = 3,
@@ -318,7 +318,7 @@ metabolites_to_plot <- c(
 )
 metabolite_order <- unname(metabolites_to_plot)
 
-flux_metabolites <- read.csv("data/2B.csv", check.names = FALSE, row.names = 1) %>%
+flux_metabolites <- read.csv("../data/2B.csv", check.names = FALSE, row.names = 1) %>%
   mutate(
     metabolite = factor(metabolite, levels = metabolite_order),
     metabolite_name = names(metabolites_to_plot)[match(metabolite, metabolite_order)],
@@ -370,7 +370,7 @@ fig_2c <- ggarrange(
 print(fig_2c)
 
 ggsave(
-  "figures/2c.png",
+  "../figures/2c.png",
   fig_2c,
   width = 25,
   height = 12.5,
@@ -383,7 +383,7 @@ ggsave(
 
 
 ```{r figure 2D}
-scfa_production <- read.csv("data/2E.csv", check.names = FALSE, row.names = 1) %>%
+scfa_production <- read.csv("../data/2E.csv", check.names = FALSE, row.names = 1) %>%
   mutate(
     clinical_response = factor(clinical_response, 
                                levels = c('responder', 'non-responder', 'donor')),
@@ -420,7 +420,7 @@ fig_2d <- ggplot(scfa_production, aes(x = time, y = flux)) +
 print(fig_2d)
 
 ggsave(
-  "figures/2D.png",
+  "../figures/2D.png",
   fig_2d,
   width = 15,
   height = 10,
@@ -442,6 +442,6 @@ bottom <- plot_grid(fig_2c, fig_2d, rel_widths = c(1.5,1), nrow = 1, labels = c(
 
 figure2 <- plot_grid(top,bottom, nrow = 2)
 figure2
-ggsave("figures/Figure2.pdf", figure2, width = 14, height = 8, dpi = 300, bg = 'white')
+ggsave("../figures/Figure2.pdf", figure2, width = 14, height = 8, dpi = 300, bg = 'white')
 
 ```
