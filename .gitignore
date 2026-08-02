@@ -8,3 +8,16 @@ __pycache__/
 # Retain the pre-consolidation Figure 1 folders locally without tracking them.
 Figure1AB/
 Figure1CDE/
+
+# Retain the pre-consolidation Figure 2-4 folders locally without tracking them.
+Figure2ABCD/
+Figure3AB/
+Figure3CE/
+Figure4ABC/
+Figure4D/
+
+# Analysis outputs are reproducible and should remain local.
+Figure2/figures/
+Figure3/figures/
+Figure4/figures/
+Figure3/processed_data/TaxonCounts_all.csv
