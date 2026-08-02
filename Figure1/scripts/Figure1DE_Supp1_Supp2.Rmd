@@ -6,7 +6,27 @@ date: "2024-12-22"
 
 ```{r setup, include=FALSE}
 
-setwd("/Users/guillaumeurtecho/Dropbox/UrtechoLab/Projects/2024/FMT_Metabolic_models_ZZ/Figure1/scripts")
+find_figure1_dir <- function() {
+  input_file <- knitr::current_input(dir = TRUE)
+  candidates <- c(
+    if (nzchar(input_file)) file.path(dirname(input_file), ".."),
+    getwd(),
+    file.path(getwd(), "Figure1"),
+    file.path(getwd(), "..")
+  )
+  candidates <- unique(normalizePath(candidates, mustWork = FALSE))
+  marker <- file.path(candidates, "ref", "assembly.taxonomy_parsed_filled.csv")
+  matches <- candidates[file.exists(marker)]
+
+  if (!length(matches)) {
+    stop("Could not locate the Figure1 directory.")
+  }
+
+  matches[[1]]
+}
+
+figure1_dir <- find_figure1_dir()
+figure1_path <- function(...) file.path(figure1_dir, ...)
 
 library(tidyverse)
 library(reshape2)
@@ -16,24 +36,24 @@ library(pROC)
 library(RColorBrewer)
 
 #taxonomy data
-tax <- read.csv("../ref/assembly.taxonomy_parsed_filled.csv") %>% rename('taxon'='assembly')
+tax <- read.csv(figure1_path("ref", "assembly.taxonomy_parsed_filled.csv")) %>% rename('taxon'='assembly')
 
 #metabolic distance
-dist <- read.csv("../processed_data/distance_d0.csv") %>% mutate(donor = substr(sample_id, 1, 1), recipient = substr(sample_id,4,4))
+dist <- read.csv(figure1_path("processed_data", "distance_d0.csv")) %>% mutate(donor = substr(sample_id, 1, 1), recipient = substr(sample_id,4,4))
 
 #metabolic independence
-independence <- read.csv('../processed_data/MetabolicIndependence_score.csv') %>% rename(taxon=genome, independence = score)
+independence <- read.csv(figure1_path("processed_data", "MetabolicIndependence_score.csv")) %>% rename(taxon=genome, independence = score)
 
 #vendor diversity
-diversity_scores <- read.csv("../processed_data/vendor_diversity.csv")
+diversity_scores <- read.csv(figure1_path("processed_data", "vendor_diversity.csv"))
 
 #donor abundances
-donor_abd <- read.csv("../processed_data/donor_abundances.csv")
+donor_abd <- read.csv(figure1_path("processed_data", "donor_abundances.csv"))
 
 #Read in colonization files
 
 # Define the file path
-file_path <- "../../20241201_JvE_ModelFeatures/processed_data/DEseq_Pairwise"
+file_path <- figure1_path("..", "20241201_JvE_ModelFeatures", "processed_data", "DEseq_Pairwise")
 
 # Define the mapping of root names to Magtypes
 magtypes <- c("J" = "AZC3J", "C" = "AZC9C", "E" = "AZC7E", "T" = "AZC5T")
@@ -69,7 +89,7 @@ AllMetabolicFeatures <- all_data %>% mutate(donor = substr(sample_id, 5, 5),
   # Compute ratio
   mutate(diversity_ratio = donor_diversity / recipient_diversity) %>% left_join(., donor_abd, by = c('donor', 'taxon'))
 
-write.csv(AllMetabolicFeatures, "../processed_data/AllMetabolicFeatures.csv", row.names = F, quote = F)
+write.csv(AllMetabolicFeatures, figure1_path("processed_data", "AllMetabolicFeatures.csv"), row.names = F, quote = F)
 
 ```
 
@@ -120,7 +140,7 @@ grid <- expand_grid(donor=as.factor(c('T','J','C','E')),recipient=as.factor(c('T
 
 s1a
 
-ggsave("../figs/FigureS1A.png", width = 3, height = 3, dpi = 300)
+ggsave(figure1_path("figs", "FigureS1A.png"), width = 3, height = 3, dpi = 300)
 
 ```
 
@@ -162,16 +182,16 @@ combined_plot <- plot_grid(
 
 # Display the plot
 combined_plot
-ggsave("../figs/Figure1DE.png", width = 4, height = 3, dpi = 300)
+ggsave(figure1_path("figs", "Figure1DE.png"), width = 4, height = 3, dpi = 300)
 
 ```
 
 How are other distance metrics? FIGURE 2S
 ```{r}
 
-L1 <- read.csv("../processed_data/distances/distance_d0_L1.csv") %>% rename("L1"='distance')
-L2 <- read.csv("../processed_data/distances/distance_d0_L2.csv") %>% rename("L2" = 'distance')
-cosine_dis <- read.csv("../processed_data/distances/distance_d0_cosine.csv") %>% rename("Cosine Distance" = 'distance')
+L1 <- read.csv(figure1_path("processed_data", "distances", "distance_d0_L1.csv")) %>% rename("L1"='distance')
+L2 <- read.csv(figure1_path("processed_data", "distances", "distance_d0_L2.csv")) %>% rename("L2" = 'distance')
+cosine_dis <- read.csv(figure1_path("processed_data", "distances", "distance_d0_cosine.csv")) %>% rename("Cosine Distance" = 'distance')
 
 temp <- AllMetabolicFeatures %>% select(taxon, sample_id, colonization, mahalonobis=distance) %>%
   left_join(., L1, by = c("taxon", "sample_id")) %>%
@@ -198,13 +218,13 @@ combined_plot <- plot_grid(
 
 combined_plot
 
-ggsave("../figs/supp2_DistanceComparisons.png", width = 5.5, height = 5.5)
+ggsave(figure1_path("figs", "supp2_DistanceComparisons.png"), width = 5.5, height = 5.5)
 
 ```
 
 
 TRAIN INITIAL REGRESSION MODEL, continued in later scripts
-```{r setup, include=FALSE}
+```{r prepare-model-data, include=FALSE}
 # --------------------------------
 # RANDOM FOREST with 'ranger'
 # --------------------------------
@@ -222,5 +242,3 @@ dataframe <- AllMetabolicFeatures %>% mutate(
 
 
 ```
-
-

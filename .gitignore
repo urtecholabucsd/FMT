@@ -4,3 +4,7 @@ __pycache__/
 */.ipynb_checkpoints/*
 *.Rhistory
 *.RData
+
+# Retain the pre-consolidation Figure 1 folders locally without tracking them.
+Figure1AB/
+Figure1CDE/
