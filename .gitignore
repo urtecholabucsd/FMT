@@ -17,6 +17,7 @@ Figure4ABC/
 Figure4D/
 
 # Analysis outputs are reproducible and should remain local.
+Figure1/figs/
 Figure2/figures/
 Figure3/figures/
 Figure4/figures/

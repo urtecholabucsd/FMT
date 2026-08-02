@@ -11,6 +11,8 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+dir.create("../figs", showWarnings = FALSE, recursive = TRUE)
+
 library(tidyverse)
 library(proxy)
 library(ape)

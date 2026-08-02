@@ -6,6 +6,8 @@ date: "2025-01-18"
 
 Read in color palette
 ```{r data-setup}
+dir.create("../figs/supplement", showWarnings = FALSE, recursive = TRUE)
+
 library(tidyverse)
 library(cowplot)
 library(pROC)

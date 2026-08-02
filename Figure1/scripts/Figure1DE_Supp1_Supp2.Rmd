@@ -5,6 +5,8 @@ date: "2024-12-22"
 ---
 
 ```{r setup, include=FALSE}
+dir.create("../figs", showWarnings = FALSE, recursive = TRUE)
+
 library(tidyverse)
 library(reshape2)
 library(cowplot)
