@@ -1,0 +1,155 @@
+---
+title: "Supplementary Figure 4"
+output: html_document
+date: "2026-04-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+dir.create("../figures", showWarnings = FALSE, recursive = TRUE)
+
+library(tidyverse)
+library(ggdendro)
+library(patchwork)
+```
+
+## Load and validate the processed data
+
+```{r load-data}
+abundance <- read.csv(
+  "../data/supp_4.csv",
+  stringsAsFactors = FALSE,
+  row.names = 1,
+  check.names = FALSE
+)
+
+bray_curtis_distance <- read.csv(
+  "../data/bray_curtis_distance.csv",
+  row.names = 1,
+  check.names = FALSE
+)
+
+metadata_cols <- c("sample_id", "clinical_response", "time")
+missing_metadata <- setdiff(metadata_cols, colnames(abundance))
+if (length(missing_metadata)) {
+  stop("Missing metadata columns: ", paste(missing_metadata, collapse = ", "))
+}
+
+sample_ids <- abundance$sample_id
+missing_distances <- setdiff(
+  sample_ids,
+  intersect(rownames(bray_curtis_distance), colnames(bray_curtis_distance))
+)
+if (length(missing_distances)) {
+  stop("Samples missing from the Bray-Curtis matrix: ",
+       paste(missing_distances, collapse = ", "))
+}
+
+bray_curtis_distance <- bray_curtis_distance[
+  sample_ids,
+  sample_ids,
+  drop = FALSE
+]
+
+meta <- abundance %>%
+  transmute(
+    label = sample_id,
+    group_plot = case_when(
+      clinical_response == "donor" ~ "donor",
+      time == "T0" ~ "recipient T0",
+      time == "T6" & clinical_response == "responder" ~
+        "recipient T6 responder",
+      time == "T6" & clinical_response == "non-responder" ~
+        "recipient T6 non-responder",
+      TRUE ~ "other"
+    )
+  )
+
+hc <- hclust(as.dist(as.matrix(bray_curtis_distance)), method = "ward.D2")
+```
+
+## Supplementary Figure 4
+
+```{r supplementary-figure-4, fig.width=10, fig.height=14}
+composition_cols <- setdiff(colnames(abundance), metadata_cols)
+
+taxonomies <- abundance %>%
+  select(sample_id, all_of(composition_cols)) %>%
+  pivot_longer(
+    cols = all_of(composition_cols),
+    names_to = "Taxon",
+    values_to = "Abundance"
+  ) %>%
+  filter(is.finite(Abundance), Abundance > 0) %>%
+  transmute(
+    id = sample_id,
+    Taxon,
+    Abundance = Abundance * 100
+  )
+
+sample_order <- hc$labels[hc$order]
+meta <- meta %>%
+  mutate(
+    sample_id = factor(label, levels = sample_order),
+    x = match(label, sample_order)
+  )
+taxonomies <- taxonomies %>%
+  mutate(id = factor(id, levels = sample_order))
+
+dendrogram_segments <- ggdendro::segment(
+  ggdendro::dendro_data(hc, type = "rectangle")
+)
+
+group_colors <- c(
+    "donor" = "#1b9e77",
+    "recipient T0" = "#7570b3",
+    "recipient T6 responder" = "#d95f02",
+    "recipient T6 non-responder" = "#e7298a",
+    "other" = "grey70"
+)
+
+tree_plot <- ggplot(dendrogram_segments) +
+  geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_point(
+    data = meta,
+    aes(x = x, y = 0, color = group_plot),
+    size = 2.5,
+    inherit.aes = FALSE
+  ) +
+  scale_color_manual(values = group_colors, name = "Sample group") +
+  scale_x_continuous(limits = c(0.5, length(sample_order) + 0.5)) +
+  labs(y = "Clustering height") +
+  theme_classic() +
+  theme(
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank()
+  )
+
+composition_plot <- ggplot(
+  taxonomies,
+  aes(x = id, y = Abundance, fill = Taxon)
+) +
+  geom_col(width = 1, color = "black", linewidth = 0.1) +
+  scale_fill_viridis_d(option = "turbo", end = 0.9) +
+  labs(x = "Sample", y = "Relative abundance (%)", fill = "Phylum") +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 5)
+  )
+
+supplementary_figure_4 <- tree_plot / composition_plot +
+  plot_layout(heights = c(1, 2), guides = "collect") +
+  plot_annotation(title = "Supplementary Figure 4")
+
+supplementary_figure_4
+
+ggsave(
+  filename = "../figures/supplementary_figure_4.png",
+  plot = supplementary_figure_4,
+  width = 10,
+  height = 14,
+  dpi = 600,
+  bg = "white"
+)
+```
