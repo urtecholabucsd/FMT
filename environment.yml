@@ -1,0 +1,24 @@
+name: fmt-analysis
+
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  - python=3.9
+  - pip
+  - ipykernel=6.29.4
+  - jupyterlab=4.2.5
+  - numpy=1.26.4
+  - pandas=2.2.2
+  - scipy=1.13.0
+  - scikit-bio=0.6.0
+  - matplotlib=3.8.4
+  - seaborn=0.12.2
+  - biom-format=2.1.15
+  - pip:
+      - micom==0.37.0
+      - carveme==1.6.1
+      - cplex==22.1.1.0
+      - scikit-learn==1.6.1
