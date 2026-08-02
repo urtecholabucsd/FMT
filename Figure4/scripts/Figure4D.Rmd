@@ -12,29 +12,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
                       fig.width = 7, fig.height = 5, dpi = 150)
-
-find_figure4_dir <- function() {
-  input_file <- knitr::current_input(dir = TRUE)
-  candidates <- c(
-    if (nzchar(input_file)) file.path(dirname(input_file), ".."),
-    getwd(),
-    file.path(getwd(), "Figure4"),
-    file.path(getwd(), "..")
-  )
-  candidates <- unique(normalizePath(candidates, mustWork = FALSE))
-  marker <- file.path(candidates, "misc", "ExcerptInteractions.xlsx")
-  matches <- candidates[file.exists(marker)]
-
-  if (!length(matches)) {
-    stop("Could not locate the Figure4 directory.")
-  }
-
-  matches[[1]]
-}
-
-figure4_dir <- find_figure4_dir()
-figure4_path <- function(...) file.path(figure4_dir, ...)
-dir.create(figure4_path("figures"), showWarnings = FALSE)
+dir.create("../figures", showWarnings = FALSE)
 ```
 
 # Setup
@@ -54,12 +32,9 @@ library(broom)
 # ── FILE PATHS ────────────────────────────────────────────────────────────────
 # Prefer the full local MICOM output when available. The small tracked excerpt
 # has the same schema and supports input validation without committing 814 MB.
-interactions_full_file <- figure4_path("..", "goll_et.al_2020_IBS_FMT",
-                                       "openbiome_simulated_models",
-                                       "interactions_western_openbiome_summary.csv")
-interactions_excerpt_file <- figure4_path("misc", "ExcerptInteractions.xlsx")
-engraftment_file <- figure4_path("..", "Figure3", "data",
-                                 "MedianEngraftmentScores_Openbiome.csv")
+interactions_full_file <- "../../goll_et.al_2020_IBS_FMT/openbiome_simulated_models/interactions_western_openbiome_summary.csv"
+interactions_excerpt_file <- "../misc/ExcerptInteractions.xlsx"
+engraftment_file <- "../../Figure3/data/MedianEngraftmentScores_Openbiome.csv"
 ```
 
 ```{r highlighted-samples}
@@ -186,6 +161,6 @@ p1a <- ggplot(sample_eng, aes(x = rho, y = med_engraft)) +
 
 p1a
 
-ggsave(figure4_path("figures", "Fig4D_ENBIvsEngraftment.pdf"), width = 3, height = 3)
+ggsave("../figures/Fig4D_ENBIvsEngraftment.pdf", width = 3, height = 3)
 
 ```

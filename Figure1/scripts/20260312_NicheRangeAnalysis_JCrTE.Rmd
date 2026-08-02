@@ -11,29 +11,6 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-
-find_figure1_dir <- function() {
-  input_file <- knitr::current_input(dir = TRUE)
-  candidates <- c(
-    if (nzchar(input_file)) file.path(dirname(input_file), ".."),
-    getwd(),
-    file.path(getwd(), "Figure1"),
-    file.path(getwd(), "..")
-  )
-  candidates <- unique(normalizePath(candidates, mustWork = FALSE))
-  marker <- file.path(candidates, "ref", "assembly.taxonomy_parsed_filled.csv")
-  matches <- candidates[file.exists(marker)]
-
-  if (!length(matches)) {
-    stop("Could not locate the Figure1 directory.")
-  }
-
-  matches[[1]]
-}
-
-figure1_dir <- find_figure1_dir()
-figure1_path <- function(...) file.path(figure1_dir, ...)
-
 library(tidyverse)
 library(proxy)
 library(ape)
@@ -46,18 +23,18 @@ library(cluster)     # pam(), silhouette()
 library(factoextra)  # fviz_silhouette()
 library(cowplot)
 
-flux <- read.csv(figure1_path("input", "exchanges_d0_high_fiber.csv")) %>%
+flux <- read.csv("../input/exchanges_d0_high_fiber.csv") %>%
   filter(!grepl("medium", taxon, ignore.case = TRUE)) #remove medium
 
 #scale by abundance?
 flux <- flux %>%
   mutate(flux = (flux / abundance) * median(abundance))
 
-tax <- read.csv(figure1_path("ref", "assembly.taxonomy_parsed_filled.csv"))
+tax <- read.csv("../ref/assembly.taxonomy_parsed_filled.csv")
 
 
 # ── Load shared palette ───────────────────────────────────────────────────
-palette_df <- read.csv(figure1_path("..", "utils", "colorPalette.csv"), row.names = 1)
+palette_df <- read.csv("../../utils/colorPalette.csv", row.names = 1)
 order_colors <- setNames(palette_df$x, rownames(palette_df))
 named_orders <- setdiff(names(order_colors), "Other")
 
@@ -418,7 +395,7 @@ print(p_pcoa_clust)
 
 
 
-ggsave(figure1_path("figs", "niche_tax_clust.pdf"), width = 5, height = 3.5)
+ggsave("../figs/niche_tax_clust.pdf", width = 5, height = 3.5)
 
 ```
 
@@ -532,7 +509,7 @@ p_heat <- ggplot(full_grid,
   print(p_heat)
 }
 
-ggsave(figure1_path("figs", "niche_cell_clust.pdf"), width = 4.25, height = 3.5)
+ggsave("../figs/niche_cell_clust.pdf", width = 4.25, height = 3.5)
 
 
 # ── Combined summary ──────────────────────────────────────────────────────────
@@ -638,7 +615,7 @@ p_dens_boxplot <- ggplot(cell_density_all,
         strip.background = element_blank())
 
 p_dens_boxplot
-ggsave(figure1_path("figs", "OccupiedCells.pdf"), width = 1.5, height = 3.5)
+ggsave("../figs/OccupiedCells.pdf", width = 1.5, height = 3.5)
 
 ```
 
@@ -772,13 +749,13 @@ print(p_hv)
 ## 8 · Export Results
 
 ```{r export}
-ggsave(figure1_path("figs", "niche_pcoa.pdf"),     plot = p_pcoa,       width = 5, height = 3.5)
-ggsave(figure1_path("figs", "niche_clusters.pdf"), plot = p_pcoa_clust, width = 6, height = 5)
-ggsave(figure1_path("figs", "niche_grid.pdf"),     plot = p_occ / p_dens, width = 4.5, height = 4.5)
-ggsave(figure1_path("figs", "niche_breadth.pdf"),  plot = p_hv,        width = 3.5, height = 2.5)
-#ggsave(figure1_path("figs", "niche_heat_10.pdf"), plot = heat_plots[["p_heat_10"]], width = 8, height = 6)
-ggsave(figure1_path("figs", "niche_heat_20.pdf"),  plot = heat_plots[["p_heat_20"]], width = 4, height = 5)
-ggsave(figure1_path("figs", "dens_Boxplot.pdf"),   plot = p_dens_boxplot, width = 5, height = 3.5)
+ggsave("../figs/niche_pcoa.pdf",     plot = p_pcoa,       width = 5, height = 3.5)
+ggsave("../figs/niche_clusters.pdf", plot = p_pcoa_clust, width = 6, height = 5)
+ggsave("../figs/niche_grid.pdf",     plot = p_occ / p_dens, width = 4.5, height = 4.5)
+ggsave("../figs/niche_breadth.pdf",  plot = p_hv,        width = 3.5, height = 2.5)
+#ggsave("../figs/niche_heat_10.pdf", plot = heat_plots[["p_heat_10"]], width = 8, height = 6)
+ggsave("../figs/niche_heat_20.pdf",  plot = heat_plots[["p_heat_20"]], width = 4, height = 5)
+ggsave("../figs/dens_Boxplot.pdf",   plot = p_dens_boxplot, width = 5, height = 3.5)
 
 
 

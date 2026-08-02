@@ -4,40 +4,17 @@ output: html_document
 date: "2025-01-18"
 ---
 
-
 Read in color palette
-```{r}
-find_figure1_dir <- function() {
-  input_file <- knitr::current_input(dir = TRUE)
-  candidates <- c(
-    if (nzchar(input_file)) file.path(dirname(input_file), ".."),
-    getwd(),
-    file.path(getwd(), "Figure1"),
-    file.path(getwd(), "..")
-  )
-  candidates <- unique(normalizePath(candidates, mustWork = FALSE))
-  marker <- file.path(candidates, "ref", "assembly.taxonomy_parsed_filled.csv")
-  matches <- candidates[file.exists(marker)]
-
-  if (!length(matches)) {
-    stop("Could not locate the Figure1 directory.")
-  }
-
-  matches[[1]]
-}
-
-figure1_dir <- find_figure1_dir()
-figure1_path <- function(...) file.path(figure1_dir, ...)
-
+```{r data-setup}
 library(tidyverse)
 library(cowplot)
 library(pROC)
 
-palette_df <- read.csv(figure1_path("..", "utils", "colorPalette.csv"), row.names = 1)
+palette_df <- read.csv("../../utils/colorPalette.csv", row.names = 1)
 order_colors <- setNames(palette_df$x, rownames(palette_df))
 named_orders <- setdiff(names(order_colors), "Other")
 
-AllMetabolicFeatures <- read.csv(figure1_path("processed_data", "AllMetabolicFeatures.csv"))
+AllMetabolicFeatures <- read.csv("../processed_data/AllMetabolicFeatures.csv")
 dataframe <- AllMetabolicFeatures %>% mutate(
   mean_d0_abundance = log10(mean_d0_abundance),
   colonization_binary = factor(colonization_binary, levels = c(0, 1))
@@ -94,7 +71,7 @@ print(s2a)
 importance_values <- rf_ranger_model$variable.importance
 print(importance_values)
 
-ggsave(figure1_path("figs", "supplement", "random_forestROC.png"), s2a, width = 3, height = 3)
+ggsave("../figs/supplement/random_forestROC.png", s2a, width = 3, height = 3)
 
 ```
 
@@ -233,7 +210,7 @@ s2b <- ggplot() +
   labs(x = "Recall", y = "Precision") +
   theme_cowplot()
 s2b
-ggsave(figure1_path("figs", "supplement", "AUC-PR-rf.png"), s2b, width = 4, height = 4)
+ggsave("../figs/supplement/AUC-PR-rf.png", s2b, width = 4, height = 4)
 
 # Print out final AUC-PR results
 cat("Mean AUC-PR (RF):", mean_auc_pr_model, "\n")
@@ -350,7 +327,7 @@ s2c <- ggplot(auroc_df, aes(x = factor(TrainPercent), y = AUROC)) +
 
 print(s2c)
 
-ggsave(figure1_path("figs", "supplement", "TrainingSubset.png"), s2c, width = 4, height = 3)
+ggsave("../figs/supplement/TrainingSubset.png", s2c, width = 4, height = 3)
 
 # Report median AUROC at 10% training
 cat("Median AUROC at 10% training:", median((auroc_df %>% filter(TrainPercent == 0.1))$AUROC), "\n")
@@ -426,7 +403,7 @@ s2d <- ggplot(anova_df, aes(x = Feature, y = Percent_Variance)) +
 
 print(s2d)
 
-ggsave(figure1_path("figs", "supplement", "ANOVA_variance_explained.png"), s2d, width = 4, height = 3)
+ggsave("../figs/supplement/ANOVA_variance_explained.png", s2d, width = 4, height = 3)
 
 # Print ANOVA summary
 print(anova_df)
@@ -530,7 +507,7 @@ fig1e <- ggplot(df_regression_plot, aes(x = log_fold_change, y = cv_predicted)) 
 
 print(fig1e)
 
-ggsave(figure1_path("figs", "RandomForest_Regression_Fig1E.pdf"), fig1e, width = 5, height = 3, bg = 'white')
+ggsave("../figs/RandomForest_Regression_Fig1E.pdf", fig1e, width = 5, height = 3, bg = 'white')
 
 ```
 
@@ -550,7 +527,7 @@ s2_composite <- plot_grid(
 
 print(s2_composite)
 
-ggsave(figure1_path("figs", "supplement", "FigureS2_composite.png"), s2_composite,
+ggsave("../figs/supplement/FigureS2_composite.png", s2_composite,
        width = 10, height = 8, bg = 'white')
 
 ```

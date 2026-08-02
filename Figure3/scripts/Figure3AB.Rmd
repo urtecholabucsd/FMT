@@ -1,30 +1,6 @@
 
-
-
 ```{r setup, include=FALSE}
-
-find_figure3_dir <- function() {
-  input_file <- knitr::current_input(dir = TRUE)
-  candidates <- c(
-    if (nzchar(input_file)) file.path(dirname(input_file), ".."),
-    getwd(),
-    file.path(getwd(), "Figure3"),
-    file.path(getwd(), "..")
-  )
-  candidates <- unique(normalizePath(candidates, mustWork = FALSE))
-  marker <- file.path(candidates, "ref", "DonorRecipientMapping.csv")
-  matches <- candidates[file.exists(marker)]
-
-  if (!length(matches)) {
-    stop("Could not locate the Figure3 directory.")
-  }
-
-  matches[[1]]
-}
-
-figure3_dir <- find_figure3_dir()
-figure3_path <- function(...) file.path(figure3_dir, ...)
-dir.create(figure3_path("figures"), showWarnings = FALSE)
+dir.create("../figures", showWarnings = FALSE)
 
 library(tidyverse)
 library(reshape2)
@@ -33,22 +9,22 @@ library(ggsignif)
 library(ranger)
 
 #taxonomy data
-tax <- read.csv(figure3_path("ref", "taxonomy_counts.csv"))
+tax <- read.csv("../ref/taxonomy_counts.csv")
 
 #Mahalonibis distance for donor-recipient
-dist <- read.csv(figure3_path("processed_data", "ZZ_modelInput", "nearest_neighbors_t0.csv")) %>%
+dist <- read.csv("../processed_data/ZZ_modelInput/nearest_neighbors_t0.csv") %>%
   separate(comparison, into = c('donor', 'recipient'), sep = ' vs ', remove = F )
 
 #growth rate
-growth <- read.csv(figure3_path("processed_data", "ZZ_modelInput", "growth_rates_t0.csv")) #%>% rename(donor=sample_id)
+growth <- read.csv("../processed_data/ZZ_modelInput/growth_rates_t0.csv") #%>% rename(donor=sample_id)
 
 
 #donor/recipient diversity ratios
-div <- read.csv(figure3_path("processed_data", "ZZ_modelInput", "shannonDiversity.csv")) %>% na.omit()
+div <- read.csv("../processed_data/ZZ_modelInput/shannonDiversity.csv") %>% na.omit()
 
 #metabolc independence
-independence <- read.table(figure3_path("processed_data", "ZZ_modelInput", "genome_scores.tsv"), sep = '\t', header =T) %>%
-  rename(taxon=genome_name, met_independence = genome_score) %>% left_join(., read.table(figure3_path("ref", "filtered_strain_taxa.tsv"), sep = '\t', header = T), by = c('taxon'='MicrobeID')) %>% select(-taxon, -Strain) %>% rename('taxon'='NCBI.Taxonomy.ID')
+independence <- read.table("../processed_data/ZZ_modelInput/genome_scores.tsv", sep = '\t', header =T) %>%
+  rename(taxon=genome_name, met_independence = genome_score) %>% left_join(., read.table("../ref/filtered_strain_taxa.tsv", sep = '\t', header = T), by = c('taxon'='MicrobeID')) %>% select(-taxon, -Strain) %>% rename('taxon'='NCBI.Taxonomy.ID')
 
 #assembled metabolic data together
 data <- dist %>% 
@@ -57,8 +33,8 @@ data <- dist %>%
   select(-sample_id) 
 
 #Read in abundance files
-abundance_dat <- read.csv(figure3_path("processed_data", "ZZ_modelInput", "pre_post_abundances.csv"))
-donor_abd <- read.csv(figure3_path("processed_data", "ZZ_modelInput", "donor_abundances.csv"))
+abundance_dat <- read.csv("../processed_data/ZZ_modelInput/pre_post_abundances.csv")
+donor_abd <- read.csv("../processed_data/ZZ_modelInput/donor_abundances.csv")
 
 
 AllMetabolicFeatures <- data %>% left_join(., abundance_dat, by = c('donor', 'recipient', 'taxon')) %>% left_join(., donor_abd, by = c('donor', 'taxon'))
@@ -75,7 +51,7 @@ library(cowplot)
 library(ggsignif)
 
 # ── Read palette (at top of script, after loading libraries) ─────────────
-human_palette <- read.csv(figure3_path("..", "utils", "human_order_palette.csv"))
+human_palette <- read.csv("../../utils/human_order_palette.csv")
 order_colors <- setNames(human_palette$color, human_palette$order)
 named_orders <- setdiff(names(order_colors), "Other")
 
@@ -195,8 +171,8 @@ fig3a <- ggplot(df_plot, aes(x = log10(post_abundance + 1e-6),
 
 print(fig3a)
 
-ggsave(figure3_path("figures", "Fig3A_LOO_predicted_vs_observed.pdf"), fig3a, width = 5, height = 3)
-ggsave(figure3_path("figures", "Fig3A_LOO_predicted_vs_observed.png"), fig3a, width = 5, height = 3, bg = "white")
+ggsave("../figures/Fig3A_LOO_predicted_vs_observed.pdf", fig3a, width = 5, height = 3)
+ggsave("../figures/Fig3A_LOO_predicted_vs_observed.png", fig3a, width = 5, height = 3, bg = "white")
 
 ```
 
@@ -236,14 +212,14 @@ fig3b <-  ggplot(rho_df, aes(x = clinical_response, y = rho, fill = clinical_res
 
 fig3b
 
-ggsave(figure3_path("figures", "Rho_Respondersvs_non_LOO.png"), height = 3.5, width = 2, bg = "white")
+ggsave("../figures/Rho_Respondersvs_non_LOO.png", height = 3.5, width = 2, bg = "white")
 
 ```
 
 ```{r}
 plot_grid(fig3a, fig3b, labels = 'AUTO', rel_widths = c(1,0.3))
 
-ggsave(figure3_path("figures", "Fig3AB.pdf"), width = 6, height = 3)
+ggsave("../figures/Fig3AB.pdf", width = 6, height = 3)
 
 ```
 
@@ -298,8 +274,8 @@ p_imp <- ggplot(imp_df, aes(x = Feature, y = Importance)) +
 
 print(p_imp)
 
-ggsave(figure3_path("figures", "LOO_permutation_importance.pdf"), p_imp, width = 5, height = 3)
-ggsave(figure3_path("figures", "LOO_permutation_importance.png"), p_imp, width = 5, height = 3, bg = "white")
+ggsave("../figures/LOO_permutation_importance.pdf", p_imp, width = 5, height = 3)
+ggsave("../figures/LOO_permutation_importance.png", p_imp, width = 5, height = 3, bg = "white")
 
 print(imp_df)
 
@@ -372,8 +348,8 @@ p_dropout <- ggplot(dropout_results, aes(x = label, y = mean_rho)) +
 
 print(p_dropout)
 
-ggsave(figure3_path("figures", "LOO_feature_dropout.pdf"), p_dropout, width = 5, height = 3)
-ggsave(figure3_path("figures", "LOO_feature_dropout.png"), p_dropout, width = 5, height = 3, bg = "white")
+ggsave("../figures/LOO_feature_dropout.pdf", p_dropout, width = 5, height = 3)
+ggsave("../figures/LOO_feature_dropout.png", p_dropout, width = 5, height = 3, bg = "white")
 
 print(dropout_results %>% select(label, mean_rho, sd_rho, delta_rho))
 
@@ -447,7 +423,7 @@ final_with_legend <- ggdraw(main_panels) +
 
 print(final_with_legend)
 
-ggsave(figure3_path("figures", "PCoA_leave1out_LOO.png"), final_with_legend,
+ggsave("../figures/PCoA_leave1out_LOO.png", final_with_legend,
        width = 15, height = 6, bg = "white")
 
 ```
@@ -498,7 +474,7 @@ plots <- map(unique(df_rf$recipient), function(rec) {
 
 plot_grid(plotlist = plots, ncol = 7)
 
-ggsave(figure3_path("figures", "PredictComposition_LOO.png"), width = 18, height = 8, bg = "white")
+ggsave("../figures/PredictComposition_LOO.png", width = 18, height = 8, bg = "white")
 
 ```
 
@@ -564,7 +540,7 @@ p_alpha <- ggplot(alpha_df, aes(x = clinical_response, y = delta_shannon, fill =
 
 plot_grid(p_bc, p_alpha, ncol = 2)
 
-ggsave(figure3_path("figures", "EcologicalChanges_RespondersvsNon.png"), height = 3.5, width = 4.5, bg = "white")
+ggsave("../figures/EcologicalChanges_RespondersvsNon.png", height = 3.5, width = 4.5, bg = "white")
 
 ```
 
@@ -611,6 +587,6 @@ ggplot(rho_kfold, aes(x = subset, y = rho)) +
   scale_y_continuous(n.breaks = 10, limits = c(0, 1)) +
   labs(x = "Training fraction", y = expression(Spearman~rho))
 
-ggsave(figure3_path("figures", "IBS_heldout_kfold.png"), width = 4.5, height = 3, bg = "white")
+ggsave("../figures/IBS_heldout_kfold.png", width = 4.5, height = 3, bg = "white")
 
 ```

@@ -5,29 +5,6 @@ date: "2025-05-06"
 ---
 
 ```{r setup, include=FALSE}
-
-find_figure3_dir <- function() {
-  input_file <- knitr::current_input(dir = TRUE)
-  candidates <- c(
-    if (nzchar(input_file)) file.path(dirname(input_file), ".."),
-    getwd(),
-    file.path(getwd(), "Figure3"),
-    file.path(getwd(), "..")
-  )
-  candidates <- unique(normalizePath(candidates, mustWork = FALSE))
-  marker <- file.path(candidates, "ref", "DonorRecipientMapping.csv")
-  matches <- candidates[file.exists(marker)]
-
-  if (!length(matches)) {
-    stop("Could not locate the Figure3 directory.")
-  }
-
-  matches[[1]]
-}
-
-figure3_dir <- find_figure3_dir()
-figure3_path <- function(...) file.path(figure3_dir, ...)
-
 library(tidyverse)
 library(reshape2)
 library(cowplot)
@@ -35,13 +12,13 @@ library(ggsignif)
 library(vegan)
 
 #Get list of donor, recipients, and post fmt recipients
-DRmapping <- read.csv(figure3_path("ref", "DonorRecipientMapping.csv")) %>%
+DRmapping <- read.csv("../ref/DonorRecipientMapping.csv") %>%
   separate(donor, into = c('donor', 'trash'), remove = T, sep = '_S') %>%
   separate(recipient, into = c('recipient_pre', 'trash'), remove = T, sep = '_S') %>% select(donor, recipient_pre, clinical_response) %>% 
   mutate(recipient_post = gsub("-0", "-6", recipient_pre))
 
 #read in count tables, add a pseudocount
-counts <- read.csv(figure3_path("processed_data", "goll_agora_map.counts.csv")) %>% mutate(across(-1, ~ .x + 1)) #add pseudocount to all but taxon column
+counts <- read.csv("../processed_data/goll_agora_map.counts.csv") %>% mutate(across(-1, ~ .x + 1)) #add pseudocount to all but taxon column
 # 1. Rename sample columns: drop leading "X", replace "." with "-"
 new_names <- names(counts) %>%
   # leave taxon_id alone, only transform sample names
@@ -65,7 +42,7 @@ counts_mat <- counts %>%
 shannon_df <- diversity(t(counts_mat), index = "shannon") %>% as.data.frame() %>% rownames_to_column(., 'taxon')
 names(shannon_df) <- c('sample', "shannonD")
 
-write.csv(shannon_df, figure3_path("ref", "ShannonDF_All.csv"), row.names = F, quote = F)
+write.csv(shannon_df, "../ref/ShannonDF_All.csv", row.names = F, quote = F)
 
 #write out diversity 
 DRmapping %>% left_join(., shannon_df %>% rename('donor_shannonD'=shannonD, 'donor'=sample)) %>%
@@ -73,7 +50,7 @@ DRmapping %>% left_join(., shannon_df %>% rename('donor_shannonD'=shannonD, 'don
                       mutate(diversity_ratio = donor_shannonD/recipient_shannonD) %>% 
                       select(-recipient_post) %>% 
                       rename('recipient'=recipient_pre) %>%
-              write.csv(figure3_path("processed_data", "ZZ_modelInput", "shannonDiversity.csv"), quote = F, row.names = F)
+              write.csv("../processed_data/ZZ_modelInput/shannonDiversity.csv", quote = F, row.names = F)
 
 
 ```
@@ -109,7 +86,7 @@ counts_long <- counts_norm %>%
   )
 
 #Write out all count files
-write.csv(counts_long, figure3_path("processed_data", "TaxonCounts_all.csv"), quote = F, row.names = F)
+write.csv(counts_long, "../processed_data/TaxonCounts_all.csv", quote = F, row.names = F)
 
 
 #write out pre/post dataframe
@@ -118,12 +95,12 @@ DRmapping %>% left_join(., counts_long %>% rename('pre_abundance'=normalized_cou
   mutate(log_fold_change=log2(post_abundance/pre_abundance)) %>% #calculate fold-change
   select(-clinical_response, -recipient_post) %>% 
   rename('recipient' = 'recipient_pre', 'taxon'='taxon_id') %>%
-  write.csv(., figure3_path("processed_data", "ZZ_modelInput", "pre_post_abundances.csv"), quote = F, row.names = F)
+  write.csv(., "../processed_data/ZZ_modelInput/pre_post_abundances.csv", quote = F, row.names = F)
 
 #write out donor abundances:
 
 counts_long %>% filter(sample %in%  DRmapping$donor) %>% rename(taxon=taxon_id,donor_abundance=normalized_count, donor =sample) %>%
-  write.csv(., figure3_path("processed_data", "ZZ_modelInput", "donor_abundances.csv"), quote = F, row.names = F)
+  write.csv(., "../processed_data/ZZ_modelInput/donor_abundances.csv", quote = F, row.names = F)
 
 ```
 
