@@ -32,7 +32,7 @@ Large files are not committed to the repository. They can be downloaded from the
 
 Raw sequencing data are not duplicated in this repository. The analyses use data from the following published studies and public archives:
 
-| Analysis directory | Source study | Raw-data accession |
+| Analysis directory | Source study | Accession |
 | --- | --- | --- |
 | `goll_et.al_2020_IBS_FMT/` | Goll et al. (2020), [*Effects of fecal microbiota transplantation in subjects with irritable bowel syndrome are mirrored by changes in gut microbiome*](https://www.tandfonline.com/doi/full/10.1080/19490976.2020.1794263) | [ENA PRJEB36140](https://www.ebi.ac.uk/ena/browser/view/PRJEB36140) |
 | `li_et.al_2016_FMT/` | Li et al. (2016), [*Durable coexistence of donor and recipient strains after fecal microbiota transplantation*](https://www.science.org/doi/10.1126/science.aad8852) | [ENA/NCBI BioProject PRJEB12357](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB12357) |
