@@ -32,7 +32,7 @@ donor_abd <- read.csv("../processed_data/donor_abundances.csv")
 #Read in colonization files
 
 # Define the file path
-file_path <- "../../20241201_JvE_ModelFeatures/processed_data/DEseq_Pairwise"
+file_path <- "../processed_data/DEseq_Pairwise"
 
 # Define the mapping of root names to Magtypes
 magtypes <- c("J" = "AZC3J", "C" = "AZC9C", "E" = "AZC7E", "T" = "AZC5T")

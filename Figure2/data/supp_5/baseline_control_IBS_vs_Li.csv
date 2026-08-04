@@ -1,0 +1,11 @@
+dataset,metric,median,sd
+IBS (Figure 3),"rho abundance, model",0.7670114042933812,0.13376966952372102
+IBS (Figure 3),"rho abundance, no-change baseline",0.7386568023853266,0.2175878941446691
+IBS (Figure 3),"rho abundance, shuffled-FC null",0.6166340563506263,0.01649587658655121
+IBS (Figure 3),"rho fold-change, model",0.5348454847123407,0.19875795780664096
+IBS (Figure 3),delta vs no-change,0.02835460190805461,
+Li/FAT day42,"rho abundance, model",0.7622063747344339,0.0829275308542667
+Li/FAT day42,"rho abundance, no-change baseline",0.8080002515406811,0.06511056854986032
+Li/FAT day42,"rho abundance, shuffled-FC null",0.7586277485564297,0.008408266401884381
+Li/FAT day42,"rho fold-change, model",0.042197580581490556,0.10712203449154657
+Li/FAT day42,delta vs no-change,-0.04579387680624725,

@@ -1,0 +1,237 @@
+---
+title: "Supplementary Figure 5 - external cohort validation (Li et al., PRJEB46778)"
+output: html_document
+---
+
+A. Li-native random forest, leave-one-recipient-out, observed vs predicted post-FMT abundance (day 84)
+B. Feature importance (impurity, mean +/- SD across LOO folds)
+C. Fold-change accuracy, Li-native LOO vs the IBS-trained (Goll) model, pooled across timepoints
+
+Requires `li_et.al_2016_FMT/scripts/01_LiEtAl_dfPrep.py` to have written
+`Figure2/data/supp_5/AllMetabolicFeatures.csv`.
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(cowplot)
+library(ggsignif)
+library(ranger)
+dir.create("../figures", showWarnings = FALSE, recursive = TRUE)
+
+PRIMARY_DAY <- 84   # ~2.8 months, closest Li analogue to the IBS 6-month sample
+POST_DAYS   <- c(2, 14, 42, 84)
+
+# fold-change LOO rho achieved by the same model within the IBS cohort
+IBS_REFERENCE <- 0.535
+
+rf_features <- c("average_distance", "diversity_ratio",
+                 "met_independence", "log10_pre_abund")
+rf_formula  <- as.formula(paste("log_fold_change ~", paste(rf_features, collapse = " + ")))
+
+human_palette <- read.csv("../../utils/human_order_palette.csv")
+order_colors  <- setNames(human_palette$color, human_palette$order)
+named_orders  <- setdiff(names(order_colors), "Other")
+
+tax <- read.csv("../../utils/full_taxonomy.csv") %>%
+  select(taxon_id, order) %>%
+  distinct()
+
+clean_df <- function(d) {
+  d %>%
+    filter(if_all(all_of(c(rf_features, "log_fold_change",
+                           "pre_abundance", "post_abundance")), ~ !is.na(.x))) %>%
+    filter(is.finite(log_fold_change), is.finite(log10_pre_abund))
+}
+
+li_all <- read.csv("../data/supp_5/AllMetabolicFeatures.csv") %>%
+  mutate(comparison = paste(donor_subject, "vs", recipient))
+
+AllMetabolicFeatures <- clean_df(li_all %>% filter(timepoint_day == PRIMARY_DAY))
+
+rf_mod <- readRDS("../../Figure3/processed_data/rf_model_IBS.rds")
+```
+
+Panel A. Leave-one-recipient-out CV within the Li cohort, day 84.
+
+```{r}
+set.seed(123)
+recipients <- unique(AllMetabolicFeatures$recipient)
+
+df_rf <- AllMetabolicFeatures
+df_rf$loo_pred_fc <- NA_real_
+imp_matrix <- matrix(NA, nrow = length(recipients), ncol = length(rf_features),
+                     dimnames = list(recipients, rf_features))
+
+for (i in seq_along(recipients)) {
+  rec <- recipients[i]
+  mod <- ranger(rf_formula,
+                data          = filter(df_rf, recipient != rec),
+                num.trees     = 100,
+                mtry          = 3,
+                min.node.size = 2,
+                importance    = "impurity")
+  df_rf$loo_pred_fc[df_rf$recipient == rec] <-
+    predict(mod, data = filter(df_rf, recipient == rec))$predictions
+  imp_matrix[i, ] <- mod$variable.importance
+}
+
+df_rf <- df_rf %>% mutate(loo_pred_abundance = pre_abundance * 2 ^ loo_pred_fc)
+
+loo_rho <- df_rf %>%
+  group_by(recipient) %>%
+  summarise(rho = cor(post_abundance, loo_pred_abundance,
+                      method = "spearman", use = "complete.obs"), .groups = "drop")
+
+cat("Li-native LOO rho (abundance):", round(median(loo_rho$rho), 2),
+    "+-", round(sd(loo_rho$rho), 2), "\n")
+
+df_plot <- df_rf %>%
+  left_join(tax, by = c("taxon" = "taxon_id")) %>%
+  mutate(order_plot = if_else(order %in% named_orders, order, "Other"),
+         order_plot = factor(order_plot, levels = c(named_orders, "Other")))
+
+panelA <- ggplot(df_plot, aes(x = log10(post_abundance + 1e-6),
+                              y = log10(loo_pred_abundance + 1e-6))) +
+  geom_point(aes(color = order_plot), alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE, color = "red", linetype = "dashed") +
+  scale_colour_manual(values = order_colors, name = "Order") +
+  annotate("text",
+           x = min(log10(df_rf$post_abundance + 1e-6), na.rm = TRUE) + 0.5,
+           y = max(log10(df_rf$loo_pred_abundance + 1e-6), na.rm = TRUE) - 0.3,
+           label = paste0("rho == ", round(median(loo_rho$rho), 2)),
+           parse = TRUE, hjust = 0, size = 4) +
+  labs(x = expression(Observed~log[10](Post-FMT~Abundance)),
+       y = expression(Predicted~log[10](Post-FMT~Abundance))) +
+  theme_cowplot()
+
+panelA
+```
+
+Panel B. Impurity importance across LOO folds.
+
+```{r}
+imp_df <- data.frame(Feature    = colnames(imp_matrix),
+                     Importance = colMeans(imp_matrix),
+                     SD         = apply(imp_matrix, 2, sd)) %>%
+  mutate(Feature = recode(Feature,
+                          average_distance = "Metabolic\nDistance",
+                          met_independence = "Metabolic\nIndependence",
+                          log10_pre_abund  = "Pre-FMT\nAbundance",
+                          diversity_ratio  = "Diversity\nRatio")) %>%
+  arrange(desc(Importance)) %>%
+  mutate(Feature = factor(Feature, levels = Feature))
+
+panelB <- ggplot(imp_df, aes(x = Feature, y = Importance)) +
+  geom_col(fill = "steelblue", color = "black", width = 0.6) +
+  geom_errorbar(aes(ymin = pmax(Importance - SD, 0), ymax = Importance + SD),
+                width = 0.2) +
+  labs(x = NULL, y = "Impurity Importance\n(mean +/- SD across LOO folds)") +
+  theme_cowplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+panelB
+print(imp_df)
+```
+
+Panel C. Performance of the IBS-trained (Goll) model applied to this cohort
+without retraining, across all four post-FMT timepoints. Scored on log2
+fold-change rather than predicted abundance, because predicted abundance is the
+product of pre-FMT abundance and predicted fold-change and is therefore
+dominated by the pre-FMT term. Dashed line is the fold-change accuracy the same
+model achieves within the IBS cohort by leave-one-recipient-out CV.
+
+```{r}
+set.seed(123)
+
+goll_rho <- map_dfr(POST_DAYS, function(day) {
+  d <- clean_df(li_all %>% filter(timepoint_day == day))
+  d$goll_pred_fc <- predict(rf_mod, d)$predictions
+
+  d %>%
+    group_by(recipient, fmt_type) %>%
+    summarise(rho = cor(log_fold_change, goll_pred_fc, method = "spearman"),
+              .groups = "drop") %>%
+    mutate(day = day)
+}) %>%
+  mutate(day = factor(day, levels = POST_DAYS))
+
+goll_rho %>%
+  group_by(day) %>%
+  summarise(median_rho = round(median(rho), 3), sd = round(sd(rho), 3),
+            .groups = "drop") %>%
+  print()
+
+cat("pooled across timepoints: median rho =",
+    round(median(goll_rho$rho), 3), "+-", round(sd(goll_rho$rho), 3), "\n")
+
+panelC <- ggplot(goll_rho, aes(x = day, y = rho)) +
+  geom_hline(yintercept = 0, linewidth = 0.3) +
+  geom_hline(yintercept = IBS_REFERENCE, linetype = "dashed",
+             color = "firebrick", linewidth = 0.5) +
+  stat_boxplot(geom = "errorbar", width = 0.2) +
+  geom_boxplot(width = 0.5, fill = "#F1E201FF", outlier.shape = NA) +
+  geom_jitter(aes(shape = fmt_type), height = 0, width = 0.12,
+              alpha = 0.8, size = 1.8) +
+  annotate("text", x = 0.55, y = IBS_REFERENCE + 0.05,
+           label = "IBS cohort", color = "firebrick", size = 3, hjust = 0) +
+  scale_shape_manual(values = c(Allogenic = 16, Autologous = 1), name = NULL) +
+  labs(x = "Days post-FMT", y = expression(Fold-change~Spearman~rho)) +
+  theme_cowplot() +
+  theme(legend.position = "bottom")
+
+panelC
+```
+
+Alternative Panel C, if you would rather mirror the layout of panel A. This is
+the Goll model scored on the same axes as A, observed versus predicted post-FMT
+abundance at day 84. Note that it lands at rho = 0.76 against panel A's 0.78,
+so a reader comparing the two panels would conclude the transfer worked, which
+is the opposite of the point the text makes.
+
+```{r, eval=FALSE}
+goll_day84 <- AllMetabolicFeatures %>%
+  mutate(goll_pred_fc        = predict(rf_mod, .)$predictions,
+         goll_pred_abundance = pre_abundance * 2 ^ goll_pred_fc) %>%
+  left_join(tax, by = c("taxon" = "taxon_id")) %>%
+  mutate(order_plot = if_else(order %in% named_orders, order, "Other"),
+         order_plot = factor(order_plot, levels = c(named_orders, "Other")))
+
+goll_abd_rho <- goll_day84 %>%
+  group_by(recipient) %>%
+  summarise(rho = cor(post_abundance, goll_pred_abundance,
+                      method = "spearman", use = "complete.obs"), .groups = "drop")
+
+panelC_alt <- ggplot(goll_day84, aes(x = log10(post_abundance + 1e-6),
+                                     y = log10(goll_pred_abundance + 1e-6))) +
+  geom_point(aes(color = order_plot), alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE, color = "red", linetype = "dashed") +
+  scale_colour_manual(values = order_colors, name = "Order") +
+  annotate("text",
+           x = min(log10(goll_day84$post_abundance + 1e-6), na.rm = TRUE) + 0.5,
+           y = max(log10(goll_day84$goll_pred_abundance + 1e-6), na.rm = TRUE) - 0.3,
+           label = paste0("rho == ", round(median(goll_abd_rho$rho), 2)),
+           parse = TRUE, hjust = 0, size = 4) +
+  labs(x = expression(Observed~log[10](Post-FMT~Abundance)),
+       y = expression(IBS-trained~model~log[10](Predicted))) +
+  theme_cowplot()
+
+panelC_alt
+```
+
+Assemble.
+
+```{r}
+shared_legend <- get_legend(panelA + theme(legend.position = "right"))
+
+fig <- plot_grid(
+  panelA + theme(legend.position = "none"),
+  panelB,
+  panelC,
+  labels = "AUTO", nrow = 1, rel_widths = c(1, 0.8, 0.75)
+)
+
+fig_final <- plot_grid(fig, shared_legend, nrow = 1, rel_widths = c(1, 0.2))
+fig_final
+
+ggsave("../figures/supplementary_figure_5.pdf", fig_final, width = 12, height = 3.5)
+ggsave("../figures/supplementary_figure_5.png", fig_final, width = 12, height = 3.5, bg = "white")
+```

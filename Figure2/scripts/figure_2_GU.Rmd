@@ -6,7 +6,7 @@ date: "2025-08-04"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-dir.create("../figures", showWarnings = FALSE)
+dir.create("../figures", showWarnings = FALSE, recursive = TRUE)
 ```
 
 ```{r}
@@ -20,15 +20,15 @@ library(ggpubr)
 library(phyloseq)
 library(DESeq2)
 
-pf <- read.csv("../../utils/colorPalette.csv", stringsAsFactors = FALSE)
+pf <- read.csv('../../utils/colorPalette.csv', stringsAsFactors = FALSE)
 palette_vec <- setNames(trimws(pf$x), trimws(pf$X))
 ```
 
 
 ```{r figure 2A}
-raw <- read.csv("../data/abundance_raw_subset_filtered.csv", check.names = FALSE)
-taxonomy <- read.csv("../../goll_et.al_2020_IBS_FMT/processed/full_taxonomy.csv", check.names = FALSE)
-DonorRecipientMapping <- read.csv("../../goll_et.al_2020_IBS_FMT/raw/DonorRecipientMapping.csv", check.names = FALSE)
+raw <- read.csv('../data/abundance_raw_subset_filtered.csv', check.names = FALSE)
+taxonomy <- read.csv('../../utils/full_taxonomy.csv', check.names = FALSE)
+DonorRecipientMapping <- read.csv('../../utils/DonorRecipientMapping.csv', check.names = FALSE)
 
 sample_info_t6 <- DonorRecipientMapping %>% 
   select(recipient, clinical_response) %>%
@@ -244,7 +244,7 @@ ggsave(
 
 
 ```{r figure 2B}
-total_t0_production = read.csv("../data/2A.csv", check.names = FALSE)
+total_t0_production = read.csv('../data/2A.csv', check.names = FALSE)
 
 metabolites_to_plot <- c(
   'Valeric Acid' = 'M03134[e]',
@@ -295,7 +295,7 @@ fig_2b <- ggplot(total_t0_production, aes(x = log_fold_change, y = `-log10q_val`
   theme_cowplot()
 
 print(fig_2b)
-ggsave(filename = "../figures/2b.pdf",
+ggsave(filename = '../figures/2b.pdf',
        plot = fig_2b,
        width = 5, 
        height = 3,
@@ -318,7 +318,7 @@ metabolites_to_plot <- c(
 )
 metabolite_order <- unname(metabolites_to_plot)
 
-flux_metabolites <- read.csv("../data/2B.csv", check.names = FALSE, row.names = 1) %>%
+flux_metabolites <- read.csv('../data/2B.csv', check.names = FALSE, row.names = 1) %>%
   mutate(
     metabolite = factor(metabolite, levels = metabolite_order),
     metabolite_name = names(metabolites_to_plot)[match(metabolite, metabolite_order)],
@@ -383,7 +383,7 @@ ggsave(
 
 
 ```{r figure 2D}
-scfa_production <- read.csv("../data/2E.csv", check.names = FALSE, row.names = 1) %>%
+scfa_production <- read.csv('../data/2E.csv', check.names = FALSE, row.names = 1) %>%
   mutate(
     clinical_response = factor(clinical_response, 
                                levels = c('responder', 'non-responder', 'donor')),
@@ -442,6 +442,248 @@ bottom <- plot_grid(fig_2c, fig_2d, rel_widths = c(1.5,1), nrow = 1, labels = c(
 
 figure2 <- plot_grid(top,bottom, nrow = 2)
 figure2
-ggsave("../figures/Figure2.pdf", figure2, width = 14, height = 8, dpi = 300, bg = 'white')
+ggsave('../figures/Figure2.pdf', figure2, width = 14, height = 8, dpi = 300, bg = 'white')
 
+```
+
+
+## Reviewer response: donor vs. recipient community structure (Bray-Curtis PCoA + PERMANOVA)
+
+Addresses the question of whether post-FMT recipients converge on donors in general
+or on their own specific donor. Two analyses are run below.
+(1) PCoA of Bray-Curtis dissimilarities on relative abundances, with recipients
+labeled by a subject number so pre- and post-FMT samples of the same individual can
+be traced, and PERMANOVA (adonis2) testing group separation in that space.
+(2) Recipient-to-own-donor vs. recipient-to-other-donor Bray-Curtis distances at T0
+and T6, which is the comparison that actually distinguishes donor-specific
+engraftment from a generic shift toward a "donor-like" community.
+
+```{r pcoa setup}
+library(vegan)
+
+raw_pcoa <- read.csv('../data/abundance_raw_subset_filtered.csv', check.names = FALSE) %>%
+  column_to_rownames('taxon_id') %>%
+  as.matrix()
+
+# relative abundance, samples as rows
+rel_pcoa <- t(sweep(raw_pcoa, 2, colSums(raw_pcoa), '/'))
+
+mapping <- read.csv('../../utils/DonorRecipientMapping.csv', check.names = FALSE) %>%
+  mutate(
+    subject   = str_replace(str_split_fixed(recipient, '_', 2)[,1], '-0$', ''),
+    donor_id  = str_split_fixed(donor, '_', 2)[,1]
+  ) %>%
+  select(subject, donor_id, clinical_response)
+
+# recipient subject numbering used for the point labels (1..n, ordered numerically)
+subject_levels <- mapping$subject[order(as.numeric(mapping$subject))]
+subject_index  <- setNames(seq_along(subject_levels), subject_levels)
+
+meta_pcoa <- data.frame(sample = rownames(rel_pcoa), stringsAsFactors = FALSE) %>%
+  mutate(
+    group = case_when(
+      str_detect(sample, '^D-')  ~ 'Donor',
+      str_detect(sample, '-0$')  ~ 'Recipient pre-FMT (T0)',
+      str_detect(sample, '-6$')  ~ 'Recipient post-FMT (T6)'
+    ),
+    subject   = ifelse(group == 'Donor', NA_character_,
+                       str_split_fixed(sample, '-', 2)[,1]),
+    rec_label = ifelse(is.na(subject), NA_character_,
+                       as.character(subject_index[subject]))
+  ) %>%
+  left_join(mapping, by = 'subject') %>%
+  column_to_rownames('sample')
+
+meta_pcoa <- meta_pcoa[rownames(rel_pcoa), , drop = FALSE]
+meta_pcoa$group <- factor(
+  meta_pcoa$group,
+  levels = c('Donor', 'Recipient pre-FMT (T0)', 'Recipient post-FMT (T6)')
+)
+
+bc_dist <- vegdist(rel_pcoa, method = 'bray')
+```
+
+```{r PERMANOVA}
+set.seed(42)
+
+# global test across the three groups
+permanova_global <- adonis2(bc_dist ~ group, data = meta_pcoa,
+                            permutations = 9999, by = 'terms')
+print(permanova_global)
+
+# dispersion check: PERMANOVA can be driven by unequal within-group spread
+bd <- betadisper(bc_dist, meta_pcoa$group)
+print(permutest(bd, permutations = 9999))
+
+# pairwise PERMANOVA with BH correction
+pairs_to_test <- combn(levels(meta_pcoa$group), 2, simplify = FALSE)
+
+permanova_pairwise <- map_dfr(pairs_to_test, function(pr) {
+  keep <- meta_pcoa$group %in% pr
+  sub_meta <- droplevels(meta_pcoa[keep, , drop = FALSE])
+  sub_dist <- vegdist(rel_pcoa[keep, , drop = FALSE], method = 'bray')
+  a <- adonis2(sub_dist ~ group, data = sub_meta,
+               permutations = 9999, by = 'terms')
+  tibble(
+    comparison = paste(pr, collapse = ' vs. '),
+    R2 = a$R2[1],
+    F_stat = a$F[1],
+    p_value = a$`Pr(>F)`[1]
+  )
+}) %>%
+  mutate(p_adj = p.adjust(p_value, method = 'BH'))
+
+print(permanova_pairwise)
+
+write.csv(permanova_pairwise, '../figures/s5_permanova_pairwise.csv', row.names = FALSE)
+```
+
+```{r permanova subtitle}
+# compact stat strings for the PCoA subtitle
+fmt_p <- function(p) ifelse(p < 1e-4, 'p < 1e-4', paste0('p = ', signif(p, 2)))
+
+don_t0 <- permanova_pairwise %>%
+  filter(comparison == 'Donor vs. Recipient pre-FMT (T0)')
+
+permanova_subtitle <- paste0(
+  'PERMANOVA, donor vs T0: R² = ', sprintf('%.2f', don_t0$R2),
+  ', ', fmt_p(don_t0$p_adj)
+)
+
+cat(permanova_subtitle, '\n')
+```
+
+```{r figure 2E PCoA}
+pcoa_res <- cmdscale(bc_dist, k = 4, eig = TRUE)
+eig_pos  <- pcoa_res$eig[pcoa_res$eig > 0]
+var_expl <- round(100 * pcoa_res$eig[1:2] / sum(eig_pos), 1)
+
+pcoa_df <- as.data.frame(pcoa_res$points[, 1:2])
+colnames(pcoa_df) <- c('PCo1', 'PCo2')
+pcoa_df <- bind_cols(pcoa_df, meta_pcoa[rownames(pcoa_df), ])
+
+# faint segment linking T0 and T6 of the same recipient
+traj_df <- pcoa_df %>%
+  filter(!is.na(subject)) %>%
+  mutate(time = ifelse(str_detect(group, 'pre'), 'T0', 'T6')) %>%
+  select(subject, time, PCo1, PCo2) %>%
+  pivot_wider(names_from = time, values_from = c(PCo1, PCo2)) %>%
+  filter(!is.na(PCo1_T0), !is.na(PCo1_T6))
+
+group_cols <- c(
+  'Donor'                   = '#2C7BB6',
+  'Recipient pre-FMT (T0)'  = '#999999',
+  'Recipient post-FMT (T6)' = '#D7191C'
+)
+
+lab_nudge <- 0.02 * diff(range(pcoa_df$PCo2))
+
+fig_2e <- ggplot(pcoa_df, aes(x = PCo1, y = PCo2)) +
+  stat_ellipse(aes(color = group), type = 't', level = 0.8,
+               linetype = 'dashed', linewidth = 0.4, show.legend = FALSE) +
+  geom_segment(
+    data = traj_df,
+    aes(x = PCo1_T0, y = PCo2_T0, xend = PCo1_T6, yend = PCo2_T6),
+    inherit.aes = FALSE, color = 'grey70', linewidth = 0.25, alpha = 0.7
+  ) +
+  geom_point(aes(color = group, shape = group), size = 2.2, alpha = 0.9) +
+  geom_text(
+    aes(label = rec_label, color = group),
+    size = 2, vjust = 0, nudge_y = lab_nudge, nudge_x = lab_nudge,
+    show.legend = FALSE, na.rm = TRUE
+  ) +
+  scale_color_manual(values = group_cols, name = '') +
+  scale_shape_manual(values = c(17, 16, 16), name = '') +
+  labs(
+    x = paste0('PCo1 (', var_expl[1], '%)'),
+    y = paste0('PCo2 (', var_expl[2], '%)'),
+    subtitle = permanova_subtitle
+  ) +
+  theme_cowplot() +
+  theme(
+    legend.position = 'bottom',
+    legend.text = element_text(size = 9),
+    axis.text   = element_text(size = 10),
+    axis.title  = element_text(size = 12),
+    plot.subtitle = element_text(size = 9, hjust = 0)
+  )
+
+print(fig_2e)
+
+ggsave('../figures/s5_pcoa_bray_curtis.pdf', fig_2e,
+       width = 6, height = 5.4, dpi = 600, bg = 'white')
+ggsave('../figures/s5e_pcoa_bray_curtis.png', fig_2e,
+       width = 6, height = 5.4, dpi = 600, bg = 'white')
+```
+
+```{r figure 2F own donor vs other donors}
+donor_ids <- rownames(rel_pcoa)[str_detect(rownames(rel_pcoa), '^D-')]
+bc_mat <- as.matrix(bc_dist)
+
+# Some recipients are assigned to a donor that was not sequenced / not present in
+# the abundance table (e.g. D-1), so drop those pairs before indexing bc_mat.
+dropped_pairs <- meta_pcoa %>%
+  rownames_to_column('sample') %>%
+  filter(!is.na(subject), !is.na(donor_id), !(donor_id %in% donor_ids))
+if (nrow(dropped_pairs) > 0) {
+  message('Dropping ', nrow(dropped_pairs),
+          ' recipient sample(s) whose assigned donor is absent from the ',
+          'abundance table: ',
+          paste(unique(dropped_pairs$donor_id), collapse = ', '))
+}
+
+dist_df <- meta_pcoa %>%
+  rownames_to_column('sample') %>%
+  filter(!is.na(subject), !is.na(donor_id), donor_id %in% donor_ids) %>%
+  mutate(time = ifelse(str_detect(group, 'pre'), 'T0', 'T6')) %>%
+  rowwise() %>%
+  mutate(
+    own_donor   = bc_mat[sample, donor_id],
+    other_donor = mean(bc_mat[sample, setdiff(donor_ids, donor_id)])
+  ) %>%
+  ungroup() %>%
+  select(sample, subject, time, clinical_response, own_donor, other_donor) %>%
+  pivot_longer(c(own_donor, other_donor),
+               names_to = 'reference', values_to = 'distance') %>%
+  mutate(
+    reference = factor(reference,
+                       levels = c('own_donor', 'other_donor'),
+                       labels = c('Own donor', 'Other donors')),
+    time = factor(time, levels = c('T0', 'T6'))
+  )
+
+fig_2f <- ggplot(dist_df, aes(x = reference, y = distance)) +
+  stat_boxplot(geom = 'errorbar', width = 0.2) +
+  geom_boxplot(aes(fill = reference), outlier.shape = NA, show.legend = FALSE) +
+  geom_jitter(width = 0.1, height = 0, size = 1, alpha = 0.5) +
+  facet_wrap(~ time) +
+  geom_signif(
+    comparisons = list(c('Own donor', 'Other donors')),
+    test = 'wilcox.test', test.args = list(paired = TRUE),
+    map_signif_level = FALSE, textsize = 3, tip_length = 0.01,
+    y_position = max(dist_df$distance, na.rm = TRUE) * 1.03
+  ) +
+  scale_fill_brewer(palette = 'Set2') +
+  labs(x = '', y = 'Bray-Curtis distance to donor') +
+  theme_cowplot() +
+  theme(
+    strip.background = element_blank(),
+    strip.text = element_text(size = 12, face = 'bold'),
+    axis.text  = element_text(size = 10),
+    axis.title = element_text(size = 12)
+  )
+
+print(fig_2f)
+
+ggsave('../figures/2f_own_vs_other_donor_distance.pdf', fig_2f,
+       width = 5, height = 4, dpi = 600, bg = 'white')
+
+# paired test of whether recipients move closer to their own donor after FMT
+own_wide <- dist_df %>%
+  filter(reference == 'Own donor') %>%
+  select(subject, time, distance) %>%
+  pivot_wider(names_from = time, values_from = distance) %>%
+  drop_na()
+
+print(wilcox.test(own_wide$T0, own_wide$T6, paired = TRUE))
 ```
